@@ -21,12 +21,9 @@ struct GameView: View {
     @State var round: Int = 0
     
     var body: some View {
-
-        GeometryReader { geometry in
-            VStack(spacing: 5) {
-                NavigationLink {
-                    ResultView()
-                } label: {
+        if game.winner == nil {
+            GeometryReader { geometry in
+                VStack(spacing: 5) {
                     ZStack {
                         if let topItem = game.topItem, let image = topItem.image, let caption = topItem.caption {
                             Image(image)
@@ -39,20 +36,19 @@ struct GameView: View {
                                 .shadow(color: .black, radius: 5)
                         }
                     }
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height * 0.45)
-                .clipped()
-                
-                HStack {
-                    Text("VS")
-                        .font(.largeTitle)
-                        .fontWeight(.heavy)
-                }
-                .frame(width: geometry.size.width, height: geometry.size.height * 0.1)
-                
-                NavigationLink {
-                    ResultView()
-                } label: {
+                    .onTapGesture {
+                        game.choose(top: true)
+                    }
+                    .frame(width: geometry.size.width, height: geometry.size.height * 0.45)
+                    .clipped()
+                    
+                    HStack {
+                        Text("VS")
+                            .font(.largeTitle)
+                            .fontWeight(.heavy)
+                    }
+                    .frame(width: geometry.size.width, height: geometry.size.height * 0.1)
+                    
                     ZStack {
                         if let bottomItem = game.bottomItem, let image = bottomItem.image, let caption = bottomItem.caption {
                             Image(image)
@@ -64,11 +60,17 @@ struct GameView: View {
                                 .shadow(color: .black, radius: 5)
                         }
                     }
+                    .onTapGesture {
+                        game.choose(top: false)
+                    }
+                    .scaledToFill()
+                    .frame(width: geometry.size.width, height: geometry.size.height * 0.45)
+                    .clipped()
                 }
-                .scaledToFill()
-                .frame(width: geometry.size.width, height: geometry.size.height * 0.45)
-                .clipped()
             }
+        }
+        else {
+            ResultView()
         }
     }
 }
