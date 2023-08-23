@@ -18,6 +18,10 @@ struct HomeView: View {
                 .tabItem {
                     Label("게임 만들기", systemImage: "plus")
                 }
+            SettingView()
+                .tabItem {
+                    Label("설정", systemImage: "gear")
+                }
         }
     }
 }

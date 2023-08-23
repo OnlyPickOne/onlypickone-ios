@@ -50,7 +50,6 @@ struct AddView: View {
                 }
 
             }
-//            .background(Color(UIColor.systemGray5))
             
 
         }

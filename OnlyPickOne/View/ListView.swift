@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ListView: View {
+    @State var isModal: Bool = false
     var body: some View {
         NavigationView {
             List {
@@ -49,6 +50,14 @@ struct ListView: View {
                 }
             }
             .navigationTitle("이상형 월드컵")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                Menu("정렬") {
+                    Text("최신순")
+                    Text("조회순")
+                    Text("최다플레이순")
+                }
+            }
         }
     }
 }
