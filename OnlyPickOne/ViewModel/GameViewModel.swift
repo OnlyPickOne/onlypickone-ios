@@ -8,6 +8,7 @@
 import Foundation
 
 class GameViewModel: ObservableObject {
+    public let game: Game
     private var list: [Item]
     private var result: [Item] = []
     
@@ -15,8 +16,9 @@ class GameViewModel: ObservableObject {
     @Published var bottomItem: Item?
     @Published var winner: Item?
     
-    init(list: [Item]) {
-        self.list = list
+    init(game: Game) {
+        self.game = game
+        self.list = game.items ?? []
         match()
     }
     

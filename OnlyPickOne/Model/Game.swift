@@ -11,6 +11,8 @@ struct Game: Codable {
     let id: Int?
     let title: String?
     let description: String?
+    let createdTime: String?
+    let author: String?
     let items: [Item]?
 
 //    enum CodingKeys: String, CodingKey {
