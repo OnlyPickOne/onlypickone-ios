@@ -10,48 +10,32 @@ import SwiftUI
 struct AddView: View {
     @State var titleInput: String = ""
     @State var detailInput: String = ""
+    @State var images: [String] = ["cat1","cat2","football"]
+    @State var itemInput: [String] = ["","",""]
     
+    let colors:[Color] = [.purple, .pink, .orange]
     var body: some View {
-        NavigationView {
-            VStack {
-                Text("제목")
-                TextField("게임 제목을 작성해주세요", text: $titleInput)
-                    .textFieldStyle(.roundedBorder)
-                    .padding(15)
-                
-                Spacer()
-                
-                Text("설명")
-                HStack {
-                    TextEditor(text: $detailInput)
-                        .textFieldStyle(.roundedBorder)
-                        .frame(height: 120)
-                        .cornerRadius(10)
-                        .padding(15)
-                }
-                
-                Spacer()
-                
-                ScrollView(.horizontal) {
-                    HStack {
-                        ForEach((0..<10), id: \.self) { index in
-                            Text("asdfasd")
-                                .frame(width: 180, height: 240)
-                        }
-                    }
-                }
-                
-                Spacer()
-                
-                NavigationLink {
-                    ResultView()
-                } label: {
-                    Label("생성하기", systemImage: "plus")
-                }
-
-            }
+        VStack(spacing: 5) {
+            Text("제목")
+            TextField("게임 제목을 작성해주세요", text: $titleInput)
+                .textFieldStyle(.roundedBorder)
+                .padding(15)
             
-
+            Text("설명")
+            HStack {
+                TextEditor(text: $detailInput)
+                    .background(Color.primary.colorInvert())
+                    .cornerRadius(5)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 5)
+                            .stroke(.black, lineWidth: 1 / 3)
+                            .opacity(0.3)
+                    )
+                    .padding(15)
+            }
+            .frame(height: 180)
+            
+            CardView(input: itemInput, images: images)
         }
     }
 }

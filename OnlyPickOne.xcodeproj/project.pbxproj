@@ -18,6 +18,8 @@
 		33835F022A95D86100C93EB0 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33835F012A95D86100C93EB0 /* SettingView.swift */; };
 		33835F042A95F20200C93EB0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33835F032A95F20200C93EB0 /* Item.swift */; };
 		33835F092A95F32100C93EB0 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33835F082A95F32100C93EB0 /* GameViewModel.swift */; };
+		33835F0B2A96279A00C93EB0 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33835F0A2A96279A00C93EB0 /* Game.swift */; };
+		33835F0D2A971D6600C93EB0 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33835F0C2A971D6600C93EB0 /* CardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		33835F012A95D86100C93EB0 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		33835F032A95F20200C93EB0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		33835F082A95F32100C93EB0 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		33835F0A2A96279A00C93EB0 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		33835F0C2A971D6600C93EB0 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,7 @@
 		33835F052A95F26300C93EB0 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				33835F0A2A96279A00C93EB0 /* Game.swift */,
 				33835F032A95F20200C93EB0 /* Item.swift */,
 			);
 			path = Model;
@@ -99,6 +104,7 @@
 				33222E0B2A95D4FF00D12DA2 /* GameView.swift */,
 				33222E082A95D4FE00D12DA2 /* ResultView.swift */,
 				33222E092A95D4FE00D12DA2 /* AddView.swift */,
+				33835F0C2A971D6600C93EB0 /* CardView.swift */,
 				33835F012A95D86100C93EB0 /* SettingView.swift */,
 			);
 			path = View;
@@ -183,6 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33835F092A95F32100C93EB0 /* GameViewModel.swift in Sources */,
+				33835F0B2A96279A00C93EB0 /* Game.swift in Sources */,
 				33222DFA2A95CFA300D12DA2 /* OnlyPickOneApp.swift in Sources */,
 				33835F042A95F20200C93EB0 /* Item.swift in Sources */,
 				33222E0F2A95D4FF00D12DA2 /* AddView.swift in Sources */,
@@ -190,6 +197,7 @@
 				33222E0E2A95D4FF00D12DA2 /* HomeView.swift in Sources */,
 				33835F022A95D86100C93EB0 /* SettingView.swift in Sources */,
 				33222E102A95D4FF00D12DA2 /* ResultView.swift in Sources */,
+				33835F0D2A971D6600C93EB0 /* CardView.swift in Sources */,
 				33222E0C2A95D4FF00D12DA2 /* ListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

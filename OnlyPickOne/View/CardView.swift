@@ -8,17 +8,16 @@
 import SwiftUI
 
 struct CardView: View {
-    @State var temp: String
-    
-    let categoryName: String
+    @State var input: [String]
+    @State var images: [String]
     
     var body: some View {
         GeometryReader { geo in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 0) {
-                    ForEach(0..<latestmovie.count) { num in
+                    ForEach(0..<images.count) { num in
                         ZStack(alignment: .bottom) {
-                            Image(latestmovie[num].imageName)
+                            Image(images[num])
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: geo.size.width - 40, height: 300)
@@ -30,14 +29,14 @@ struct CardView: View {
                                 )
                                 .shadow(radius: 10)
                             HStack {
-                                TextField("캡션을 입력하세요", text: $temp)
+                                TextField("캡션을 입력하세요", text: $input[num])
                                     .textFieldStyle(.roundedBorder)
                                     .frame(height: 36)
                                 ZStack {
                                     Color(UIColor.systemBackground)
                                         .frame(width: 80, height: 36)
                                         .cornerRadius(8)
-                                    Text("\(num + 1) / \(latestmovie.count)")
+                                    Text("\(num + 1) / \(images.count)")
                                 }
                             }
                             .padding(20)
@@ -71,7 +70,7 @@ struct CardView: View {
 
 struct CardView_Previews: PreviewProvider {
     static var previews: some View {
-        CardView(temp: "", categoryName: "asdf")
+        CardView(input: [""], images: ["street"])
     }
 }
 
