@@ -49,6 +49,10 @@ struct CardView: View {
         .onAppear {
             UIScrollView.appearance().isPagingEnabled = true
         }
+        .onDisappear {
+            UIScrollView.appearance().isPagingEnabled = false
+            
+        }
     }
     
     func getScale(proxy: GeometryProxy) -> CGFloat {
