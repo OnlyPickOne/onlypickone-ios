@@ -24,32 +24,37 @@ struct ListView: View {
                                 .fontWeight(.medium)
                                 .lineLimit(2)
                             HStack(spacing: 15) {
-                                Image("thumbnail")
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                                    .frame(width: 48, height: 48)
-                                VStack(alignment: .leading) {
+                                HStack(spacing: 0) {
+                                    Image("cat1")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 40, height: 64)
+                                        .clipped()
+                                    Image("cat2")
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                        .frame(width: 40, height: 64)
+                                        .clipped()
+                                }
+                                VStack(alignment: .trailing) {
                                     HStack {
-                                        Text("침착맨")
+                                        Text("\(index + 1)시간 전")
                                             .font(.caption2)
                                             .fontWeight(.light)
-                                        Spacer()
-                                        Text("\(index) month ago")
-                                            .font(.caption2)
-                                            .fontWeight(.light)
+                                            .multilineTextAlignment(.trailing)
                                     }
                                     Text("안녕하세요. 망한/웃긴/귀여운 고양이들 사진중 원하는 사진을 고르시면 됩니다. 중복이 있으면 바로말해주세요. (자료출처: 구글 이미지, 유튜브 타임스낵과 다양한 동물의 짤, 네이버 카페, 인스타그램, 제작자) (업데이트: ○)")
                                         .font(.caption)
                                         .fontWeight(.light)
                                         .multilineTextAlignment(.leading)
-                                        .lineLimit(3)
+                                        .lineLimit(4)
                                 }
                             }
                         }
                     }
                 }
             }
-            .navigationTitle("이상형 월드컵")
+            .navigationTitle("OnlyPickOne")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 Menu("정렬") {
@@ -58,6 +63,7 @@ struct ListView: View {
                     Text("최다플레이순")
                 }
             }
+            .tint(Color("opoPink"))
         }
     }
 }

@@ -9,28 +9,19 @@ import SwiftUI
 
 struct HomeView: View {
     var body: some View {
-        NavigationView {
-            TabView {
-                ListView()
-                    .tabItem {
-                        Label("게임목록", systemImage: "gamecontroller")
-                    }
-                AddView()
-                    .tabItem {
-                        Label("게임 만들기", systemImage: "plus.square.fill.on.square.fill")
-                    }
-                SettingView()
-                    .tabItem {
-                        Label("설정", systemImage: "gearshape")
-                    }
-            }
-            .navigationTitle("OnlyPickOne")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                Button("정렬") {
-                    
+        TabView {
+            ListView()
+                .tabItem {
+                    Label("게임목록", systemImage: "gamecontroller")
                 }
-            }
+            AddView()
+                .tabItem {
+                    Label("게임 만들기", systemImage: "plus.square.fill.on.square.fill")
+                }
+            SettingView()
+                .tabItem {
+                    Label("설정", systemImage: "gearshape")
+                }
         }
         .tint(Color("opoPink"))
     }
