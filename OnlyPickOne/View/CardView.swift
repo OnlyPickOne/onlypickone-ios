@@ -51,7 +51,6 @@ struct CardView: View {
         }
         .onDisappear {
             UIScrollView.appearance().isPagingEnabled = false
-            
         }
     }
     

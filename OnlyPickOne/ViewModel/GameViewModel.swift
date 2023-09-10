@@ -23,9 +23,6 @@ class GameViewModel: ObservableObject {
     }
     
     private func match() {
-        print(list)
-        print(result)
-        print(topItem, bottomItem)
         if list.count == 0 {
             list = result
             result = []
