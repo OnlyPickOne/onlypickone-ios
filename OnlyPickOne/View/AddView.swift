@@ -43,7 +43,7 @@ struct AddView: View {
                 .tint(Color("opoPink"))
                 .padding()
             }
-            .navigationTitle("만들기")
+            .navigationTitle("게임 만들기")
             .navigationBarTitleDisplayMode(.inline)
             .tint(Color("opoPink"))
         }

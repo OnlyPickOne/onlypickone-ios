@@ -28,7 +28,7 @@ struct SettingView: View {
                     Text("게임 목록")
                 }
             }
-            .navigationTitle("OnlyPickOne")
+            .navigationTitle("설정")
             .navigationBarTitleDisplayMode(.inline)
             .tint(Color("opoPink"))
         }
