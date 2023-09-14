@@ -13,6 +13,8 @@
 		330F91552AAEE03B00B8EB99 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F91542AAEE03B00B8EB99 /* APIManager.swift */; };
 		330F91572AAEE0D200B8EB99 /* TestJoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F91562AAEE0D200B8EB99 /* TestJoke.swift */; };
 		330F91592AB0356400B8EB99 /* AddSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F91582AB0356400B8EB99 /* AddSheetView.swift */; };
+		330F915B2AB17ABE00B8EB99 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F915A2AB17ABE00B8EB99 /* ListViewModel.swift */; };
+		330F915D2AB17E4500B8EB99 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F915C2AB17E4500B8EB99 /* Int+.swift */; };
 		33222DFA2A95CFA300D12DA2 /* OnlyPickOneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33222DF92A95CFA300D12DA2 /* OnlyPickOneApp.swift */; };
 		33222DFE2A95CFA500D12DA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33222DFD2A95CFA500D12DA2 /* Assets.xcassets */; };
 		33222E012A95CFA500D12DA2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33222E002A95CFA500D12DA2 /* Preview Assets.xcassets */; };
@@ -34,6 +36,9 @@
 		330F91542AAEE03B00B8EB99 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		330F91562AAEE0D200B8EB99 /* TestJoke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestJoke.swift; sourceTree = "<group>"; };
 		330F91582AB0356400B8EB99 /* AddSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSheetView.swift; sourceTree = "<group>"; };
+		330F915A2AB17ABE00B8EB99 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		330F915C2AB17E4500B8EB99 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
+		330F915E2AB2E3D700B8EB99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		33222DF62A95CFA300D12DA2 /* OnlyPickOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnlyPickOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33222DF92A95CFA300D12DA2 /* OnlyPickOneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyPickOneApp.swift; sourceTree = "<group>"; };
 		33222DFD2A95CFA500D12DA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -77,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				332466A52AA8494E00F001B8 /* UIApplication+.swift */,
+				330F915C2AB17E4500B8EB99 /* Int+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -100,6 +106,7 @@
 		33222DF82A95CFA300D12DA2 /* OnlyPickOne */ = {
 			isa = PBXGroup;
 			children = (
+				330F915E2AB2E3D700B8EB99 /* Info.plist */,
 				33222DF92A95CFA300D12DA2 /* OnlyPickOneApp.swift */,
 				330F914C2AAEDA9400B8EB99 /* Extension */,
 				330F914B2AAEDA8600B8EB99 /* Service */,
@@ -149,6 +156,7 @@
 			isa = PBXGroup;
 			children = (
 				33835F082A95F32100C93EB0 /* GameViewModel.swift */,
+				330F915A2AB17ABE00B8EB99 /* ListViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -235,6 +243,7 @@
 				33222DFA2A95CFA300D12DA2 /* OnlyPickOneApp.swift in Sources */,
 				33835F042A95F20200C93EB0 /* Item.swift in Sources */,
 				33222E0F2A95D4FF00D12DA2 /* AddView.swift in Sources */,
+				330F915D2AB17E4500B8EB99 /* Int+.swift in Sources */,
 				33222E0D2A95D4FF00D12DA2 /* GameView.swift in Sources */,
 				330F91552AAEE03B00B8EB99 /* APIManager.swift in Sources */,
 				33222E0E2A95D4FF00D12DA2 /* HomeView.swift in Sources */,
@@ -246,6 +255,7 @@
 				33222E102A95D4FF00D12DA2 /* ResultView.swift in Sources */,
 				33835F0D2A971D6600C93EB0 /* CardView.swift in Sources */,
 				33222E0C2A95D4FF00D12DA2 /* ListView.swift in Sources */,
+				330F915B2AB17ABE00B8EB99 /* ListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +387,7 @@
 				DEVELOPMENT_TEAM = 6W8N7TVCPJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OnlyPickOne/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "온리픽원";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -411,6 +422,7 @@
 				DEVELOPMENT_TEAM = 6W8N7TVCPJ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OnlyPickOne/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "온리픽원";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

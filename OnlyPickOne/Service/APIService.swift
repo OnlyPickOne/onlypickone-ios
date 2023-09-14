@@ -30,7 +30,7 @@ extension APIService: TargetType {
         case .game, .gameList:
             return URL(string: "http://52.78.136.228")!
         case .test:
-            return URL(string: "https://api.icndb.com")!
+            return URL(string: "https://reqres.in/api")!
         default:
             return URL(string: "http://52.78.136.228")!
         }
@@ -39,7 +39,7 @@ extension APIService: TargetType {
     var path: String {
         switch self {
         case .test:
-            return "/jokes/random"
+            return "/users/2"
         default:
             return ""
         }
@@ -56,12 +56,12 @@ extension APIService: TargetType {
     
     var task: Task {
         switch self {
-        case .test:
-            let params: [String: Any] = [
-                "firstName": "Taehee",
-                "lastName": "Han"
-            ]
-            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+//        case .test:
+//            let params: [String: Any] = [
+//                "firstName": "Taehee",
+//                "lastName": "Han"
+//            ]
+//            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
         default:
             return .requestPlain
         }

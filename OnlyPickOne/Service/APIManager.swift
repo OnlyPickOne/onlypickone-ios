@@ -16,7 +16,7 @@ struct APIManager {
             switch result {
             case let .success(response):
                 let result = try? response.map(Joke.self)
-                completion(result?.value.joke ?? "")
+//                completion(result?.value.joke ?? "")
             case let .failure(error):
                 print(error.localizedDescription)
             }
