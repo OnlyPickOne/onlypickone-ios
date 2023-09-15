@@ -27,8 +27,8 @@ enum APIService {
 extension APIService: TargetType {
     var baseURL: URL {
         switch self {
-        case .game, .gameList:
-            return URL(string: "http://52.78.136.228")!
+        case .game, .gameList, .info:
+            return URL(string: "http://52.78.136.228:8080/api/v1")!
         case .test:
             return URL(string: "https://reqres.in/api")!
         default:
@@ -38,6 +38,8 @@ extension APIService: TargetType {
     
     var path: String {
         switch self {
+        case .info:
+            return "/versions"
         case .test:
             return "/users/2"
         default:
@@ -47,7 +49,7 @@ extension APIService: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .test:
+        case .test, .info:
             return .get
         default:
             return .get
