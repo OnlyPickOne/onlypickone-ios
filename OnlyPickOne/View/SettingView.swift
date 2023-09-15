@@ -8,24 +8,62 @@
 import SwiftUI
 
 struct SettingView: View {
+    @ObservedObject var viewModel = SettingViewModel()
+    
     var body: some View {
         NavigationView {
             List {
                 Section("고객센터") {
-                    Text("공지사항")
-                    Text("문의하기")
-                    Text("앱 정보")
+                    NavigationLink {
+                        Text("공지사항")
+                    } label: {
+                        Text("공지사항")
+                    }
+                    NavigationLink {
+                        Text("문의하기")
+                    } label: {
+                        Text("문의하기")
+                    }
+                    NavigationLink {
+                        Text("최소지원버전 : \(viewModel.minimumVersion)\n현재최신버전 : \(viewModel.latestVersion)")
+                    } label: {
+                        Text("앱 정보")
+                    }
+                    .onAppear() {
+                        viewModel.info()
+                    }
+
                 }
                 
                 Section("개인 설정") {
-                    Text("내 게임")
-                    Text("로그아웃")
-                    Text("회원 탈퇴")
+                    NavigationLink {
+                        Text("내 게임")
+                    } label: {
+                        Text("내 게임")
+                    }
+                    NavigationLink {
+                        Text("로그아웃")
+                    } label: {
+                        Text("로그아웃")
+                    }
+                    NavigationLink {
+                        Text("회원 탈퇴")
+                    } label: {
+                        Text("회원 탈퇴")
+                    }
                 }
                 
                 Section("관리자 메뉴 - 관리자만 보일 예정") {
-                    Text("공지 작성")
-                    Text("게임 목록")
+                    NavigationLink {
+                        Text("공지 작성")
+                    } label: {
+                        Text("공지 작성")
+                    }
+                    NavigationLink {
+                        Text("게임 목록")
+                    } label: {
+                        Text("게임 목록")
+                    }
                 }
             }
             .navigationTitle("설정")

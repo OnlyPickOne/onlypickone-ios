@@ -15,6 +15,9 @@
 		330F91592AB0356400B8EB99 /* AddSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F91582AB0356400B8EB99 /* AddSheetView.swift */; };
 		330F915B2AB17ABE00B8EB99 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F915A2AB17ABE00B8EB99 /* ListViewModel.swift */; };
 		330F915D2AB17E4500B8EB99 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F915C2AB17E4500B8EB99 /* Int+.swift */; };
+		330F91602AB4854C00B8EB99 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F915F2AB4854C00B8EB99 /* Info.swift */; };
+		330F91642AB4862E00B8EB99 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F91632AB4862E00B8EB99 /* Response.swift */; };
+		330F91662AB488A300B8EB99 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F91652AB488A300B8EB99 /* SettingViewModel.swift */; };
 		33222DFA2A95CFA300D12DA2 /* OnlyPickOneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33222DF92A95CFA300D12DA2 /* OnlyPickOneApp.swift */; };
 		33222DFE2A95CFA500D12DA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33222DFD2A95CFA500D12DA2 /* Assets.xcassets */; };
 		33222E012A95CFA500D12DA2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33222E002A95CFA500D12DA2 /* Preview Assets.xcassets */; };
@@ -39,6 +42,9 @@
 		330F915A2AB17ABE00B8EB99 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		330F915C2AB17E4500B8EB99 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		330F915E2AB2E3D700B8EB99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		330F915F2AB4854C00B8EB99 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
+		330F91632AB4862E00B8EB99 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		330F91652AB488A300B8EB99 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		33222DF62A95CFA300D12DA2 /* OnlyPickOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnlyPickOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33222DF92A95CFA300D12DA2 /* OnlyPickOneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyPickOneApp.swift; sourceTree = "<group>"; };
 		33222DFD2A95CFA500D12DA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -131,7 +137,9 @@
 			isa = PBXGroup;
 			children = (
 				33835F0A2A96279A00C93EB0 /* Game.swift */,
+				330F915F2AB4854C00B8EB99 /* Info.swift */,
 				33835F032A95F20200C93EB0 /* Item.swift */,
+				330F91632AB4862E00B8EB99 /* Response.swift */,
 				330F91562AAEE0D200B8EB99 /* TestJoke.swift */,
 			);
 			path = Model;
@@ -157,6 +165,7 @@
 			children = (
 				33835F082A95F32100C93EB0 /* GameViewModel.swift */,
 				330F915A2AB17ABE00B8EB99 /* ListViewModel.swift */,
+				330F91652AB488A300B8EB99 /* SettingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -239,13 +248,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				33835F092A95F32100C93EB0 /* GameViewModel.swift in Sources */,
+				330F91662AB488A300B8EB99 /* SettingViewModel.swift in Sources */,
 				33835F0B2A96279A00C93EB0 /* Game.swift in Sources */,
 				33222DFA2A95CFA300D12DA2 /* OnlyPickOneApp.swift in Sources */,
 				33835F042A95F20200C93EB0 /* Item.swift in Sources */,
+				330F91642AB4862E00B8EB99 /* Response.swift in Sources */,
 				33222E0F2A95D4FF00D12DA2 /* AddView.swift in Sources */,
 				330F915D2AB17E4500B8EB99 /* Int+.swift in Sources */,
 				33222E0D2A95D4FF00D12DA2 /* GameView.swift in Sources */,
 				330F91552AAEE03B00B8EB99 /* APIManager.swift in Sources */,
+				330F91602AB4854C00B8EB99 /* Info.swift in Sources */,
 				33222E0E2A95D4FF00D12DA2 /* HomeView.swift in Sources */,
 				33835F022A95D86100C93EB0 /* SettingView.swift in Sources */,
 				330F91572AAEE0D200B8EB99 /* TestJoke.swift in Sources */,
