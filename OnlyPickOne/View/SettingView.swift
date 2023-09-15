@@ -26,11 +26,11 @@ struct SettingView: View {
                     }
                     NavigationLink {
                         Text("최소지원버전 : \(viewModel.minimumVersion)\n현재최신버전 : \(viewModel.latestVersion)")
+                            .onAppear() {
+                                viewModel.info()
+                            }
                     } label: {
                         Text("앱 정보")
-                    }
-                    .onAppear() {
-                        viewModel.info()
                     }
 
                 }
