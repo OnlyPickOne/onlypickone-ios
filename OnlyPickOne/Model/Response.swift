@@ -11,5 +11,5 @@ struct Response<T: Codable>: Decodable {
     let status: Int?
     let isSuccess: Bool?
     let message: String?
-    let data: T
+    let data: T?
 }
