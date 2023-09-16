@@ -28,8 +28,8 @@ class SettingViewModel: ObservableObject {
                 }
             } receiveValue: { response in
                 let result = try? response.map(Response<Info>.self)
-                self.minimumVersion = result?.data.minimum ?? ""
-                self.latestVersion = result?.data.latest ?? ""
+                self.minimumVersion = result?.data?.minimum ?? ""
+                self.latestVersion = result?.data?.latest ?? ""
             }.store(in: &subscription)
     }
 }
