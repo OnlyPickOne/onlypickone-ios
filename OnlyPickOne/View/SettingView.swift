@@ -60,9 +60,19 @@ struct SettingView: View {
                         Text("공지 작성")
                     }
                     NavigationLink {
+                        Text("유저 목록")
+                    } label: {
+                        Text("유저 목록")
+                    }
+                    NavigationLink {
                         Text("게임 목록")
                     } label: {
                         Text("게임 목록")
+                    }
+                    NavigationLink {
+                        Text("버전 정보 변경")
+                    } label: {
+                        Text("버전 정보 변경")
                     }
                 }
             }
