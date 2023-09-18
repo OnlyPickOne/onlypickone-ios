@@ -9,4 +9,5 @@ import Foundation
 
 struct Email: Codable {
     let email: String?
+    let code: String?
 }
