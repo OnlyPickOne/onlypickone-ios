@@ -20,6 +20,7 @@ enum APIService {
     case login
     case leave
     case info
+    case mailAuthReq(_ mail: Email)
     case notice
     case test
 }
@@ -27,7 +28,7 @@ enum APIService {
 extension APIService: TargetType {
     var baseURL: URL {
         switch self {
-        case .game, .gameList, .info:
+        case .game, .gameList, .info, .mailAuthReq(_):
             return URL(string: "http://52.78.136.228:8080/api/v1")!
         case .test:
             return URL(string: "https://reqres.in/api")!
@@ -40,6 +41,8 @@ extension APIService: TargetType {
         switch self {
         case .info:
             return "/versions"
+        case .mailAuthReq(_):
+            return "/mails"
         case .test:
             return "/users/2"
         default:
@@ -51,6 +54,8 @@ extension APIService: TargetType {
         switch self {
         case .test, .info:
             return .get
+        case .mailAuthReq(_):
+            return .post
         default:
             return .get
         }
@@ -64,6 +69,9 @@ extension APIService: TargetType {
 //                "lastName": "Han"
 //            ]
 //            return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+        case .mailAuthReq(let mail):
+//            return .requestParameters(parameters: ["email" : mail], encoding: URLEncoding.queryString)
+            return .requestJSONEncodable(mail)
         default:
             return .requestPlain
         }
