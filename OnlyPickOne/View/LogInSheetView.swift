@@ -24,6 +24,9 @@ struct LogInSheetView: View {
                     Spacer()
                     NavigationLink {
                         Text("asdf")
+                            .onAppear(){
+                                isShowingLogInSheet = false
+                            }
                     } label: {
                         Text("로그인")
                             .frame(maxWidth: .infinity)
@@ -36,7 +39,7 @@ struct LogInSheetView: View {
                     .cornerRadius(10)
                     
                     NavigationLink {
-                        Text("asdf")
+                        SignUpView(isShowingLogInSheet: $isShowingLogInSheet)
                     } label: {
                         Text("회원가입")
                             .frame(maxWidth: .infinity)
