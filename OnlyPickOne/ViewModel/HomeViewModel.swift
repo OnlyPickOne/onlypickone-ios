@@ -14,7 +14,7 @@ class HomeViewModel: ObservableObject {
     private var subscription = Set<AnyCancellable>()
     private let provider = MoyaProvider<APIService>()
     
-    @Published var isAuthorized: Bool = false
+    @Published var isNeedToAuth: Bool = true
     
     public func mailAuthReqeust(email: String?) {
         guard let email = email else { return }
@@ -34,7 +34,7 @@ class HomeViewModel: ObservableObject {
     
     init(subscription: Set<AnyCancellable> = Set<AnyCancellable>(), isAuthorized: Bool = false) {
         self.subscription = subscription
-        self.isAuthorized = isAuthorized
+        self.isNeedToAuth = isAuthorized
 //        self.mailAuthReqeust(email: "110w110@naver.com")
     }
 }

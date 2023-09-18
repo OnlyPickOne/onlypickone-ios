@@ -26,6 +26,13 @@ struct HomeView: View {
                 }
         }
         .tint(Color("opoPink"))
+        .fullScreenCover(isPresented: $viewModel.isNeedToAuth) {
+            LogInSheetView()
+        }
+        .onAppear {
+            // 인증 확인 로직 후 true 또는 false로 변경
+            viewModel.isNeedToAuth = true
+        }
     }
 }
 
