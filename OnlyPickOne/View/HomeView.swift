@@ -28,6 +28,7 @@ struct HomeView: View {
         .tint(Color("opoPink"))
         .fullScreenCover(isPresented: $viewModel.isNeedToAuth) {
             LogInSheetView(isShowingLogInSheet: $viewModel.isNeedToAuth)
+                .tint(Color("opoPink"))
         }
         .onAppear {
             // 인증 확인 로직 후 true 또는 false로 변경

@@ -12,7 +12,6 @@ struct SignUpView: View {
     @State var emailInput = ""
     @State var passwordInput = ""
     @State var codeInput = ""
-    
     @ObservedObject var viewModel = SignUpViewModel()
     
     var body: some View {
@@ -30,13 +29,14 @@ struct SignUpView: View {
                         Button {
                             print("인증 요청")
                             viewModel.isShowingAuthField = true
+                            viewModel.mailAuthReqeust(email: emailInput)
                         } label: {
                             Text("인증요청")
                                 .font(.subheadline)
                         }
                         .frame(width: 80, height: 40)
                         .background(viewModel.isValidEmail ? Color("opoBlue") : Color(cgColor: UIColor.systemGray5.cgColor))
-                        .accentColor(.white)
+                        .foregroundColor(viewModel.isValidEmail ? .white : Color(cgColor: UIColor.systemGray2.cgColor))
                         .font(.headline)
                         .cornerRadius(10)
                         .disabled(!(viewModel.isValidEmail))
@@ -54,19 +54,19 @@ struct SignUpView: View {
                         Text("인증번호")
                             .font(.headline)
                         HStack {
-                            TextField("6자리 인증코드를 입력하세요", text: $codeInput)
+                            TextField("인증코드는 10분 간 유효합니다.", text: $codeInput)
                                 .textInputAutocapitalization(.never)
                                 .keyboardType(.numberPad)
                             Button {
                                 print("확인")
-                                viewModel.checkCode()
+                                viewModel.mailVerify(email: emailInput, code: codeInput)
                             } label: {
                                 Text("인증")
                                     .font(.subheadline)
                             }
                             .frame(width: 80, height: 40)
                             .background(codeInput.count == 6 ? Color("opoBlue") : Color(cgColor: UIColor.systemGray5.cgColor))
-                            .accentColor(.white)
+                            .foregroundColor(codeInput.count == 6 ? .white : Color(cgColor: UIColor.systemGray2.cgColor))
                             .font(.headline)
                             .cornerRadius(10)
                             .disabled(codeInput.count != 6)
@@ -112,7 +112,7 @@ struct SignUpView: View {
                 .padding(0)
                 .frame(height: 40)
                 .background((viewModel.isSucessAuthEmail && viewModel.isValidPassword) ? Color("opoRed") : Color(cgColor: UIColor.systemGray5.cgColor))
-                .accentColor(.white)
+                .foregroundColor((viewModel.isSucessAuthEmail && viewModel.isValidPassword) ? .white : Color(cgColor: UIColor.systemGray2.cgColor))
                 .font(.headline)
                 .cornerRadius(10)
                 .disabled(!(viewModel.isSucessAuthEmail && viewModel.isValidPassword))

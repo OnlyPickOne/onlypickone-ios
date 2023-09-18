@@ -39,8 +39,38 @@ class SignUpViewModel: ObservableObject {
         isValidPassword = false
     }
     
-    public func checkCode() {
-        isSucessAuthEmail = true
+    public func mailAuthReqeust(email: String?) {
+        guard let email = email else { return }
+        provider.requestPublisher(.mailAuthReq(Email(email: email, code: nil)))
+            .sink { completion in
+                switch completion {
+                case let .failure(error):
+                    print("error: \(error)")
+                case .finished:
+                    print("sucess")
+                }
+            } receiveValue: { response in
+                let result = try? response.map(Response<String>.self)
+                print(result?.message ?? "")
+            }.store(in: &subscription)
+    }
+    
+    public func mailVerify(email: String?, code: String?) {
+        guard let email = email, let code = code else { return }
+        provider.requestPublisher(.mailVerify(Email(email: email, code: code)))
+            .sink { completion in
+                switch completion {
+                case let .failure(error):
+                    print("error: \(error)")
+                case .finished:
+                    print("sucess")
+                }
+            } receiveValue: { response in
+                let result = try? response.map(Response<String>.self)
+                if result?.isSuccess ?? false {
+                    self.isSucessAuthEmail = true
+                }
+            }.store(in: &subscription)
     }
     
     init(subscription: Set<AnyCancellable> = Set<AnyCancellable>()) {
