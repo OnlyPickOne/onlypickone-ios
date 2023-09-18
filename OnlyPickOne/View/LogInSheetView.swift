@@ -8,28 +8,50 @@
 import SwiftUI
 
 struct LogInSheetView: View {
+    @Binding var isShowingLogInSheet: Bool
+    
     var body: some View {
-        ZStack {
-            Color("opoBackground")
-            VStack {
-                Spacer()
-                Image("opoImage")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 150)
-                Spacer()
-                Button("sadf") {
-                    Text("sadf")
+        NavigationView {
+            ZStack {
+                Color("opoBackground")
+                    .ignoresSafeArea(.all)
+                VStack(spacing: 16) {
+                    Spacer()
+                    Image("opoImage")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 150)
+                    Spacer()
+                    NavigationLink {
+                        Text("asdf")
+                    } label: {
+                        Text("로그인")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .padding()
+                    .frame(height: 40)
+                    .background(Color("opoBlue"))
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .cornerRadius(10)
+                    
+                    NavigationLink {
+                        Text("asdf")
+                    } label: {
+                        Text("회원가입")
+                            .frame(maxWidth: .infinity)
+                    }
+                    .padding()
+                    .frame(height: 40)
+                    .background(Color("opoRed"))
+                    .foregroundColor(.white)
+                    .font(.headline)
+                    .cornerRadius(10)
                 }
-                Spacer()
+                .padding(48)
             }
+            .tint(Color("opoPink"))
         }
         
-    }
-}
-
-struct LogInSheetView_Previews: PreviewProvider {
-    static var previews: some View {
-        LogInSheetView()
     }
 }
