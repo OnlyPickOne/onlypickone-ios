@@ -14,7 +14,6 @@ struct ListView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color.green.edgesIgnoringSafeArea(.all)
                 List {
                     ForEach((0..<viewModel.gameList.count), id: \.self) { index in
                         NavigationLink {
