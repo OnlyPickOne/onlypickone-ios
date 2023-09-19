@@ -39,7 +39,7 @@ struct AddSheetView: View {
                         }
                         NavigationLink("다음", destination: {
                             VStack(spacing: 0) {
-                                CardView(input: itemInput, images: images)
+                                CardView(input: itemInput, imageList: [UIImage(named: "street")!])
                                     .navigationTitle("캡션 달기")
                                     .tint(Color("opoPink"))
                             }
