@@ -19,7 +19,6 @@ class ListViewModel: ObservableObject {
     private let provider = MoyaProvider<APIService>()
     
     func test() {
-        
         provider.requestPublisher(.test)
             .sink { completion in
                 switch completion {

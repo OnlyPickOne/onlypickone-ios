@@ -10,7 +10,6 @@ import PhotosUI
 
 struct CardView: View {
     @State var input: [String]
-//    @State var images: [String]
     @State var imageList: [UIImage]
     @State var showImagePicker: Bool = false
     
@@ -57,13 +56,6 @@ struct CardView: View {
                 }
             }
             .sheet(isPresented: $showImagePicker) {
-//                let configuration: PHPickerConfiguration = {
-//                    var config = PHPickerConfiguration(photoLibrary: PHPhotoLibrary.shared())
-//                    config.selectionLimit = 128
-//                    config.filter = .images
-//                    return config
-//                }()
-//                PhotoPicker(configuration: configuration, isPresented: $showImagePicker, images: $imageList)
                 PhotoPicker(images: $imageList, inputs: $input, showImagePicker: $showImagePicker, selectionLimit: 128)
             }
         }
@@ -97,14 +89,3 @@ struct CardView_Previews: PreviewProvider {
         CardView(input: [""], imageList: [])
     }
 }
-
-//struct Movie : Identifiable {
-//    var id : Int
-//    var title : String
-//    var imageName : String
-//}
-
-//var latestmovie = [Movie(id: 0, title: "The Avengers", imageName: "street"),
-//                   Movie(id: 1, title: "cat1", imageName: "cat1"),
-//                   Movie(id: 2, title: "cat2", imageName: "cat2"),
-//                   Movie(id: 3, title: "football", imageName: "football")]

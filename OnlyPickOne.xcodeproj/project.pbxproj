@@ -18,6 +18,14 @@
 		330F91602AB4854C00B8EB99 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F915F2AB4854C00B8EB99 /* Info.swift */; };
 		330F91642AB4862E00B8EB99 /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F91632AB4862E00B8EB99 /* Response.swift */; };
 		330F91662AB488A300B8EB99 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F91652AB488A300B8EB99 /* SettingViewModel.swift */; };
+		33217A2C2AB8052200F7596E /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33217A2B2AB8052200F7596E /* HomeViewModel.swift */; };
+		33217A2E2AB80F9B00F7596E /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33217A2D2AB80F9B00F7596E /* Email.swift */; };
+		33217A302AB8121700F7596E /* LogInSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33217A2F2AB8121700F7596E /* LogInSheetView.swift */; };
+		33217A322AB8216C00F7596E /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33217A312AB8216C00F7596E /* SignUpView.swift */; };
+		33217A342AB8260A00F7596E /* SignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33217A332AB8260A00F7596E /* SignUpViewModel.swift */; };
+		33217A362AB8412200F7596E /* LogInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33217A352AB8412200F7596E /* LogInViewModel.swift */; };
+		33217A382AB9649200F7596E /* CardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33217A372AB9649200F7596E /* CardViewModel.swift */; };
+		33217A3D2AB968EA00F7596E /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33217A3C2AB968EA00F7596E /* PhotoPicker.swift */; };
 		33222DFA2A95CFA300D12DA2 /* OnlyPickOneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33222DF92A95CFA300D12DA2 /* OnlyPickOneApp.swift */; };
 		33222DFE2A95CFA500D12DA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33222DFD2A95CFA500D12DA2 /* Assets.xcassets */; };
 		33222E012A95CFA500D12DA2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33222E002A95CFA500D12DA2 /* Preview Assets.xcassets */; };
@@ -45,6 +53,14 @@
 		330F915F2AB4854C00B8EB99 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		330F91632AB4862E00B8EB99 /* Response.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		330F91652AB488A300B8EB99 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
+		33217A2B2AB8052200F7596E /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		33217A2D2AB80F9B00F7596E /* Email.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Email.swift; sourceTree = "<group>"; };
+		33217A2F2AB8121700F7596E /* LogInSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInSheetView.swift; sourceTree = "<group>"; };
+		33217A312AB8216C00F7596E /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		33217A332AB8260A00F7596E /* SignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewModel.swift; sourceTree = "<group>"; };
+		33217A352AB8412200F7596E /* LogInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewModel.swift; sourceTree = "<group>"; };
+		33217A372AB9649200F7596E /* CardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardViewModel.swift; sourceTree = "<group>"; };
+		33217A3C2AB968EA00F7596E /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPicker.swift; sourceTree = "<group>"; };
 		33222DF62A95CFA300D12DA2 /* OnlyPickOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnlyPickOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33222DF92A95CFA300D12DA2 /* OnlyPickOneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyPickOneApp.swift; sourceTree = "<group>"; };
 		33222DFD2A95CFA500D12DA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -80,6 +96,7 @@
 			children = (
 				330F91522AAEDBBC00B8EB99 /* APIService.swift */,
 				330F91542AAEE03B00B8EB99 /* APIManager.swift */,
+				33217A3C2AB968EA00F7596E /* PhotoPicker.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -140,6 +157,7 @@
 				330F915F2AB4854C00B8EB99 /* Info.swift */,
 				33835F032A95F20200C93EB0 /* Item.swift */,
 				330F91632AB4862E00B8EB99 /* Response.swift */,
+				33217A2D2AB80F9B00F7596E /* Email.swift */,
 				330F91562AAEE0D200B8EB99 /* TestJoke.swift */,
 			);
 			path = Model;
@@ -149,6 +167,8 @@
 			isa = PBXGroup;
 			children = (
 				33222E0A2A95D4FF00D12DA2 /* HomeView.swift */,
+				33217A2F2AB8121700F7596E /* LogInSheetView.swift */,
+				33217A312AB8216C00F7596E /* SignUpView.swift */,
 				33222E072A95D4FB00D12DA2 /* ListView.swift */,
 				33222E0B2A95D4FF00D12DA2 /* GameView.swift */,
 				33222E082A95D4FE00D12DA2 /* ResultView.swift */,
@@ -163,8 +183,12 @@
 		33835F072A95F2B600C93EB0 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				33835F082A95F32100C93EB0 /* GameViewModel.swift */,
+				33217A2B2AB8052200F7596E /* HomeViewModel.swift */,
+				33217A332AB8260A00F7596E /* SignUpViewModel.swift */,
+				33217A352AB8412200F7596E /* LogInViewModel.swift */,
 				330F915A2AB17ABE00B8EB99 /* ListViewModel.swift */,
+				33835F082A95F32100C93EB0 /* GameViewModel.swift */,
+				33217A372AB9649200F7596E /* CardViewModel.swift */,
 				330F91652AB488A300B8EB99 /* SettingViewModel.swift */,
 			);
 			path = ViewModel;
@@ -248,8 +272,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				33835F092A95F32100C93EB0 /* GameViewModel.swift in Sources */,
+				33217A2C2AB8052200F7596E /* HomeViewModel.swift in Sources */,
 				330F91662AB488A300B8EB99 /* SettingViewModel.swift in Sources */,
 				33835F0B2A96279A00C93EB0 /* Game.swift in Sources */,
+				33217A302AB8121700F7596E /* LogInSheetView.swift in Sources */,
 				33222DFA2A95CFA300D12DA2 /* OnlyPickOneApp.swift in Sources */,
 				33835F042A95F20200C93EB0 /* Item.swift in Sources */,
 				330F91642AB4862E00B8EB99 /* Response.swift in Sources */,
@@ -258,13 +284,19 @@
 				33222E0D2A95D4FF00D12DA2 /* GameView.swift in Sources */,
 				330F91552AAEE03B00B8EB99 /* APIManager.swift in Sources */,
 				330F91602AB4854C00B8EB99 /* Info.swift in Sources */,
+				33217A362AB8412200F7596E /* LogInViewModel.swift in Sources */,
 				33222E0E2A95D4FF00D12DA2 /* HomeView.swift in Sources */,
+				33217A342AB8260A00F7596E /* SignUpViewModel.swift in Sources */,
 				33835F022A95D86100C93EB0 /* SettingView.swift in Sources */,
+				33217A2E2AB80F9B00F7596E /* Email.swift in Sources */,
+				33217A322AB8216C00F7596E /* SignUpView.swift in Sources */,
 				330F91572AAEE0D200B8EB99 /* TestJoke.swift in Sources */,
+				33217A382AB9649200F7596E /* CardViewModel.swift in Sources */,
 				330F91592AB0356400B8EB99 /* AddSheetView.swift in Sources */,
 				332466A62AA8494E00F001B8 /* UIApplication+.swift in Sources */,
 				330F91532AAEDBBC00B8EB99 /* APIService.swift in Sources */,
 				33222E102A95D4FF00D12DA2 /* ResultView.swift in Sources */,
+				33217A3D2AB968EA00F7596E /* PhotoPicker.swift in Sources */,
 				33835F0D2A971D6600C93EB0 /* CardView.swift in Sources */,
 				33222E0C2A95D4FF00D12DA2 /* ListView.swift in Sources */,
 				330F915B2AB17ABE00B8EB99 /* ListViewModel.swift in Sources */,
