@@ -37,7 +37,7 @@ struct SettingView: View {
                 
                 Section("개인 설정") {
                     NavigationLink {
-                        Text("내 게임")
+                        ListView()
                     } label: {
                         Text("내 게임")
                     }
@@ -70,7 +70,7 @@ struct SettingView: View {
                         Text("게임 목록")
                     }
                     NavigationLink {
-                        Text("버전 정보 변경")
+                        VersionSettingView(leastInput: "", latestInput: "")
                     } label: {
                         Text("버전 정보 변경")
                     }
