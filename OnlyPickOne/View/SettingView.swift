@@ -55,7 +55,7 @@ struct SettingView: View {
                 
                 Section("관리자 메뉴 - 관리자만 보일 예정") {
                     NavigationLink {
-                        Text("공지 작성")
+                        NoticeSettingView(titleInput: "", contentInput: "")
                     } label: {
                         Text("공지 작성")
                     }

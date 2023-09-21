@@ -17,10 +17,12 @@ struct VersionSettingView: View {
                 Text("최소 지원 버전")
                 TextField("", text: $leastInput)
             }
+            .padding(5)
             VStack(alignment: .leading) {
                 Text("현재 최신 버전")
                 TextField("", text: $latestInput)
             }
+            .padding(5)
             Button {
                 print("submit")
             } label: {
