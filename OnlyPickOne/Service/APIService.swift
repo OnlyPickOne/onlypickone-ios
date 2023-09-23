@@ -22,7 +22,8 @@ enum APIService {
     case info
     case mailAuthReq(_ mail: Email)
     case mailVerify(_ mail: Email)
-    case signUp(_ signUp: SignUp)
+    case signUp(_ account: Account)
+//    case logIn(_ )
     case notice
     case test
 }
@@ -69,8 +70,8 @@ extension APIService: TargetType {
         switch self {
         case .mailAuthReq(let mail), .mailVerify(let mail):
             return .requestJSONEncodable(mail)
-        case .signUp(let signUp):
-            return .requestJSONEncodable(signUp)
+        case .signUp(let account):
+            return .requestJSONEncodable(account)
         default:
             return .requestPlain
         }

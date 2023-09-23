@@ -73,7 +73,7 @@ class SignUpViewModel: ObservableObject {
     
     public func signUp(email: String?, password: String?, completion: @escaping (Bool)->()) {
         guard let email = email, let password = password else { return }
-        provider.requestPublisher(.signUp(SignUp(email: email, password: password)))
+        provider.requestPublisher(.signUp(Account(email: email, password: password)))
             .sink { completion in
                 switch completion {
                 case let .failure(error):
