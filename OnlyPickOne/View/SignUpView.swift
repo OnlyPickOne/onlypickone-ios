@@ -104,7 +104,10 @@ struct SignUpView: View {
                     }
                 }
                 Button {
-                    isShowingLogInSheet = false
+//                    isShowingLogInSheet = false
+                    viewModel.signUp(email: emailInput, password: passwordInput) { isSucess in
+                        self.isShowingLogInSheet = !isSucess
+                    }
                 } label: {
                     Text("가입하기")
                         .frame(maxWidth: .infinity)
