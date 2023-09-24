@@ -40,8 +40,10 @@ struct LogInSheetView: View {
                                     SecureField("비밀번호를 입력해주세요.", text: $passwordInput)
                                 }
                                 Button {
-                                    viewModel.logIn()
-                                    isShowingLogInSheet = !(viewModel.isSucessLogIn)
+                                    viewModel.logIn(email: emailInput, password: passwordInput) {
+                                        result in
+                                        self.isShowingLogInSheet = !result
+                                    }
                                 } label: {
                                     Text("로그인")
                                         .frame(maxWidth: .infinity)

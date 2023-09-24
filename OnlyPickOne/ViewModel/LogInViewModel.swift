@@ -16,7 +16,20 @@ class LogInViewModel: ObservableObject {
     
     @Published var isSucessLogIn: Bool = false
     
-    public func logIn() {
-        isSucessLogIn = true
+    public func logIn(email: String?, password: String?, completion: @escaping (Bool)->()) {
+        guard let email = email, let password = password else { return }
+        provider.requestPublisher(.logIn(Account(email: email, password: password)))
+            .sink { completion in
+                switch completion {
+                case let .failure(error):
+                    print("error: \(error)")
+                case .finished:
+                    print("sucess")
+                }
+            } receiveValue: { response in
+                let result = try? response.map(Response<String>.self)
+                print(result)
+                completion(result?.isSuccess ?? false)
+            }.store(in: &subscription)
     }
 }

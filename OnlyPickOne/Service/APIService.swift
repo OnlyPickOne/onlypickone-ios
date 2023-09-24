@@ -23,7 +23,7 @@ enum APIService {
     case mailAuthReq(_ mail: Email)
     case mailVerify(_ mail: Email)
     case signUp(_ account: Account)
-//    case logIn(_ )
+    case logIn(_ account: Account)
     case notice
     case test
 }
@@ -48,6 +48,8 @@ extension APIService: TargetType {
             return "/mails/verify"
         case .signUp(_):
             return "/auth/signup"
+        case .logIn(_):
+            return "/auth/login"
         case .test:
             return "/users/2"
         default:
@@ -59,7 +61,7 @@ extension APIService: TargetType {
         switch self {
         case .test, .info:
             return .get
-        case .mailAuthReq(_), .mailVerify(_), .signUp(_):
+        case .mailAuthReq(_), .mailVerify(_), .signUp(_), .logIn(_):
             return .post
         default:
             return .get
@@ -70,7 +72,7 @@ extension APIService: TargetType {
         switch self {
         case .mailAuthReq(let mail), .mailVerify(let mail):
             return .requestJSONEncodable(mail)
-        case .signUp(let account):
+        case .signUp(let account), .logIn(let account):
             return .requestJSONEncodable(account)
         default:
             return .requestPlain
