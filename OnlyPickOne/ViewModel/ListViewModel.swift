@@ -29,7 +29,6 @@ class ListViewModel: ObservableObject {
                 }
             } receiveValue: { recievedValue in
                 let result = try? recievedValue.map(Joke.self)
-                print(result?.data.email ?? "")
                 self.testString = result?.data.email ?? ""
             }.store(in : &subscription)
     }

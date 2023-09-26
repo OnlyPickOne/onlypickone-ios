@@ -33,7 +33,14 @@ class LogInViewModel: ObservableObject {
                 print(result)
                 self.isFailureLogIn = !(result?.isSuccess ?? false)
                 self.isSucessLogIn = result?.isSuccess ?? false
-//                completion(result?.isSuccess ?? false)
+                
+                // Token Save
+                if let accessToken = result?.data?.accessToken, let refreshToken = result?.data?.refreshToken {
+                    UserDefaults.standard.set(accessToken, forKey: "accessToken")
+                    UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
+                }
+                
+                completion(result?.isSuccess ?? false)
             }.store(in: &subscription)
     }
 }
