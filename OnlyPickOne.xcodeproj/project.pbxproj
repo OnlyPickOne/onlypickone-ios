@@ -10,7 +10,6 @@
 		330F914F2AAEDAEF00B8EB99 /* CombineMoya in Frameworks */ = {isa = PBXBuildFile; productRef = 330F914E2AAEDAEF00B8EB99 /* CombineMoya */; };
 		330F91512AAEDAEF00B8EB99 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 330F91502AAEDAEF00B8EB99 /* Moya */; };
 		330F91532AAEDBBC00B8EB99 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F91522AAEDBBC00B8EB99 /* APIService.swift */; };
-		330F91552AAEE03B00B8EB99 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F91542AAEE03B00B8EB99 /* APIManager.swift */; };
 		330F91572AAEE0D200B8EB99 /* TestJoke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F91562AAEE0D200B8EB99 /* TestJoke.swift */; };
 		330F91592AB0356400B8EB99 /* AddSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F91582AB0356400B8EB99 /* AddSheetView.swift */; };
 		330F915B2AB17ABE00B8EB99 /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 330F915A2AB17ABE00B8EB99 /* ListViewModel.swift */; };
@@ -50,7 +49,6 @@
 
 /* Begin PBXFileReference section */
 		330F91522AAEDBBC00B8EB99 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
-		330F91542AAEE03B00B8EB99 /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		330F91562AAEE0D200B8EB99 /* TestJoke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestJoke.swift; sourceTree = "<group>"; };
 		330F91582AB0356400B8EB99 /* AddSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSheetView.swift; sourceTree = "<group>"; };
 		330F915A2AB17ABE00B8EB99 /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
@@ -107,7 +105,6 @@
 			isa = PBXGroup;
 			children = (
 				330F91522AAEDBBC00B8EB99 /* APIService.swift */,
-				330F91542AAEE03B00B8EB99 /* APIManager.swift */,
 				33217A3C2AB968EA00F7596E /* PhotoPicker.swift */,
 			);
 			path = Service;
@@ -310,7 +307,6 @@
 				33217A492AC2BFE700F7596E /* VersionSettingViewModel.swift in Sources */,
 				330F915D2AB17E4500B8EB99 /* Int+.swift in Sources */,
 				33222E0D2A95D4FF00D12DA2 /* GameView.swift in Sources */,
-				330F91552AAEE03B00B8EB99 /* APIManager.swift in Sources */,
 				330F91602AB4854C00B8EB99 /* Info.swift in Sources */,
 				33217A362AB8412200F7596E /* LogInViewModel.swift in Sources */,
 				33222E0E2A95D4FF00D12DA2 /* HomeView.swift in Sources */,
