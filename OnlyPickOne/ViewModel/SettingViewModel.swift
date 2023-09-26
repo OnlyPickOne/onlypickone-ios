@@ -17,7 +17,7 @@ class SettingViewModel: ObservableObject {
     @Published var minimumVersion: String = ""
     @Published var latestVersion: String = ""
     
-    func info() {
+    public func info() {
         provider.requestPublisher(.info)
             .sink { completion in
                 switch completion {
@@ -31,5 +31,12 @@ class SettingViewModel: ObservableObject {
                 self.minimumVersion = result?.data?.minimum ?? ""
                 self.latestVersion = result?.data?.latest ?? ""
             }.store(in: &subscription)
+    }
+    
+    public func logout() {
+        /// 서버 로직은 구현 후 추가할 예정
+        /// 현재는 토큰만 지우는 식으로 임시 구현
+        UserDefaults.standard.set(nil, forKey: "accessToken")
+        UserDefaults.standard.set(nil, forKey: "refreshToken")
     }
 }

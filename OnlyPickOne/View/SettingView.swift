@@ -43,6 +43,9 @@ struct SettingView: View {
                     }
                     NavigationLink {
                         Text("로그아웃")
+                            .onAppear() {
+                                viewModel.logout()
+                            }
                     } label: {
                         Text("로그아웃")
                     }
