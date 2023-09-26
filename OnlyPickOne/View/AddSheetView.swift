@@ -18,43 +18,51 @@ struct AddSheetView: View {
     let colors:[Color] = [.purple, .pink, .orange]
     var body: some View {
         NavigationView {
-            HStack(spacing: 15) {
-                TextField("게임 제목을 작성해주세요", text: $titleInput)
-                    .focused($focusField, equals: .title)
-                    .textFieldStyle(.roundedBorder)
-                NavigationLink("다음", destination: {
-                    VStack(spacing: 5) {
-                        HStack {
-                            TextEditor(text: $detailInput)
-                                .focused($focusField, equals: .detail)
-                                .background(Color.primary.colorInvert())
-                                .frame(height: 120)
-                                .cornerRadius(5)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 5)
-                                        .stroke(Color(UIColor.label), lineWidth: 0.3)
-                                        .opacity(0.3)
-                                )
-                                .padding(15)
-                        }
-                        NavigationLink("다음", destination: {
-                            VStack(spacing: 0) {
-                                CardView(input: itemInput, imageList: [UIImage(named: "picture.add")!])
-                                    .navigationTitle("캡션 달기")
-                                    .tint(Color("opoPink"))
+            VStack(spacing: 20) {
+                HStack(spacing: 15) {
+                    TextField("게임 제목을 작성해주세요", text: $titleInput)
+                        .focused($focusField, equals: .title)
+                        .textFieldStyle(.roundedBorder)
+                    NavigationLink("다음", destination: {
+                        VStack(spacing: 20) {
+                            HStack {
+                                TextEditor(text: $detailInput)
+                                    .focused($focusField, equals: .detail)
+                                    .background(Color.primary.colorInvert())
+                                    .frame(height: 200)
+                                    .cornerRadius(5)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(Color(UIColor.label), lineWidth: 0.3)
+                                            .opacity(0.3)
+                                    )
+                                    .padding(15)
                             }
-                            .toolbar {
-                                Button {
-                                    isShowingAddSheet.toggle()
-                                } label: {
-                                    Text("완료")
+                            Text("게임 설명은 최대 300자까지 작성할 수 있습니다.")
+                                .font(.caption)
+                            NavigationLink("다음", destination: {
+                                VStack(spacing: 0) {
+                                    CardView(input: itemInput, imageList: [UIImage(named: "picture.add")!])
+                                        .navigationTitle("캡션 달기")
+                                        .tint(Color("opoPink"))
                                 }
-                            }
-                        })
-                        .navigationTitle("설명")
-                        .tint(Color("opoPink"))
-                    }
-                })
+                                .toolbar {
+                                    Button {
+                                        isShowingAddSheet.toggle()
+                                    } label: {
+                                        Text("완료")
+                                    }
+                                }
+                            })
+                            .navigationTitle("설명")
+                            .tint(Color("opoPink"))
+                            .disabled(detailInput.count > 300 || detailInput.count <= 0)
+                        }
+                    })
+                    .disabled(titleInput.count > 40 || titleInput.count <= 0)
+                }
+                Text("제목은 최대 40자까지 작성할 수 있습니다.")
+                    .font(.caption)
             }
             .padding(20)
             .navigationTitle("제목")
