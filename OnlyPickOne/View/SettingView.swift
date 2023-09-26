@@ -36,6 +36,20 @@ struct SettingView: View {
 
                 }
                 
+                Section("약관") {
+                    NavigationLink {
+                        TermsWebView(urlToLoad: "https://water-advantage-4b6.notion.site/8ff7ccd28d05427c85c5aacbc59cfe06?pvs=4")
+                    } label: {
+                        Text("개인정보 처리방침")
+                    }
+                    NavigationLink {
+                        TermsWebView(urlToLoad: "https://water-advantage-4b6.notion.site/7e7e7929ce6f4d6a88c6dcdb31e0fa12?pvs=4")
+                    } label: {
+                        Text("이용 약관")
+                    }
+                    
+                }
+                
                 Section("개인 설정") {
                     NavigationLink {
                         ListView()

@@ -31,6 +31,7 @@
 		33217A442AC06E1100F7596E /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33217A432AC06E1100F7596E /* Account.swift */; };
 		33217A472AC2976300F7596E /* LoginToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33217A462AC2976300F7596E /* LoginToken.swift */; };
 		33217A492AC2BFE700F7596E /* VersionSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33217A482AC2BFE700F7596E /* VersionSettingViewModel.swift */; };
+		33217A4B2AC2CA9400F7596E /* TermsWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33217A4A2AC2CA9400F7596E /* TermsWebView.swift */; };
 		33222DFA2A95CFA300D12DA2 /* OnlyPickOneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33222DF92A95CFA300D12DA2 /* OnlyPickOneApp.swift */; };
 		33222DFE2A95CFA500D12DA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33222DFD2A95CFA500D12DA2 /* Assets.xcassets */; };
 		33222E012A95CFA500D12DA2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33222E002A95CFA500D12DA2 /* Preview Assets.xcassets */; };
@@ -71,6 +72,7 @@
 		33217A432AC06E1100F7596E /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		33217A462AC2976300F7596E /* LoginToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginToken.swift; sourceTree = "<group>"; };
 		33217A482AC2BFE700F7596E /* VersionSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionSettingViewModel.swift; sourceTree = "<group>"; };
+		33217A4A2AC2CA9400F7596E /* TermsWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsWebView.swift; sourceTree = "<group>"; };
 		33222DF62A95CFA300D12DA2 /* OnlyPickOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnlyPickOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33222DF92A95CFA300D12DA2 /* OnlyPickOneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyPickOneApp.swift; sourceTree = "<group>"; };
 		33222DFD2A95CFA500D12DA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				330F91582AB0356400B8EB99 /* AddSheetView.swift */,
 				33835F0C2A971D6600C93EB0 /* CardView.swift */,
 				33835F012A95D86100C93EB0 /* SettingView.swift */,
+				33217A4A2AC2CA9400F7596E /* TermsWebView.swift */,
 				33217A402ABC2B1D00F7596E /* Admin */,
 			);
 			path = View;
@@ -320,6 +323,7 @@
 				330F91592AB0356400B8EB99 /* AddSheetView.swift in Sources */,
 				332466A62AA8494E00F001B8 /* UIApplication+.swift in Sources */,
 				330F91532AAEDBBC00B8EB99 /* APIService.swift in Sources */,
+				33217A4B2AC2CA9400F7596E /* TermsWebView.swift in Sources */,
 				33222E102A95D4FF00D12DA2 /* ResultView.swift in Sources */,
 				33217A3D2AB968EA00F7596E /* PhotoPicker.swift in Sources */,
 				33217A3F2ABC2B1800F7596E /* VersionSettingView.swift in Sources */,
