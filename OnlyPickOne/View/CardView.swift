@@ -31,7 +31,11 @@ struct CardView: View {
                                 )
                                 .shadow(radius: 10)
                                 .onTapGesture {
-                                    showImagePicker = true
+                                    if num == imageList.count - 1 {
+                                        showImagePicker = true
+                                    } else {
+                                        imageList.remove(at: num)
+                                    }
                                 }
                             if num != imageList.count - 1 {
                                 HStack {
