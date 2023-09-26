@@ -11,6 +11,7 @@ struct SignUpView: View {
     @Binding var isShowingLogInSheet: Bool
     @State var emailInput = ""
     @State var passwordInput = ""
+    @State var repeatInput = ""
     @State var codeInput = ""
     @ObservedObject var viewModel = SignUpViewModel()
     
@@ -99,6 +100,20 @@ struct SignUpView: View {
                             .font(.caption)
                     } else {
                         Text("영어 대소문자 및 숫자를 포함하여 8자 이상 20자 이하")
+                            .foregroundColor(Color("opoRed"))
+                            .font(.caption)
+                    }
+                    SecureField("한번 더 입력하세요", text: $repeatInput)
+                        .font(.body)
+                        .onChange(of: passwordInput) {
+                            viewModel.checkValidPassword(password: $0)
+                        }
+                    if (passwordInput == repeatInput && repeatInput.count != 0) {
+                        Text("비밀번호가 일치합니다.")
+                            .foregroundColor(Color("opoSkyBlue"))
+                            .font(.caption)
+                    } else if (repeatInput.count != 0) {
+                        Text("비밀번호가 일치하지 않습니다.")
                             .foregroundColor(Color("opoRed"))
                             .font(.caption)
                     }
