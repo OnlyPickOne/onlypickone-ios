@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingView: View {
     @ObservedObject var viewModel = SettingViewModel()
+    @Binding var isNeedToAuth: Bool
     
     var body: some View {
         NavigationView {
@@ -41,14 +42,13 @@ struct SettingView: View {
                     } label: {
                         Text("내 게임")
                     }
-                    NavigationLink {
-                        Text("로그아웃")
-                            .onAppear() {
-                                viewModel.logout()
-                            }
+                    Button {
+                        viewModel.logout()
+                        isNeedToAuth = true
                     } label: {
                         Text("로그아웃")
                     }
+                    .foregroundColor(.white)
                     NavigationLink {
                         Text("회원 탈퇴")
                     } label: {
@@ -86,8 +86,8 @@ struct SettingView: View {
     }
 }
 
-struct SettingView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingView()
-    }
-}
+//struct SettingView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        SettingView()
+//    }
+//}

@@ -20,7 +20,7 @@ struct HomeView: View {
                 .tabItem {
                     Label("게임 만들기", systemImage: "plus.square.fill.on.square.fill")
                 }
-            SettingView()
+            SettingView(isNeedToAuth: $viewModel.isNeedToAuth)
                 .tabItem {
                     Label("설정", systemImage: "gearshape")
                 }
