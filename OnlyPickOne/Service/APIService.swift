@@ -35,7 +35,7 @@ extension APIService: TargetType {
         case .test:
             return URL(string: "https://reqres.in/api")!
         default:
-            return URL(string: "http://52.78.136.228:8080/api/v1")!
+            return URL(string: _privateDataStruct().baseUrl)!
         }
     }
     
