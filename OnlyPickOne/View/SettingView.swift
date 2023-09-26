@@ -48,7 +48,7 @@ struct SettingView: View {
                     } label: {
                         Text("로그아웃")
                     }
-                    .foregroundColor(.white)
+                    .foregroundColor(Color(uiColor: .label))
                     NavigationLink {
                         Text("회원 탈퇴")
                     } label: {
