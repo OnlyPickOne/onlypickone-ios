@@ -39,7 +39,10 @@ struct LogInSheetView: View {
                                         .font(.headline)
                                     SecureField("비밀번호를 입력해주세요.", text: $passwordInput)
                                 }
+                                Text("로그인 정보가 정확하지 않습니다.")
+                                    .opacity(viewModel.isFailureLogIn ? 1 : 0)
                                 Button {
+                                    viewModel.isFailureLogIn = false
                                     viewModel.logIn(email: emailInput, password: passwordInput) {
                                         result in
                                         self.isShowingLogInSheet = !result
@@ -58,7 +61,8 @@ struct LogInSheetView: View {
                             }
                             .padding(36)
                             .onAppear() {
-                                viewModel.isSucessLogIn = false
+//                                viewModel.isSucessLogIn = false
+//                                self.isShowingLogInSheet = !viewModel.isSucessLogIn
                             }
                         }
                     } label: {

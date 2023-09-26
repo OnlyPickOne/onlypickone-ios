@@ -15,9 +15,11 @@ class LogInViewModel: ObservableObject {
     private let provider = MoyaProvider<APIService>()
     
     @Published var isSucessLogIn: Bool = false
+    @Published var isFailureLogIn: Bool = false
     
     public func logIn(email: String?, password: String?, completion: @escaping (Bool)->()) {
         guard let email = email, let password = password else { return }
+        print("\(email) \(password)")
         provider.requestPublisher(.logIn(Account(email: email, password: password)))
             .sink { completion in
                 switch completion {
@@ -27,9 +29,11 @@ class LogInViewModel: ObservableObject {
                     print("sucess")
                 }
             } receiveValue: { response in
-                let result = try? response.map(Response<String>.self)
+                let result = try? response.map(Response<LoginToken>.self)
                 print(result)
-                completion(result?.isSuccess ?? false)
+                self.isFailureLogIn = !(result?.isSuccess ?? false)
+                self.isSucessLogIn = result?.isSuccess ?? false
+//                completion(result?.isSuccess ?? false)
             }.store(in: &subscription)
     }
 }
