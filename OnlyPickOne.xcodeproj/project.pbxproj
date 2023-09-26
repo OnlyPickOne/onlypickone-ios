@@ -30,6 +30,7 @@
 		33217A422ABC2CF700F7596E /* NoticeSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33217A412ABC2CF700F7596E /* NoticeSettingView.swift */; };
 		33217A442AC06E1100F7596E /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33217A432AC06E1100F7596E /* Account.swift */; };
 		33217A472AC2976300F7596E /* LoginToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33217A462AC2976300F7596E /* LoginToken.swift */; };
+		33217A492AC2BFE700F7596E /* VersionSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33217A482AC2BFE700F7596E /* VersionSettingViewModel.swift */; };
 		33222DFA2A95CFA300D12DA2 /* OnlyPickOneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33222DF92A95CFA300D12DA2 /* OnlyPickOneApp.swift */; };
 		33222DFE2A95CFA500D12DA2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33222DFD2A95CFA500D12DA2 /* Assets.xcassets */; };
 		33222E012A95CFA500D12DA2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33222E002A95CFA500D12DA2 /* Preview Assets.xcassets */; };
@@ -69,6 +70,7 @@
 		33217A412ABC2CF700F7596E /* NoticeSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeSettingView.swift; sourceTree = "<group>"; };
 		33217A432AC06E1100F7596E /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		33217A462AC2976300F7596E /* LoginToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginToken.swift; sourceTree = "<group>"; };
+		33217A482AC2BFE700F7596E /* VersionSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionSettingViewModel.swift; sourceTree = "<group>"; };
 		33222DF62A95CFA300D12DA2 /* OnlyPickOne.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnlyPickOne.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		33222DF92A95CFA300D12DA2 /* OnlyPickOneApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnlyPickOneApp.swift; sourceTree = "<group>"; };
 		33222DFD2A95CFA500D12DA2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 				33835F082A95F32100C93EB0 /* GameViewModel.swift */,
 				33217A372AB9649200F7596E /* CardViewModel.swift */,
 				330F91652AB488A300B8EB99 /* SettingViewModel.swift */,
+				33217A482AC2BFE700F7596E /* VersionSettingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -301,6 +304,7 @@
 				330F91642AB4862E00B8EB99 /* Response.swift in Sources */,
 				33222E0F2A95D4FF00D12DA2 /* AddView.swift in Sources */,
 				33217A422ABC2CF700F7596E /* NoticeSettingView.swift in Sources */,
+				33217A492AC2BFE700F7596E /* VersionSettingViewModel.swift in Sources */,
 				330F915D2AB17E4500B8EB99 /* Int+.swift in Sources */,
 				33222E0D2A95D4FF00D12DA2 /* GameView.swift in Sources */,
 				330F91552AAEE03B00B8EB99 /* APIManager.swift in Sources */,

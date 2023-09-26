@@ -8,8 +8,12 @@
 import SwiftUI
 
 struct VersionSettingView: View {
+    @ObservedObject var viewModel = VersionSettingViewModel()
+    
     @State var leastInput: String
     @State var latestInput: String
+    
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         List {
@@ -25,10 +29,13 @@ struct VersionSettingView: View {
             .padding(5)
             Button {
                 print("submit")
+                viewModel.setVersion(minimum: leastInput, latest: latestInput)
+                self.presentationMode.wrappedValue.dismiss()
             } label: {
                 Text("제출")
                     .frame(maxWidth: .infinity)
             }
+            .disabled(!(viewModel.isValidVersionString(minimum: leastInput, latest: latestInput)))
         }
     }
 }

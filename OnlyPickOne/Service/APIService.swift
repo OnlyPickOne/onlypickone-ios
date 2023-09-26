@@ -19,7 +19,8 @@ enum APIService {
     case join
     case login
     case leave
-    case info
+    case getVersion
+    case setVersion(_ info: Info)
     case mailAuthReq(_ mail: Email)
     case mailVerify(_ mail: Email)
     case signUp(_ account: Account)
@@ -40,7 +41,7 @@ extension APIService: TargetType {
     
     var path: String {
         switch self {
-        case .info:
+        case .getVersion, .setVersion(_):
             return "/versions"
         case .mailAuthReq(_):
             return "/mails"
@@ -59,9 +60,9 @@ extension APIService: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .test, .info:
+        case .test, .getVersion:
             return .get
-        case .mailAuthReq(_), .mailVerify(_), .signUp(_), .logIn(_):
+        case .mailAuthReq(_), .mailVerify(_), .signUp(_), .logIn(_), .setVersion(_):
             return .post
         default:
             return .get
@@ -74,13 +75,21 @@ extension APIService: TargetType {
             return .requestJSONEncodable(mail)
         case .signUp(let account), .logIn(let account):
             return .requestJSONEncodable(account)
+        case .setVersion(let info):
+            return .requestJSONEncodable(info)
         default:
             return .requestPlain
         }
     }
     
     var headers: [String : String]? {
-        return ["Content-type": "application/json"]
+        switch self {
+        case .setVersion(_):
+            let accessToken = UserDefaults.standard.string(forKey: "accessToken") ?? ""
+            return ["Content-type" : "application/json", "Authorization" : "Bearer \(accessToken)"]
+        default:
+            return ["Content-type" : "application/json"]
+        }
     }
     
 }

@@ -18,7 +18,7 @@ class SettingViewModel: ObservableObject {
     @Published var latestVersion: String = ""
     
     public func info() {
-        provider.requestPublisher(.info)
+        provider.requestPublisher(.getVersion)
             .sink { completion in
                 switch completion {
                 case let .failure(error):
