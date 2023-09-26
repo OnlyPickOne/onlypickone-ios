@@ -16,9 +16,6 @@ struct CardView: View {
     var body: some View {
         GeometryReader { geo in
             ScrollView(.horizontal, showsIndicators: false) {
-                Button("add") {
-                    showImagePicker = true
-                }
                 HStack(spacing: 0) {
                     ForEach(0..<min(imageList.count, 128), id: \.self) { num in
                         ZStack(alignment: .bottom) {
