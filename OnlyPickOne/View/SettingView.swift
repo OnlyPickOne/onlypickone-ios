@@ -16,7 +16,7 @@ struct SettingView: View {
             List {
                 Section("고객센터") {
                     NavigationLink {
-                        Text("공지사항")
+                        NoticeListView()
                     } label: {
                         Text("공지사항")
                     }
