@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import AcknowList
 
 struct SettingView: View {
     @ObservedObject var viewModel = SettingViewModel()
     @Binding var isNeedToAuth: Bool
     
+//    var plistName: String
     var body: some View {
         NavigationView {
             List {
@@ -26,18 +28,6 @@ struct SettingView: View {
                         Text("문의하기")
                     }
                     NavigationLink {
-                        Text("최소지원버전 : \(viewModel.minimumVersion)\n현재최신버전 : \(viewModel.latestVersion)")
-                            .onAppear() {
-                                viewModel.info()
-                            }
-                    } label: {
-                        Text("앱 정보")
-                    }
-
-                }
-                
-                Section("약관") {
-                    NavigationLink {
                         TermsWebView(urlToLoad: "https://water-advantage-4b6.notion.site/8ff7ccd28d05427c85c5aacbc59cfe06?pvs=4")
                     } label: {
                         Text("개인정보 처리방침")
@@ -47,7 +37,64 @@ struct SettingView: View {
                     } label: {
                         Text("이용 약관")
                     }
-                    
+                }
+                
+                Section("앱 정보") {
+                    NavigationLink {
+                        VStack(spacing: 20) {
+                            Text("최소지원버전 : \(viewModel.minimumVersion)\n현재최신버전 : \(viewModel.latestVersion)")
+                                .onAppear() {
+                                    viewModel.info()
+                                }
+                            NavigationLink {
+                                VStack(spacing: 10) {
+                                    VStack {
+                                        Text("OnlyPickOne Repo.")
+                                            .font(.headline)
+                                        Text("OnlyPickOne Official Github Repository")
+                                            .font(.subheadline)
+                                        Text("https://github.com/OnlyPickOne")
+                                    }
+                                    .padding(10)
+                                    VStack {
+                                        Text("Han Taehee")
+                                            .font(.headline)
+                                        Text("Mobile iOS Development")
+                                            .font(.subheadline)
+                                        Text("https://github.com/110w110")
+                                    }
+                                    VStack {
+                                        Text("Lee Hoseok")
+                                            .font(.headline)
+                                        Text("Server, Infra, DB Development")
+                                            .font(.subheadline)
+                                        Text("https://github.com/hoshogi")
+                                    }
+                                    VStack {
+                                        Text("Kim Jaehoon")
+                                            .font(.headline)
+                                        Text("Web Client Development")
+                                            .font(.subheadline)
+                                        Text("https://github.com/jaehununun")
+                                    }
+                                }
+                            } label: {
+                                Text("Developers")
+                            }
+
+                            Text("Copyright 2023. OnlyPickOne All Rights Reserved.")
+                                .font(.caption)
+                        }
+                    } label: {
+                        Text("앱 정보")
+                    }
+                    NavigationLink {
+                        AcknowListViewControllerViewWrapper()
+                                    .navigationBarTitle("Acknowledgements")
+                                    .edgesIgnoringSafeArea(.all)
+                    } label: {
+                        Text("오픈소스 라이브러리")
+                    }
                 }
                 
                 Section("개인 설정") {
@@ -100,8 +147,15 @@ struct SettingView: View {
     }
 }
 
-//struct SettingView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        SettingView()
-//    }
-//}
+private struct AcknowListViewControllerViewWrapper: UIViewControllerRepresentable {
+    public let listStyle: UITableView.Style = .insetGrouped
+
+    func makeUIViewController(context: UIViewControllerRepresentableContext<AcknowListViewControllerViewWrapper>) -> AcknowListViewController {
+        var viewController: AcknowListViewController = AcknowListViewController(fileNamed: "Package.resolved")
+        return viewController
+    }
+
+    func updateUIViewController(_ uiViewController: AcknowListViewController, context: UIViewControllerRepresentableContext<AcknowListViewControllerViewWrapper>) {
+    }
+
+}

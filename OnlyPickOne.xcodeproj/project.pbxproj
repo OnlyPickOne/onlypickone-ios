@@ -42,6 +42,8 @@
 		33222E102A95D4FF00D12DA2 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33222E082A95D4FE00D12DA2 /* ResultView.swift */; };
 		332466A62AA8494E00F001B8 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332466A52AA8494E00F001B8 /* UIApplication+.swift */; };
 		333DC6262ACDAF9400B41FFC /* NoticeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333DC6252ACDAF9400B41FFC /* NoticeListView.swift */; };
+		333DC6292ACE597000B41FFC /* AcknowList in Frameworks */ = {isa = PBXBuildFile; productRef = 333DC6282ACE597000B41FFC /* AcknowList */; };
+		333DC62B2ACE5B9D00B41FFC /* Package.resolved in Resources */ = {isa = PBXBuildFile; fileRef = 333DC62A2ACE5B9D00B41FFC /* Package.resolved */; };
 		33835F022A95D86100C93EB0 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33835F012A95D86100C93EB0 /* SettingView.swift */; };
 		33835F042A95F20200C93EB0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33835F032A95F20200C93EB0 /* Item.swift */; };
 		33835F092A95F32100C93EB0 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33835F082A95F32100C93EB0 /* GameViewModel.swift */; };
@@ -85,6 +87,7 @@
 		33222E0B2A95D4FF00D12DA2 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		332466A52AA8494E00F001B8 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		333DC6252ACDAF9400B41FFC /* NoticeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListView.swift; sourceTree = "<group>"; };
+		333DC62A2ACE5B9D00B41FFC /* Package.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Package.resolved; path = ../OnlyPickOneiOS/OnlyPickOneiOS.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved; sourceTree = "<group>"; };
 		33835F012A95D86100C93EB0 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		33835F032A95F20200C93EB0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		33835F082A95F32100C93EB0 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
@@ -98,6 +101,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				330F91512AAEDAEF00B8EB99 /* Moya in Frameworks */,
+				333DC6292ACE597000B41FFC /* AcknowList in Frameworks */,
 				330F914F2AAEDAEF00B8EB99 /* CombineMoya in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,6 +140,7 @@
 		33222DED2A95CFA300D12DA2 = {
 			isa = PBXGroup;
 			children = (
+				333DC62A2ACE5B9D00B41FFC /* Package.resolved */,
 				33222DF82A95CFA300D12DA2 /* OnlyPickOne */,
 				33222DF72A95CFA300D12DA2 /* Products */,
 			);
@@ -242,6 +247,7 @@
 			packageProductDependencies = (
 				330F914E2AAEDAEF00B8EB99 /* CombineMoya */,
 				330F91502AAEDAEF00B8EB99 /* Moya */,
+				333DC6282ACE597000B41FFC /* AcknowList */,
 			);
 			productName = OnlyPickOne;
 			productReference = 33222DF62A95CFA300D12DA2 /* OnlyPickOne.app */;
@@ -273,6 +279,7 @@
 			mainGroup = 33222DED2A95CFA300D12DA2;
 			packageReferences = (
 				330F914D2AAEDAEF00B8EB99 /* XCRemoteSwiftPackageReference "Moya" */,
+				333DC6272ACE597000B41FFC /* XCRemoteSwiftPackageReference "AcknowList" */,
 			);
 			productRefGroup = 33222DF72A95CFA300D12DA2 /* Products */;
 			projectDirPath = "";
@@ -289,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				33222E012A95CFA500D12DA2 /* Preview Assets.xcassets in Resources */,
+				333DC62B2ACE5B9D00B41FFC /* Package.resolved in Resources */,
 				33222DFE2A95CFA500D12DA2 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -558,6 +566,14 @@
 				minimumVersion = 15.0.0;
 			};
 		};
+		333DC6272ACE597000B41FFC /* XCRemoteSwiftPackageReference "AcknowList" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vtourraine/AcknowList";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -570,6 +586,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 330F914D2AAEDAEF00B8EB99 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		333DC6282ACE597000B41FFC /* AcknowList */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 333DC6272ACE597000B41FFC /* XCRemoteSwiftPackageReference "AcknowList" */;
+			productName = AcknowList;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
