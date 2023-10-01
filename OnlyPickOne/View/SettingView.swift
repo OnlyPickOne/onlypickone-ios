@@ -11,6 +11,7 @@ import AcknowList
 struct SettingView: View {
     @ObservedObject var viewModel = SettingViewModel()
     @Binding var isNeedToAuth: Bool
+    @State private var isShowingAskView: Bool = false
     @State private var isAdmin: Bool = false
     
 //    var plistName: String
@@ -23,11 +24,12 @@ struct SettingView: View {
                     } label: {
                         Text("공지사항")
                     }
-                    NavigationLink {
-                        Text("문의하기")
+                    Button {
+                        isShowingAskView.toggle()
                     } label: {
                         Text("문의하기")
                     }
+                    .foregroundColor(Color(uiColor: .label))
                 }
                 
                 Section("이용 약관") {
@@ -150,6 +152,9 @@ struct SettingView: View {
             .navigationTitle("설정")
             .navigationBarTitleDisplayMode(.inline)
             .tint(Color("opoPink"))
+        }
+        .fullScreenCover(isPresented: $isShowingAskView) {
+            AskView()
         }
     }
 }

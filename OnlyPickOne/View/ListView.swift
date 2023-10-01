@@ -17,9 +17,7 @@ struct ListView: View {
                 List {
                     ForEach((0..<viewModel.gameList.count), id: \.self) { index in
                         NavigationLink {
-                            GameView()
-                                .navigationTitle("2023 망한/웃긴/귀여운 고양이 사진 월드컵")
-                                .navigationBarTitleDisplayMode(.inline)
+                            GameInfoView()
                         } label: {
                             VStack(alignment: .leading) {
                                 Text(viewModel.testString)
