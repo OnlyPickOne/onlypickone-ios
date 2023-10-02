@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct GameInfoView: View {
+    var options = ["8강", "16강", "32강", "64강", "128강", "256강"]
+    @State private var selectionOption = 0
+    
     var body: some View {
         List {
             Section("게임 설명") {
@@ -53,18 +56,11 @@ struct GameInfoView: View {
                 }
                 .foregroundColor(Color(uiColor: .label))
                 
-                Button {
-                    print("신고하기")
-                } label: {
-                    HStack {
-                        Text("토너먼트 선택")
-                        Spacer()
-                        Text("64강")
-                            .fontWeight(.bold)
-                            .foregroundColor(Color("opoPink"))
+                Picker("토너먼트 선택", selection: $selectionOption) {
+                    ForEach(0 ..< options.count) {
+                        Text(options[$0])
                     }
                 }
-                .foregroundColor(Color(uiColor: .label))
                 
                 NavigationLink {
                     GameView()
@@ -72,7 +68,7 @@ struct GameInfoView: View {
                         .navigationBarTitleDisplayMode(.inline)
                 } label: {
                     Text("게임 시작")
-                }
+            
 
             }
         }
