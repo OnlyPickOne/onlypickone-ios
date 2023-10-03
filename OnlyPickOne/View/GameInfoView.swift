@@ -68,8 +68,12 @@ struct GameInfoView: View {
                         .navigationBarTitleDisplayMode(.inline)
                 } label: {
                     Text("게임 시작")
+<<<<<<< HEAD
+                }
+=======
             
 
+>>>>>>> cf5205bcbb44a998e48628fca27d02b07bdcd880
             }
         }
     }
