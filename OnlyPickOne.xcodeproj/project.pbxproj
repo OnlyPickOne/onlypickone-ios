@@ -46,6 +46,7 @@
 		333DC62B2ACE5B9D00B41FFC /* Package.resolved in Resources */ = {isa = PBXBuildFile; fileRef = 333DC62A2ACE5B9D00B41FFC /* Package.resolved */; };
 		333DC62D2ACE62C100B41FFC /* AskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333DC62C2ACE62C100B41FFC /* AskView.swift */; };
 		333DC62F2ACE869100B41FFC /* GameInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333DC62E2ACE869100B41FFC /* GameInfoView.swift */; };
+		333DC6312ACE94A700B41FFC /* AuthInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333DC6302ACE94A600B41FFC /* AuthInterceptor.swift */; };
 		33835F022A95D86100C93EB0 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33835F012A95D86100C93EB0 /* SettingView.swift */; };
 		33835F042A95F20200C93EB0 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33835F032A95F20200C93EB0 /* Item.swift */; };
 		33835F092A95F32100C93EB0 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33835F082A95F32100C93EB0 /* GameViewModel.swift */; };
@@ -92,6 +93,7 @@
 		333DC62A2ACE5B9D00B41FFC /* Package.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Package.resolved; path = ../OnlyPickOneiOS/OnlyPickOneiOS.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved; sourceTree = "<group>"; };
 		333DC62C2ACE62C100B41FFC /* AskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskView.swift; sourceTree = "<group>"; };
 		333DC62E2ACE869100B41FFC /* GameInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoView.swift; sourceTree = "<group>"; };
+		333DC6302ACE94A600B41FFC /* AuthInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInterceptor.swift; sourceTree = "<group>"; };
 		33835F012A95D86100C93EB0 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		33835F032A95F20200C93EB0 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		33835F082A95F32100C93EB0 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				330F91522AAEDBBC00B8EB99 /* APIService.swift */,
+				333DC6302ACE94A600B41FFC /* AuthInterceptor.swift */,
 				33217A3C2AB968EA00F7596E /* PhotoPicker.swift */,
 				33217A4C2AC2CD7800F7596E /* _privateDataStruct.swift */,
 			);
@@ -335,6 +338,7 @@
 				33222E0E2A95D4FF00D12DA2 /* HomeView.swift in Sources */,
 				33217A342AB8260A00F7596E /* SignUpViewModel.swift in Sources */,
 				33835F022A95D86100C93EB0 /* SettingView.swift in Sources */,
+				333DC6312ACE94A700B41FFC /* AuthInterceptor.swift in Sources */,
 				33217A2E2AB80F9B00F7596E /* Email.swift in Sources */,
 				33217A322AB8216C00F7596E /* SignUpView.swift in Sources */,
 				330F91572AAEE0D200B8EB99 /* TestJoke.swift in Sources */,
