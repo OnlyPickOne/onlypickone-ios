@@ -18,6 +18,8 @@ class SignUpViewModel: ObservableObject {
     @Published var isValidPassword: Bool = false
     @Published var isShowingAuthField: Bool = false
     @Published var isSucessAuthEmail: Bool = false
+    @Published var isShowingVerifyError: Bool = false
+    @Published var isShowingUsingEmailError: Bool = false
     
     public func checkValidEmail(email: String?) {
         guard let email = email else { return }
@@ -47,7 +49,7 @@ class SignUpViewModel: ObservableObject {
                 case let .failure(error):
                     print("error: \(error)")
                 case .finished:
-                    print("sucess")
+                    print("request finished")
                 }
             } receiveValue: { response in
                 let result = try? response.map(Response<String>.self)
@@ -63,11 +65,17 @@ class SignUpViewModel: ObservableObject {
                 case let .failure(error):
                     print("error: \(error)")
                 case .finished:
-                    print("sucess")
+                    print("request finished")
                 }
             } receiveValue: { response in
                 let result = try? response.map(Response<String>.self)
                 self.isSucessAuthEmail = result?.isSuccess ?? false
+                if result?.isSuccess ?? false == false && result?.status ?? 0 == 400 {
+                    self.isShowingUsingEmailError = true
+                } else {
+                    self.isShowingVerifyError = !(result?.isSuccess ?? false)   
+                }
+                print(result?.isSuccess)
             }.store(in: &subscription)
     }
     
@@ -79,7 +87,7 @@ class SignUpViewModel: ObservableObject {
                 case let .failure(error):
                     print("error: \(error)")
                 case .finished:
-                    print("sucess")
+                    print("request finished")
                 }
             } receiveValue: { response in
                 let result = try? response.map(Response<String>.self)

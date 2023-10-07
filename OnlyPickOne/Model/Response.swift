@@ -9,6 +9,7 @@ import Foundation
 
 struct Response<T: Codable>: Decodable {
     let status: Int?
+    let code: String?
     let isSuccess: Bool?
     let message: String?
     let data: T?

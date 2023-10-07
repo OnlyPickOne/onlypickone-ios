@@ -24,7 +24,7 @@ class SettingViewModel: ObservableObject {
                 case let .failure(error):
                     print("error: \(error)")
                 case .finished:
-                    print("Finished")
+                    print("request finished")
                 }
             } receiveValue: { response in
                 let result = try? response.map(Response<Info>.self)
