@@ -80,7 +80,7 @@ struct GameView: View {
             }
         }
         else {
-            ResultView(game: game)
+            ResultView(viewModel: game)
         }
     }
 }
