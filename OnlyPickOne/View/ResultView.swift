@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct ResultView: View {
+    @ObservedObject var viewModel: GameViewModel
+    
     var body: some View {
         List {
             Section("내 결과") {
-                Text("2023 망한/웃긴/귀여운 고양이 사진 월드컵")
+                Text(viewModel.game.title ?? "")
                     .font(.title2)
                     .fontWeight(.medium)
                     .multilineTextAlignment(.center)
@@ -20,16 +22,12 @@ struct ResultView: View {
                 
                 VStack(alignment: .leading, spacing: 15) {
                     HStack {
-                        Text("침착맨")
-                            .font(.caption2)
-                            .fontWeight(.light)
-                        Spacer()
-                        Text("1 month ago")
+                        Text((viewModel.game.createdTime ?? 0).toString())
                             .font(.caption2)
                             .fontWeight(.light)
                     }
                     
-                    Text("안녕하세요. 망한/웃긴/귀여운 고양이들 사진중 원하는 사진을 고르시면 됩니다. 중복이 있으면 바로말해주세요. (자료출처: 구글 이미지, 유튜브 타임스낵과 다양한 동물의 짤, 네이버 카페, 인스타그램, 제작자) (업데이트: ○)")
+                    Text(viewModel.game.description ?? "")
                         .font(.caption)
                         .fontWeight(.light)
                         .multilineTextAlignment(.leading)
@@ -49,7 +47,21 @@ struct ResultView: View {
                 }
                 .listRowSeparator(.hidden)
                 
-                Image("cat2")
+                HStack {
+                    Spacer()
+                    Text("\"")
+                        .font(.title)
+                        .fontWeight(.heavy)
+                    Text(viewModel.winner?.caption ?? "")
+                        .font(.title2)
+                        .multilineTextAlignment(.center)
+                    Text("\"")
+                        .font(.title)
+                        .fontWeight(.heavy)
+                    Spacer()
+                }
+                
+                Image(viewModel.winner?.image ?? "")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .listRowSeparator(.hidden)
@@ -99,8 +111,8 @@ struct ResultView: View {
     }
 }
 
-struct ResultView_Previews: PreviewProvider {
-    static var previews: some View {
-        ResultView()
-    }
-}
+//struct ResultView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ResultView()
+//    }
+//}

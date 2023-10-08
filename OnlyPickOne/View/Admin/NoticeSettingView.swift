@@ -21,9 +21,7 @@ struct NoticeSettingView: View {
             VStack(alignment: .leading) {
                 Text("공지 내용")
                 TextEditor(text: $contentInput)
-                    .background(Color.primary.colorInvert())
                     .frame(minHeight: 100)
-                    .cornerRadius(5)
             }
             .padding(5)
             Button {
