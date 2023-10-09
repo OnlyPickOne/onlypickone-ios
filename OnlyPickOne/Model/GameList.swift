@@ -8,12 +8,30 @@
 import Foundation
 
 struct GameList: Codable {
-    let gameId: Int?
-    let title: String?
-    let description: String?
-    let viewCount: Int?
-    let playCount: Int?
-    let itemCount: Int?
-    let reportCount: Int?
-    let imageUrls: [String]?
+    let content: [NewGame]?
+    let pageable: Pageable?
+    let totalPages: Int?
+    let totalElements: Int?
+    let last: Bool?
+    let numberOfElements: Int?
+    let size: Int?
+    let first: Bool?
+    let number: Int?
+    let sort: Sort?
+    let empty: Bool?
+}
+
+struct Sort: Codable {
+    let unsorted: Bool?
+    let sorted: Bool?
+    let empty: Bool?
+}
+
+struct Pageable: Codable {
+    let sort: Sort?
+    let pageNumber: Int?
+    let pageSize: Int?
+    let offset: Int?
+    let paged: Bool?
+    let unpaged: Bool?
 }
