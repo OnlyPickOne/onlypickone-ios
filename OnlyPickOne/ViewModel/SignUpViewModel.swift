@@ -53,6 +53,10 @@ class SignUpViewModel: ObservableObject {
                 }
             } receiveValue: { response in
                 let result = try? response.map(Response<String>.self)
+                if result?.isSuccess ?? false == false && result?.code ?? "" == "MEMBER000" {
+                    self.isShowingUsingEmailError = true
+                    self.isShowingAuthField = false
+                }
                 print(result?.message ?? "")
             }.store(in: &subscription)
     }
@@ -70,10 +74,10 @@ class SignUpViewModel: ObservableObject {
             } receiveValue: { response in
                 let result = try? response.map(Response<String>.self)
                 self.isSucessAuthEmail = result?.isSuccess ?? false
-                if result?.isSuccess ?? false == false && result?.status ?? 0 == 400 {
+                if result?.isSuccess ?? false == false && result?.code ?? "" == "MEMBER000" {
                     self.isShowingUsingEmailError = true
                 } else {
-                    self.isShowingVerifyError = !(result?.isSuccess ?? false)   
+                    self.isShowingVerifyError = !(result?.isSuccess ?? false)
                 }
                 print(result?.isSuccess)
             }.store(in: &subscription)

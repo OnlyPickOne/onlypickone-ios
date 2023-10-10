@@ -136,6 +136,20 @@ struct SignUpView: View {
                 .disabled(!(viewModel.isSucessAuthEmail && viewModel.isValidPassword))
             }
             .padding(36)
+            .alert("인증에 실패하였습니다", isPresented: $viewModel.isShowingVerifyError, actions: {
+                Button {
+                    viewModel.isShowingVerifyError = false
+                } label: {
+                    Text("확인")
+                }
+            })
+            .alert("이미 가입된 이메일입니다", isPresented: $viewModel.isShowingUsingEmailError, actions: {
+                Button {
+                    viewModel.isShowingUsingEmailError = false
+                } label: {
+                    Text("확인")
+                }
+            })
             .onAppear() {
                 viewModel.isValidEmail = false
                 viewModel.isValidPassword = false
