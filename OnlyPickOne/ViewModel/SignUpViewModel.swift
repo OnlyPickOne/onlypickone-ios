@@ -20,6 +20,7 @@ class SignUpViewModel: ObservableObject {
     @Published var isSucessAuthEmail: Bool = false
     @Published var isShowingVerifyError: Bool = false
     @Published var isShowingUsingEmailError: Bool = false
+    @Published var isLoading: Bool = false
     
     public func checkValidEmail(email: String?) {
         guard let email = email else { return }
@@ -43,8 +44,10 @@ class SignUpViewModel: ObservableObject {
     
     public func mailAuthReqeust(email: String?) {
         guard let email = email else { return }
+        self.isLoading = true
         provider.requestPublisher(.mailAuthReq(Email(email: email, code: nil)))
             .sink { completion in
+                self.isLoading = false
                 switch completion {
                 case let .failure(error):
                     print("error: \(error)")
@@ -63,8 +66,10 @@ class SignUpViewModel: ObservableObject {
     
     public func mailVerify(email: String?, code: String?) {
         guard let email = email, let code = code else { return }
+        self.isLoading = true
         provider.requestPublisher(.mailVerify(Email(email: email, code: code)))
             .sink { completion in
+                self.isLoading = false
                 switch completion {
                 case let .failure(error):
                     print("error: \(error)")
@@ -85,8 +90,10 @@ class SignUpViewModel: ObservableObject {
     
     public func signUp(email: String?, password: String?, completion: @escaping (Bool)->()) {
         guard let email = email, let password = password else { return }
+        self.isLoading = true
         provider.requestPublisher(.signUp(Account(email: email, password: password)))
             .sink { completion in
+                self.isLoading = false
                 switch completion {
                 case let .failure(error):
                     print("error: \(error)")
