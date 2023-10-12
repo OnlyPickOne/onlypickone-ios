@@ -42,6 +42,8 @@ extension APIService: TargetType {
     
     var path: String {
         switch self {
+        case .gameList, .create, .remove:
+            return "/games"
         case .getVersion, .setVersion(_):
             return "/versions"
         case .mailAuthReq(_):
@@ -65,8 +67,10 @@ extension APIService: TargetType {
         switch self {
         case .test, .getVersion:
             return .get
-        case .mailAuthReq(_), .mailVerify(_), .signUp(_), .logIn(_), .setVersion(_), .refreshToken(_):
+        case .mailAuthReq(_), .mailVerify(_), .signUp(_), .logIn(_), .setVersion(_), .refreshToken(_), .create:
             return .post
+        case .remove:
+            return .delete
         default:
             return .get
         }
@@ -89,7 +93,7 @@ extension APIService: TargetType {
     
     var headers: [String : String]? {
         switch self {
-        case .setVersion(_):
+        case .setVersion(_), .game:
             let accessToken = UserDefaults.standard.string(forKey: "accessToken") ?? ""
             return ["Content-type" : "application/json", "Authorization" : "Bearer \(accessToken)"]
         default:

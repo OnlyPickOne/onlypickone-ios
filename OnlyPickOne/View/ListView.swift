@@ -9,18 +9,18 @@ import SwiftUI
 
 struct ListView: View {
     @State var isModal: Bool = false
-    @ObservedObject private var viewModel = ListViewModel(testString: "")
+    @ObservedObject private var viewModel = ListViewModel()
     
     var body: some View {
         NavigationView {
             ZStack {
                 List {
-                    ForEach((0..<viewModel.gameList.count), id: \.self) { index in
+                    ForEach((0..<(viewModel.newGameList.content?.count ?? 0)), id: \.self) { index in
                         NavigationLink {
                             GameInfoView()
                         } label: {
                             VStack(alignment: .leading) {
-                                Text(viewModel.testString)
+                                Text("\(viewModel.newGameList.content?[index].title ?? "unknown game")")
                                     .font(.headline)
                                     .fontWeight(.medium)
                                     .lineLimit(2)
@@ -46,7 +46,7 @@ struct ListView: View {
                                                 .multilineTextAlignment(.trailing)
                                         }
                                         Spacer()
-                                        Text(viewModel.gameList[index].description ?? "")
+                                        Text("\(viewModel.newGameList.content?[index].description ?? "please refresh or restart the application")")
                                             .font(.caption)
                                             .fontWeight(.light)
                                             .multilineTextAlignment(.leading)
@@ -69,8 +69,15 @@ struct ListView: View {
                         Text("최다플레이순")
                     }
                 }
+                .refreshable {
+                    print("새로고침 - 게임 리스트 호출")
+                }
                 .tint(Color("opoPink"))
             }
+        }
+        .onAppear() {
+            print("토큰 여부 확인해서 게임 리스트 호출")
+            viewModel.fetchGameList()
         }
     }
 }
