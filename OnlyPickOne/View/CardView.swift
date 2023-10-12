@@ -34,6 +34,7 @@ struct CardView: View {
                                         showImagePicker = true
                                     } else {
                                         viewModel.imageList.remove(at: num)
+                                        viewModel.input.remove(at: num)
                                     }
                                 }
                             if num != viewModel.imageList.count - 1 {

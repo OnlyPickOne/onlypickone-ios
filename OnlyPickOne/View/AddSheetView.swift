@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct AddSheetView: View {
-    @State var titleInput: String = ""
-    @State var detailInput: String = ""
     @State var images: [String] = ["cat1","cat2","football"]
     @State var itemInput: [String] = ["","",""]
     @Binding var isShowingAddSheet: Bool
@@ -22,13 +20,13 @@ struct AddSheetView: View {
         NavigationView {
             VStack(spacing: 20) {
                 HStack(spacing: 15) {
-                    TextField("게임 제목을 작성해주세요", text: $titleInput)
+                    TextField("게임 제목을 작성해주세요", text: $viewModel.titleInput)
                         .focused($focusField, equals: .title)
                         .textFieldStyle(.roundedBorder)
                     NavigationLink("다음", destination: {
                         VStack(spacing: 20) {
                             HStack {
-                                TextEditor(text: $detailInput)
+                                TextEditor(text: $viewModel.detailInput)
                                     .focused($focusField, equals: .detail)
                                     .background(Color.primary.colorInvert())
                                     .frame(height: 200)
@@ -53,6 +51,7 @@ struct AddSheetView: View {
                                 }
                                 .toolbar {
                                     Button {
+                                        viewModel.submitGame()
                                         isShowingAddSheet.toggle()
                                     } label: {
                                         Text("완료")
@@ -62,10 +61,10 @@ struct AddSheetView: View {
                             })
                             .navigationTitle("설명")
                             .tint(Color("opoPink"))
-                            .disabled(detailInput.count > 300 || detailInput.count <= 0)
+                            .disabled(viewModel.detailInput.count > 300 || viewModel.detailInput.count <= 0)
                         }
                     })
-                    .disabled(titleInput.count > 40 || titleInput.count <= 0)
+                    .disabled(viewModel.titleInput.count > 40 || viewModel.titleInput.count <= 0)
                 }
                 Text("제목은 최대 40자까지 작성할 수 있습니다.")
                     .font(.caption)
