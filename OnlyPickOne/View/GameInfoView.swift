@@ -64,13 +64,6 @@ struct GameInfoView: View {
             
             Section("게임 플레이") {
                 Button {
-                    print("좋아요")
-                } label: {
-                    Text("좋아요")
-                }
-                .foregroundColor(Color(uiColor: .label))
-                
-                Button {
                     print("신고하기")
                 } label: {
                     Text("신고하기")
