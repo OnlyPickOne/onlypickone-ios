@@ -97,7 +97,7 @@ struct SettingView: View {
                                         Text("https://github.com/hoshogi")
                                     }
                                     VStack {
-                                        Text("Kim Jaehoon")
+                                        Text("Kim Jaehun")
                                             .font(.headline)
                                         Text("Web Client Development")
                                             .font(.subheadline)
