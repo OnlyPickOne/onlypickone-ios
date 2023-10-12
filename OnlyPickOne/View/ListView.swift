@@ -18,7 +18,7 @@ struct ListView: View {
                 List {
                     ForEach((0..<(viewModel.newGameList.content?.count ?? 0)), id: \.self) { index in
                         NavigationLink {
-                            GameInfoView()
+                            GameInfoView(game: viewModel.newGameList.content?[index])
                         } label: {
                             VStack(alignment: .leading) {
                                 Text("\(viewModel.newGameList.content?[index].title ?? "unknown game")")

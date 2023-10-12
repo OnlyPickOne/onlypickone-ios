@@ -6,35 +6,56 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct GameInfoView: View {
-    var options = ["8강", "16강", "32강", "64강", "128강", "256강"]
+    @ObservedObject var viewModel: GameInfoViewModel
+    
+    var options = [4, 8, 16, 32, 64, 128, 256]
     @State private var selectionOption = 0
     
     var body: some View {
         List {
+            Section("게임 제목") {
+                Text(viewModel.game.title ?? "unknown game")
+                    .font(.subheadline)
+            }
+            
             Section("게임 설명") {
-                Text("안녕하세요. 망한/웃긴/귀여운 고양이 사진 중 원하는 사진을 고르시면 됩니다. 중복이 있으면 바로 말해주세요. 추가를 원하는 사진이 있으시면 건의 해주세요. 저작권 문제가 있는 사진은 제거하였습니다. (자료 출처: 구글 이미지)")
+                Text(viewModel.game.description ?? "unknwon game")
                     .font(.subheadline)
             }
             
             Section("예시 사진") {
                 GeometryReader { geometry in
                     HStack(spacing: 10) {
-                        Image("street")
+                        KFImage(URL(string: viewModel.game.imageUrls?[0] ?? ""))
+                            .placeholder { //플레이스 홀더 설정
+                                Image(systemName: "list.dash")
+                            }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                            .onSuccess {r in //성공
+                                print("succes: \(r)")
+                            }
+                            .onFailure { e in //실패
+                                print("failure: \(e)")
+                            }
                             .resizable()
                             .scaledToFill()
-                            .frame(width: (geometry.size.width - 20) * (1/3), height: geometry.size.height)
+                            .frame(width: (geometry.size.width - 20) * (1/2), height: geometry.size.height)
                             .clipped()
-                        Image("cat1")
+                        KFImage(URL(string: viewModel.game.imageUrls?[1] ?? ""))
+                            .placeholder { //플레이스 홀더 설정
+                                Image(systemName: "list.dash")
+                            }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                            .onSuccess {r in //성공
+                                print("succes: \(r)")
+                            }
+                            .onFailure { e in //실패
+                                print("failure: \(e)")
+                            }
                             .resizable()
                             .scaledToFill()
-                            .frame(width: (geometry.size.width - 20) * (1/3), height: geometry.size.height)
-                            .clipped()
-                        Image("cat2")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: (geometry.size.width - 20) * (1/3), height: geometry.size.height)
+                            .frame(width: (geometry.size.width - 20) * (1/2), height: geometry.size.height)
                             .clipped()
                     }
                 }
@@ -58,7 +79,9 @@ struct GameInfoView: View {
                 
                 Picker("토너먼트 선택", selection: $selectionOption) {
                     ForEach(0 ..< options.count) {
-                        Text(options[$0])
+                        if (options[$0] <= viewModel.game.itemCount ?? 0) {
+                            Text("\(options[$0])강")
+                        }
                     }
                 }
                 
@@ -72,10 +95,14 @@ struct GameInfoView: View {
             }
         }
     }
-}
-
-struct GameInfoView_Previews: PreviewProvider {
-    static var previews: some View {
-        GameInfoView()
+    
+    init(game: NewGame?) {
+        self.viewModel = GameInfoViewModel(game: game)
     }
 }
+//
+//struct GameInfoView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        GameInfoView()
+//    }
+//}
