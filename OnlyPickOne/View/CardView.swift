@@ -9,17 +9,16 @@ import SwiftUI
 import PhotosUI
 
 struct CardView: View {
-    @State var input: [String]
-    @State var imageList: [UIImage]
     @State var showImagePicker: Bool = false
+    @ObservedObject var viewModel: AddSheetViewModel
     
     var body: some View {
         GeometryReader { geo in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 0) {
-                    ForEach(0..<min(imageList.count, 128), id: \.self) { num in
+                    ForEach(0..<min(viewModel.imageList.count, 128), id: \.self) { num in
                         ZStack(alignment: .bottom) {
-                            Image(uiImage: imageList[num])
+                            Image(uiImage: viewModel.imageList[num])
                                 .resizable()
                                 .scaledToFill()
                                 .frame(width: geo.size.width - 40, height: 300)
@@ -31,22 +30,22 @@ struct CardView: View {
                                 )
                                 .shadow(radius: 10)
                                 .onTapGesture {
-                                    if num == imageList.count - 1 {
+                                    if num == viewModel.imageList.count - 1 {
                                         showImagePicker = true
                                     } else {
-                                        imageList.remove(at: num)
+                                        viewModel.imageList.remove(at: num)
                                     }
                                 }
-                            if num != imageList.count - 1 {
+                            if num != viewModel.imageList.count - 1 {
                                 HStack {
-                                    TextField("캡션을 입력하세요", text: $input[num])
+                                    TextField("캡션을 입력하세요", text: $viewModel.input[num])
                                         .textFieldStyle(.roundedBorder)
                                         .frame(height: 36)
                                     ZStack {
                                         Color(UIColor.systemBackground)
                                             .frame(width: 80, height: 36)
                                             .cornerRadius(8)
-                                        Text("\(num + 1) / \(imageList.count - 1)")
+                                        Text("\(num + 1) / \(viewModel.imageList.count - 1)")
                                     }
                                 }
                                 .padding(20)
@@ -57,7 +56,7 @@ struct CardView: View {
                 }
             }
             .sheet(isPresented: $showImagePicker) {
-                PhotoPicker(images: $imageList, inputs: $input, showImagePicker: $showImagePicker, selectionLimit: 128)
+                PhotoPicker(images: $viewModel.imageList, inputs: $viewModel.input, showImagePicker: $showImagePicker, viewModel: viewModel, selectionLimit: 128)
             }
         }
         .onAppear {
@@ -85,8 +84,8 @@ struct CardView: View {
     }
 }
 
-struct CardView_Previews: PreviewProvider {
-    static var previews: some View {
-        CardView(input: [""], imageList: [])
-    }
-}
+//struct CardView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CardView(input: [""], imageList: [])
+//    }
+//}

@@ -57,6 +57,7 @@ struct PhotoPicker: UIViewControllerRepresentable {
     @Binding var images: [UIImage]
     @Binding var inputs: [String]
     @Binding var showImagePicker: Bool
+    @ObservedObject var viewModel: AddSheetViewModel
     
     var maxCount: Int = 128
     var selectionLimit: Int
@@ -107,8 +108,11 @@ struct PhotoPicker: UIViewControllerRepresentable {
                 if itemProvider.canLoadObject(ofClass: UIImage.self) {
                     itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
                         if let image = image as? UIImage {
-                            self.parent.images.insert(image, at: self.parent.images.count - 1)
-                            self.parent.inputs.insert("", at: self.parent.images.count - 1)
+                            DispatchQueue.main.async{
+//                                self.parent.images.insert(image, at: self.parent.images.count - 1)
+//                                self.parent.inputs.insert("", at: self.parent.images.count - 1)
+                                self.parent.viewModel.addImage(image: image, caption: "")
+                            }
                         } else {
                             print("Could not load image", error?.localizedDescription ?? "")
                         }

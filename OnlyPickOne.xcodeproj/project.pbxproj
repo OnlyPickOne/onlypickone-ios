@@ -52,6 +52,7 @@
 		33835F092A95F32100C93EB0 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33835F082A95F32100C93EB0 /* GameViewModel.swift */; };
 		33835F0B2A96279A00C93EB0 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33835F0A2A96279A00C93EB0 /* Game.swift */; };
 		33835F0D2A971D6600C93EB0 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33835F0C2A971D6600C93EB0 /* CardView.swift */; };
+		3387A60D2AD7D2DF00C30FA3 /* AddSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3387A60C2AD7D2DF00C30FA3 /* AddSheetViewModel.swift */; };
 		33D94BC22AD690A1001A009F /* GameList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D94BC12AD690A1001A009F /* GameList.swift */; };
 		33D94BC52AD7B453001A009F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 33D94BC42AD7B453001A009F /* Kingfisher */; };
 		33D94BC92AD7BB6D001A009F /* GameInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D94BC82AD7BB6D001A009F /* GameInfoViewModel.swift */; };
@@ -102,6 +103,7 @@
 		33835F082A95F32100C93EB0 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		33835F0A2A96279A00C93EB0 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		33835F0C2A971D6600C93EB0 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		3387A60C2AD7D2DF00C30FA3 /* AddSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSheetViewModel.swift; sourceTree = "<group>"; };
 		33D94BC12AD690A1001A009F /* GameList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameList.swift; sourceTree = "<group>"; };
 		33D94BC82AD7BB6D001A009F /* GameInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -238,6 +240,7 @@
 				330F915A2AB17ABE00B8EB99 /* ListViewModel.swift */,
 				33D94BC82AD7BB6D001A009F /* GameInfoViewModel.swift */,
 				33835F082A95F32100C93EB0 /* GameViewModel.swift */,
+				3387A60C2AD7D2DF00C30FA3 /* AddSheetViewModel.swift */,
 				33217A372AB9649200F7596E /* CardViewModel.swift */,
 				330F91652AB488A300B8EB99 /* SettingViewModel.swift */,
 				33217A482AC2BFE700F7596E /* VersionSettingViewModel.swift */,
@@ -337,6 +340,7 @@
 				33222DFA2A95CFA300D12DA2 /* OnlyPickOneApp.swift in Sources */,
 				33835F042A95F20200C93EB0 /* Item.swift in Sources */,
 				330F91642AB4862E00B8EB99 /* Response.swift in Sources */,
+				3387A60D2AD7D2DF00C30FA3 /* AddSheetViewModel.swift in Sources */,
 				33222E0F2A95D4FF00D12DA2 /* AddView.swift in Sources */,
 				33217A422ABC2CF700F7596E /* NoticeSettingView.swift in Sources */,
 				33217A492AC2BFE700F7596E /* VersionSettingViewModel.swift in Sources */,

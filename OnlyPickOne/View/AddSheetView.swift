@@ -14,6 +14,8 @@ struct AddSheetView: View {
     @State var itemInput: [String] = ["","",""]
     @Binding var isShowingAddSheet: Bool
     @FocusState private var focusField: Field?
+    
+    @ObservedObject var viewModel: AddSheetViewModel = AddSheetViewModel()
 
     let colors:[Color] = [.purple, .pink, .orange]
     var body: some View {
@@ -42,9 +44,12 @@ struct AddSheetView: View {
                                 .font(.caption)
                             NavigationLink("다음", destination: {
                                 VStack(spacing: 0) {
-                                    CardView(input: itemInput, imageList: [UIImage(named: "picture.add")!])
+                                    CardView(viewModel: viewModel)
                                         .navigationTitle("캡션 달기")
                                         .tint(Color("opoPink"))
+                                    Text("사진은 최소 4장에서 최대 128장까지 선택하실 수 있습니다.\n사진은 중복으로 추가될 수 있으며, 추가된 사진을 터치하면 제거됩니다.")
+                                        .font(.caption)
+                                    Spacer()
                                 }
                                 .toolbar {
                                     Button {
@@ -52,6 +57,7 @@ struct AddSheetView: View {
                                     } label: {
                                         Text("완료")
                                     }
+                                    .disabled(viewModel.imageList.count < 5 || viewModel.imageList.count > 129)
                                 }
                             })
                             .navigationTitle("설명")
