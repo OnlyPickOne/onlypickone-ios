@@ -53,6 +53,7 @@
 		33835F0B2A96279A00C93EB0 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33835F0A2A96279A00C93EB0 /* Game.swift */; };
 		33835F0D2A971D6600C93EB0 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33835F0C2A971D6600C93EB0 /* CardView.swift */; };
 		33D94BC22AD690A1001A009F /* GameList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D94BC12AD690A1001A009F /* GameList.swift */; };
+		33D94BC52AD7B453001A009F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 33D94BC42AD7B453001A009F /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33D94BC52AD7B453001A009F /* Kingfisher in Frameworks */,
 				330F91512AAEDAEF00B8EB99 /* Moya in Frameworks */,
 				333DC6292ACE597000B41FFC /* AcknowList in Frameworks */,
 				330F914F2AAEDAEF00B8EB99 /* CombineMoya in Frameworks */,
@@ -260,6 +262,7 @@
 				330F914E2AAEDAEF00B8EB99 /* CombineMoya */,
 				330F91502AAEDAEF00B8EB99 /* Moya */,
 				333DC6282ACE597000B41FFC /* AcknowList */,
+				33D94BC42AD7B453001A009F /* Kingfisher */,
 			);
 			productName = OnlyPickOne;
 			productReference = 33222DF62A95CFA300D12DA2 /* OnlyPickOne.app */;
@@ -292,6 +295,7 @@
 			packageReferences = (
 				330F914D2AAEDAEF00B8EB99 /* XCRemoteSwiftPackageReference "Moya" */,
 				333DC6272ACE597000B41FFC /* XCRemoteSwiftPackageReference "AcknowList" */,
+				33D94BC32AD7B453001A009F /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 33222DF72A95CFA300D12DA2 /* Products */;
 			projectDirPath = "";
@@ -590,6 +594,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		33D94BC32AD7B453001A009F /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -607,6 +619,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 333DC6272ACE597000B41FFC /* XCRemoteSwiftPackageReference "AcknowList" */;
 			productName = AcknowList;
+		};
+		33D94BC42AD7B453001A009F /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 33D94BC32AD7B453001A009F /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

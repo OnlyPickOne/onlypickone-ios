@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ListView: View {
     @State var isModal: Bool = false
@@ -26,12 +27,30 @@ struct ListView: View {
                                     .lineLimit(2)
                                 HStack(spacing: 15) {
                                     HStack(spacing: 0) {
-                                        Image("cat1")
+                                        KFImage(URL(string: "\(viewModel.newGameList.content?[index].imageUrls?[0] ?? "")"))
+                                            .placeholder { //플레이스 홀더 설정
+                                                Image(systemName: "list.dash")
+                                            }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                                            .onSuccess {r in //성공
+                                                print("succes: \(r)")
+                                            }
+                                            .onFailure { e in //실패
+                                                print("failure: \(e)")
+                                            }
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: 40, height: 80)
                                             .clipped()
-                                        Image("cat2")
+                                        KFImage(URL(string: "\(viewModel.newGameList.content?[index].imageUrls?[1] ?? "")"))
+                                            .placeholder { //플레이스 홀더 설정
+                                                Image(systemName: "list.dash")
+                                            }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                                            .onSuccess {r in //성공
+                                                print("succes: \(r)")
+                                            }
+                                            .onFailure { e in //실패
+                                                print("failure: \(e)")
+                                            }
                                             .resizable()
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: 40, height: 80)

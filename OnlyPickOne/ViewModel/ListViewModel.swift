@@ -34,26 +34,7 @@ class ListViewModel: ObservableObject {
                 if result?.data != nil {
                     self.newGameList = result!.data!
                 }
-                
             }.store(in: &subscription)
 
     }
-    
-//    func test() {
-//        provider.requestPublisher(.test)
-//            .sink { completion in
-//                switch completion {
-//                case let .failure(error) :
-//                    print("LogIn Fail : " + error.localizedDescription)
-//                case .finished :
-//                    print("LogIn Finished")
-//                }
-//            } receiveValue: { recievedValue in
-//                let result = try? recievedValue.map(Joke.self)
-//                self.testString = result?.data.email ?? ""
-//            }.store(in : &subscription)
-//    }
-    
-//    init(testString: String, subscription: Set<AnyCancellable> = Set<AnyCancellable>()) {
-//    }
 }
