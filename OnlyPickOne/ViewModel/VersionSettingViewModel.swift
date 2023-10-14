@@ -12,7 +12,7 @@ import CombineMoya
 
 class VersionSettingViewModel: ObservableObject {
     private var subscription = Set<AnyCancellable>()
-    private let provider = MoyaProvider<APIService>()
+    private let provider = MoyaProvider<APIService>(session: Session(interceptor: AuthInterceptor.shared))
     
     public func setVersion(minimum: String?, latest: String?) {
         guard let minimum = minimum, let latest = latest else { return }
@@ -26,7 +26,6 @@ class VersionSettingViewModel: ObservableObject {
                 }
             } receiveValue: { response in
                 let result = try? response.map(Response<String>.self)
-                print(result)
             }.store(in: &subscription)
     }
     

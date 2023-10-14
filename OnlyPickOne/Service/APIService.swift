@@ -93,12 +93,15 @@ extension APIService: TargetType {
     
     var headers: [String : String]? {
         switch self {
-        case .setVersion(_), .game:
-            let accessToken = UserDefaults.standard.string(forKey: "accessToken") ?? ""
-            return ["Content-type" : "application/json", "Authorization" : "Bearer \(accessToken)"]
+//        case .setVersion(_), .game:
+//            let accessToken = UserDefaults.standard.string(forKey: "accessToken") ?? ""
+//            return ["Content-type" : "application/json", "Authorization" : "Bearer \(accessToken)"]
         default:
             return ["Content-type" : "application/json"]
         }
     }
     
+    var validationType: ValidationType {
+        return .successCodes
+    }
 }
