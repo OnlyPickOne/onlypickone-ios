@@ -18,6 +18,8 @@ class AddSheetViewModel: ObservableObject {
     @Published var detailInput: String = ""
     @Published var input: [String] = ["nothing"]
     @Published var imageList: [UIImage] = [UIImage(named: "picture.add")!]
+    @Published var isShowingAddSheet: Bool = false
+    @Published var isShowingAlertBlankCaption: Bool = false
     
     public func addImage(image: UIImage, caption: String) {
         self.imageList.insert(image, at: self.imageList.count - 1)
@@ -28,6 +30,15 @@ class AddSheetViewModel: ObservableObject {
     public func submitGame() {
         print(titleInput)
         print(detailInput)
+        
+        for inputText in input {
+            if inputText == "" {
+                self.isShowingAlertBlankCaption = true
+                return
+            }
+        }
+        
+        self.isShowingAddSheet = false
         
         refeshToken { [self] in
             var multipartFiles: [Item] = []

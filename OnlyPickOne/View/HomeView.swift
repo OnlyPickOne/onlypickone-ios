@@ -16,7 +16,7 @@ struct HomeView: View {
                 .tabItem {
                     Label("게임목록", systemImage: "gamecontroller")
                 }
-            AddView(isShowingAddSheet: false)
+            AddView()
                 .tabItem {
                     Label("게임 만들기", systemImage: "plus.square.fill.on.square.fill")
                 }

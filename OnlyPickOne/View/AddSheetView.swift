@@ -10,10 +10,9 @@ import SwiftUI
 struct AddSheetView: View {
     @State var images: [String] = ["cat1","cat2","football"]
     @State var itemInput: [String] = ["","",""]
-    @Binding var isShowingAddSheet: Bool
     @FocusState private var focusField: Field?
     
-    @ObservedObject var viewModel: AddSheetViewModel = AddSheetViewModel()
+    @ObservedObject var viewModel: AddSheetViewModel
 
     let colors:[Color] = [.purple, .pink, .orange]
     var body: some View {
@@ -52,11 +51,18 @@ struct AddSheetView: View {
                                 .toolbar {
                                     Button {
                                         viewModel.submitGame()
-                                        isShowingAddSheet.toggle()
+//                                        viewModel.isShowingAddSheet.toggle()
                                     } label: {
                                         Text("완료")
                                     }
                                     .disabled(viewModel.imageList.count < 5 || viewModel.imageList.count > 129)
+                                }
+                                .alert("캡션을 모두 채워주세요", isPresented: $viewModel.isShowingAlertBlankCaption) {
+                                    Button {
+                                        viewModel.isShowingAlertBlankCaption = false
+                                    } label: {
+                                        Text("확인")
+                                    }
                                 }
                             })
                             .navigationTitle("설명")

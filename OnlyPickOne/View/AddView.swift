@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct AddView: View {
-    @State var isShowingAddSheet: Bool
+//    @State var isShowingAddSheet: Bool
+    
+    @ObservedObject var viewModel: AddSheetViewModel = AddSheetViewModel()
     
     var body: some View {
         NavigationView {
@@ -33,12 +35,12 @@ struct AddView: View {
                 .padding(15)
                 
                 Button {
-                    self.isShowingAddSheet.toggle()
+                    viewModel.isShowingAddSheet = true
                 } label: {
                     Text("동의하고 게임 생성하기")
                 }
-                .sheet(isPresented: $isShowingAddSheet) {
-                    AddSheetView(isShowingAddSheet: $isShowingAddSheet)
+                .sheet(isPresented: $viewModel.isShowingAddSheet) {
+                    AddSheetView(viewModel: viewModel)
                 }
                 .tint(Color("opoPink"))
                 .padding()
@@ -52,6 +54,6 @@ struct AddView: View {
 
 struct AddView_Previews: PreviewProvider {
     static var previews: some View {
-        AddView(isShowingAddSheet: false)
+        AddView()
     }
 }
