@@ -72,7 +72,7 @@ struct AddSheetView: View {
                             .navigationTitle("설명")
                             .buttonStyle(.borderedProminent)
                             .tint(Color("opoPink"))
-                            .disabled(viewModel.detailInput.count > 300 || viewModel.detailInput.count <= 0)
+                            .disabled((viewModel.titleInput.count > 40 || viewModel.titleInput.count <= 0) || (viewModel.detailInput.count > 300 || viewModel.detailInput.count <= 0))
                         }
                         .toolbar {
                             Button {
