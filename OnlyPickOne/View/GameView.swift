@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GoogleMobileAds
 
 struct GameView: View {
     @ObservedObject var game: GameViewModel = GameViewModel(game: Game(id: 0, title: "게임 이름 1", description: "안녕하세요. 망한/웃긴/귀여운 고양이들 사진중 원하는 사진을 고르시면 됩니다. 중복이 있으면 바로말해주세요. (자료출처: 구글 이미지, 유튜브 타임스낵과 다양한 동물의 짤, 네이버 카페, 인스타그램, 제작자) (업데이트: ○)", createdTime: 23400, items: [
@@ -19,6 +20,10 @@ struct GameView: View {
         Item(id: 7, caption: "가나다라마바사아자차카타파하가나다라마바사아자차카타파하", image: UIImage(named: "street"))
         ]))
     @State var round: Int = 0
+    
+    @ViewBuilder func admob() -> some View {
+        GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
+    }
     
     var body: some View {
         if game.winner == nil {
@@ -42,7 +47,7 @@ struct GameView: View {
                     .onTapGesture {
                         game.choose(top: true)
                     }
-                    .frame(width: geometry.size.width, height: geometry.size.height * 0.45)
+                    .frame(width: geometry.size.width, height: (geometry.size.height - 50) * 0.45)
                     .clipped()
                     
                     HStack {
@@ -53,7 +58,7 @@ struct GameView: View {
                                 .fontWeight(.heavy)
                         }
                     }
-                    .frame(width: geometry.size.width, height: geometry.size.height * 0.1)
+                    .frame(width: geometry.size.width, height: (geometry.size.height - 50) * 0.1)
                     
                     ZStack {
                         if let bottomItem = game.bottomItem, let image = bottomItem.image, let caption = bottomItem.caption {
@@ -74,8 +79,10 @@ struct GameView: View {
                         game.choose(top: false)
                     }
                     .scaledToFill()
-                    .frame(width: geometry.size.width, height: geometry.size.height * 0.45)
+                    .frame(width: geometry.size.width, height: (geometry.size.height - 50) * 0.45)
                     .clipped()
+                    
+                    admob()
                 }
             }
         }

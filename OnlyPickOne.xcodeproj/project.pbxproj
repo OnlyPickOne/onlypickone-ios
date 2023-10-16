@@ -54,6 +54,8 @@
 		33835F0D2A971D6600C93EB0 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33835F0C2A971D6600C93EB0 /* CardView.swift */; };
 		3387A60D2AD7D2DF00C30FA3 /* AddSheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3387A60C2AD7D2DF00C30FA3 /* AddSheetViewModel.swift */; };
 		33C79DBA2ADD195700E311F2 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C79DB92ADD195700E311F2 /* String+.swift */; };
+		33C79DBD2ADD590300E311F2 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 33C79DBC2ADD590300E311F2 /* GoogleMobileAds */; };
+		33C79DBF2ADD59F000E311F2 /* GoogleADBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C79DBE2ADD59F000E311F2 /* GoogleADBanner.swift */; };
 		33D94BC22AD690A1001A009F /* GameList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D94BC12AD690A1001A009F /* GameList.swift */; };
 		33D94BC52AD7B453001A009F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 33D94BC42AD7B453001A009F /* Kingfisher */; };
 		33D94BC92AD7BB6D001A009F /* GameInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D94BC82AD7BB6D001A009F /* GameInfoViewModel.swift */; };
@@ -106,6 +108,7 @@
 		33835F0C2A971D6600C93EB0 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		3387A60C2AD7D2DF00C30FA3 /* AddSheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSheetViewModel.swift; sourceTree = "<group>"; };
 		33C79DB92ADD195700E311F2 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		33C79DBE2ADD59F000E311F2 /* GoogleADBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleADBanner.swift; sourceTree = "<group>"; };
 		33D94BC12AD690A1001A009F /* GameList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameList.swift; sourceTree = "<group>"; };
 		33D94BC82AD7BB6D001A009F /* GameInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,6 +120,7 @@
 			files = (
 				33D94BC52AD7B453001A009F /* Kingfisher in Frameworks */,
 				330F91512AAEDAEF00B8EB99 /* Moya in Frameworks */,
+				33C79DBD2ADD590300E311F2 /* GoogleMobileAds in Frameworks */,
 				333DC6292ACE597000B41FFC /* AcknowList in Frameworks */,
 				330F914F2AAEDAEF00B8EB99 /* CombineMoya in Frameworks */,
 			);
@@ -132,6 +136,7 @@
 				333DC6302ACE94A600B41FFC /* AuthInterceptor.swift */,
 				33217A3C2AB968EA00F7596E /* PhotoPicker.swift */,
 				33217A4C2AC2CD7800F7596E /* _privateDataStruct.swift */,
+				33C79DBE2ADD59F000E311F2 /* GoogleADBanner.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -272,6 +277,7 @@
 				330F91502AAEDAEF00B8EB99 /* Moya */,
 				333DC6282ACE597000B41FFC /* AcknowList */,
 				33D94BC42AD7B453001A009F /* Kingfisher */,
+				33C79DBC2ADD590300E311F2 /* GoogleMobileAds */,
 			);
 			productName = OnlyPickOne;
 			productReference = 33222DF62A95CFA300D12DA2 /* OnlyPickOne.app */;
@@ -305,6 +311,7 @@
 				330F914D2AAEDAEF00B8EB99 /* XCRemoteSwiftPackageReference "Moya" */,
 				333DC6272ACE597000B41FFC /* XCRemoteSwiftPackageReference "AcknowList" */,
 				33D94BC32AD7B453001A009F /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				33C79DBB2ADD590300E311F2 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = 33222DF72A95CFA300D12DA2 /* Products */;
 			projectDirPath = "";
@@ -352,6 +359,7 @@
 				333DC6262ACDAF9400B41FFC /* NoticeListView.swift in Sources */,
 				330F915D2AB17E4500B8EB99 /* Int+.swift in Sources */,
 				33222E0D2A95D4FF00D12DA2 /* GameView.swift in Sources */,
+				33C79DBF2ADD59F000E311F2 /* GoogleADBanner.swift in Sources */,
 				33D94BC92AD7BB6D001A009F /* GameInfoViewModel.swift in Sources */,
 				330F91602AB4854C00B8EB99 /* Info.swift in Sources */,
 				33217A362AB8412200F7596E /* LogInViewModel.swift in Sources */,
@@ -436,6 +444,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -489,6 +498,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -606,6 +616,14 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		33C79DBB2ADD590300E311F2 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/googleads/swift-package-manager-google-mobile-ads.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
 		33D94BC32AD7B453001A009F /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -631,6 +649,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 333DC6272ACE597000B41FFC /* XCRemoteSwiftPackageReference "AcknowList" */;
 			productName = AcknowList;
+		};
+		33C79DBC2ADD590300E311F2 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 33C79DBB2ADD590300E311F2 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
 		};
 		33D94BC42AD7B453001A009F /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
