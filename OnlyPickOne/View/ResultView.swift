@@ -61,7 +61,7 @@ struct ResultView: View {
                     Spacer()
                 }
                 
-                Image(viewModel.winner?.image ?? "")
+                Image(uiImage: viewModel.winner?.image ?? UIImage())
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .listRowSeparator(.hidden)

@@ -7,13 +7,14 @@
 
 import Foundation
 import Moya
+import UIKit.UIImage
 
 enum APIService {
     case game
     case gameList
     case submit
     case statistics
-    case create
+    case create(_ title: String, _ description: String, _ multipartFiles: [Item])
     case remove
     case report
     case join
@@ -42,7 +43,7 @@ extension APIService: TargetType {
     
     var path: String {
         switch self {
-        case .gameList, .create, .remove:
+        case .gameList, .create(_,_,_), .remove:
             return "/games"
         case .getVersion, .setVersion(_):
             return "/versions"
@@ -67,7 +68,7 @@ extension APIService: TargetType {
         switch self {
         case .test, .getVersion:
             return .get
-        case .mailAuthReq(_), .mailVerify(_), .signUp(_), .logIn(_), .setVersion(_), .refreshToken(_), .create:
+        case .mailAuthReq(_), .mailVerify(_), .signUp(_), .logIn(_), .setVersion(_), .refreshToken(_), .create(_,_,_):
             return .post
         case .remove:
             return .delete
@@ -86,6 +87,17 @@ extension APIService: TargetType {
             return .requestJSONEncodable(info)
         case .refreshToken(let token):
             return .requestJSONEncodable(token)
+        case .create(let title, let description, let multipartFiles):
+            let titleData = title.data(using: String.Encoding.utf8) ?? Data()
+            let descriptionData = description.data(using: String.Encoding.utf8) ?? Data()
+            var formData: [Moya.MultipartFormData] = [Moya.MultipartFormData(provider: .data(titleData), name: "title")]
+            formData.append(Moya.MultipartFormData(provider: .data(descriptionData), name: "description"))
+            for mFile in multipartFiles {
+                if let caption = mFile.caption, let image = mFile.image, let imageData = image.jpegData(compressionQuality: 0.2) {
+                    formData.append(Moya.MultipartFormData(provider: .data(imageData), name: "multipartFiles", fileName: "\(caption).jpeg", mimeType: "image/jpeg"))
+                }
+            }
+            return .uploadMultipart(formData)
         default:
             return .requestPlain
         }
@@ -93,9 +105,9 @@ extension APIService: TargetType {
     
     var headers: [String : String]? {
         switch self {
-//        case .setVersion(_), .game:
-//            let accessToken = UserDefaults.standard.string(forKey: "accessToken") ?? ""
-//            return ["Content-type" : "application/json", "Authorization" : "Bearer \(accessToken)"]
+        case .setVersion(_), .game, .create(_, _, _):
+            let accessToken = UserDefaults.standard.string(forKey: "accessToken") ?? ""
+            return ["Content-type" : "application/json", "Authorization" : "Bearer \(accessToken)"]
         default:
             return ["Content-type" : "application/json"]
         }

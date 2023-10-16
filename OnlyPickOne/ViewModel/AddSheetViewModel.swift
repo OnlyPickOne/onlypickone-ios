@@ -6,9 +6,14 @@
 //
 
 import Foundation
+import Moya
+import Combine
 import UIKit.UIImage
 
 class AddSheetViewModel: ObservableObject {
+    private var subscription = Set<AnyCancellable>()
+    private let provider = MoyaProvider<APIService>()
+    
     @Published var titleInput: String = ""
     @Published var detailInput: String = ""
     @Published var input: [String] = ["nothing"]
@@ -23,7 +28,42 @@ class AddSheetViewModel: ObservableObject {
     public func submitGame() {
         print(titleInput)
         print(detailInput)
-        print(imageList)
-        print(input)
+        
+        refeshToken { [self] in
+            var multipartFiles: [Item] = []
+            for i in 0..<self.imageList.count - 1 {
+                let item = Item(id: nil, caption: self.input[i], image: self.imageList[i])
+                multipartFiles.append(item)
+            }
+            print(multipartFiles)
+            provider.requestPublisher(.create(titleInput, detailInput, multipartFiles))
+                .sink { completion in
+                    switch completion {
+                    case let .failure(error):
+                        print("error: \(error)")
+                    case .finished:
+                        print("request finished")
+                    }
+                } receiveValue: { response in
+                    let result = try? response.map(Response<String>.self)
+                    print(result?.message ?? "")
+                }.store(in: &subscription)
+        }
+    }
+    
+    private func refeshToken(completion: @escaping () -> ()) {
+        guard let accessToken = UserDefaults.standard.string(forKey: "accessToken"), let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") else { return }
+        print(accessToken, refreshToken)
+        provider.request(.refreshToken(LoginToken(grantType: nil, accessToken: accessToken, refreshToken: refreshToken, accessTokenExpiresIn: nil))) { (result) in
+            switch result {
+            case let .success(response):
+                let result = try? response.map(Response<LoginToken>.self)
+                UserDefaults.standard.set(result?.data?.accessToken ?? "", forKey: "accessToken")
+                UserDefaults.standard.set(result?.data?.refreshToken ?? "", forKey: "refreshToken")
+                completion()
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }

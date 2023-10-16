@@ -59,7 +59,7 @@ struct ListView: View {
                                     VStack(alignment: .leading, spacing: 5) {
                                         HStack {
                                             Spacer()
-                                            Text(viewModel.gameList[index].createdTime?.toLastTimeString() ?? "")
+                                            Text(viewModel.newGameList.content?[index].createdAt?.toLastTimeString() ?? "")
                                                 .font(.caption2)
                                                 .fontWeight(.light)
                                                 .multilineTextAlignment(.trailing)
