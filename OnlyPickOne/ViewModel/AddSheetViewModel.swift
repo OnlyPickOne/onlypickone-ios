@@ -54,12 +54,20 @@ class AddSheetViewModel: ObservableObject {
                         print("error: \(error)")
                     case .finished:
                         print("request finished")
+                        self.resetValue()
                     }
                 } receiveValue: { response in
                     let result = try? response.map(Response<String>.self)
                     print(result?.message ?? "")
                 }.store(in: &subscription)
         }
+    }
+    
+    public func resetValue() {
+        self.input = ["nothing"]
+        self.imageList = [UIImage(named: "picture.add")!]
+        self.titleInput = ""
+        self.detailInput = ""
     }
     
     private func refeshToken(completion: @escaping () -> ()) {

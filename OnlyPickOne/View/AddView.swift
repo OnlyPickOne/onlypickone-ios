@@ -37,7 +37,10 @@ struct AddView: View {
                 Button {
                     viewModel.isShowingAddSheet = true
                 } label: {
-                    Text("동의하고 게임 생성하기")
+                    HStack {
+                        Image(systemName: "checkmark.circle.fill")
+                        Text("동의하고 게임 생성하기")
+                    }
                 }
                 .sheet(isPresented: $viewModel.isShowingAddSheet) {
                     AddSheetView(viewModel: viewModel)

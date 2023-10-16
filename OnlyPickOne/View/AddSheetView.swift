@@ -10,6 +10,7 @@ import SwiftUI
 struct AddSheetView: View {
     @State var images: [String] = ["cat1","cat2","football"]
     @State var itemInput: [String] = ["","",""]
+    @State var alertToReset: Bool = false
     @FocusState private var focusField: Field?
     
     @ObservedObject var viewModel: AddSheetViewModel
@@ -39,23 +40,19 @@ struct AddSheetView: View {
                             }
                             Text("게임 설명은 최대 300자까지 작성할 수 있습니다.")
                                 .font(.caption)
-                            NavigationLink("다음", destination: {
+                            NavigationLink(destination: {
                                 VStack(spacing: 0) {
                                     CardView(viewModel: viewModel)
                                         .navigationTitle("캡션 달기")
                                         .tint(Color("opoPink"))
-                                    Text("사진은 최소 4장에서 최대 128장까지 선택하실 수 있습니다.\n사진은 중복으로 추가될 수 있으며, 추가된 사진을 터치하면 제거됩니다.")
-                                        .font(.caption)
                                     Spacer()
                                 }
                                 .toolbar {
                                     Button {
-                                        viewModel.submitGame()
-//                                        viewModel.isShowingAddSheet.toggle()
+                                        alertToReset.toggle()
                                     } label: {
-                                        Text("완료")
+                                        Image(systemName: "trash.fill")
                                     }
-                                    .disabled(viewModel.imageList.count < 5 || viewModel.imageList.count > 129)
                                 }
                                 .alert("캡션을 모두 채워주세요", isPresented: $viewModel.isShowingAlertBlankCaption) {
                                     Button {
@@ -64,12 +61,29 @@ struct AddSheetView: View {
                                         Text("확인")
                                     }
                                 }
-                            })
+                            },
+                                           label: {
+                                Text("다음")
+                                    .frame(maxWidth: .infinity)
+                            }
+                            )
+                            .frame(height: 50)
+                            .padding(15)
                             .navigationTitle("설명")
+                            .buttonStyle(.borderedProminent)
                             .tint(Color("opoPink"))
                             .disabled(viewModel.detailInput.count > 300 || viewModel.detailInput.count <= 0)
                         }
+                        .toolbar {
+                            Button {
+                                alertToReset.toggle()
+                            } label: {
+                                Image(systemName: "trash.fill")
+                            }
+                        }
                     })
+                    .buttonStyle(.borderedProminent)
+                    .tint(Color("opoPink"))
                     .disabled(viewModel.titleInput.count > 40 || viewModel.titleInput.count <= 0)
                 }
                 Text("제목은 최대 40자까지 작성할 수 있습니다.")
@@ -78,7 +92,24 @@ struct AddSheetView: View {
             .padding(20)
             .navigationTitle("제목")
             .navigationBarTitleDisplayMode(.inline)
+            .buttonStyle(.borderedProminent)
             .tint(Color("opoPink"))
+            .toolbar {
+                Button {
+                    alertToReset.toggle()
+                } label: {
+                    Image(systemName: "trash.fill")
+                }
+            }
+            .alert("작성하신 모든 내용이 삭제됩니다.", isPresented: $alertToReset) {
+                Button("삭제", role: .destructive) {
+                    viewModel.resetValue()
+                    alertToReset.toggle()
+                }
+                Button("취소", role: .cancel) {
+                    alertToReset.toggle()
+                }
+            }
             .onAppear {
                 UIApplication.shared.hideKeyboard()
             }
