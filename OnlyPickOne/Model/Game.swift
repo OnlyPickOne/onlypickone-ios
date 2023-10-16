@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Game: Codable {
+struct Game {
     let id: Int?
     let title: String?
     let description: String?
@@ -25,5 +25,6 @@ struct NewGame: Codable {
     let playCount: Int?
     let itemCount: Int?
     let reportCount: Int?
+    let createdAt: String?
     let imageUrls: [String]?
 }

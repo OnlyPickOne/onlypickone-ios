@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import UIKit.UIImage
 
-struct Item: Codable {
+struct Item {
     let id: Int?
     let caption: String?
-    let image: String?
+    let image: UIImage?
 }
 
