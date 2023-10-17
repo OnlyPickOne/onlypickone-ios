@@ -80,8 +80,7 @@ struct GameInfoView: View {
                 }
                 
                 NavigationLink {
-                    Text("asdf")
-                    GameView(round: options[selectionOption], gameId: gameId)
+                    GameView(round: options[selectionOption], info: self.viewModel)
                         .navigationTitle("2023 망한/웃긴/귀여운 고양이 사진 월드컵")
                         .navigationBarTitleDisplayMode(.inline)
                 } label: {

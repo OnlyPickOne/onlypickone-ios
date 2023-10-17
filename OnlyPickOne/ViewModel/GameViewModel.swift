@@ -13,8 +13,8 @@ class GameViewModel: ObservableObject {
     private var subscription = Set<AnyCancellable>()
     private let provider = MoyaProvider<APIService>()
     
-    public let game: Game
-    public let itemCount: Int
+    public var game: Game
+    public var itemCount: Int
     private var list: [ItemWithUrl]
     private var result: [ItemWithUrl] = []
     
@@ -56,6 +56,12 @@ class GameViewModel: ObservableObject {
         match()
     }
     
+    public func gameStart(gameId: Int, count: Int) {
+        
+        
+        self.fetchGameData(gameId: gameId, count: count)
+    }
+    
     public func fetchGameData(gameId: Int, count: Int) {
         print(gameId, count)
         provider.requestPublisher(.start(gameId, count))
@@ -68,7 +74,6 @@ class GameViewModel: ObservableObject {
                 }
             } receiveValue: { response in
                 let result = try? response.map(Response<[ItemWithUrl]>.self)
-                print(result?.data)
                 if let itemList = result?.data {
                     self.list = itemList
                 }
