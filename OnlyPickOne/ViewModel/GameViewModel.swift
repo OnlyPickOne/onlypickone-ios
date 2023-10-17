@@ -21,6 +21,7 @@ class GameViewModel: ObservableObject {
     @Published var topItem: ItemWithUrl?
     @Published var bottomItem: ItemWithUrl?
     @Published var winner: ItemWithUrl?
+    @Published var semifinals: [ItemWithUrl?] = []
     
     init(game: Game, itemCount: Int) {
         self.game = game
@@ -35,8 +36,18 @@ class GameViewModel: ObservableObject {
             result = []
         }
         
+        if list.count == 4 {
+            semifinals = list
+        }
+        
         if list.count == 1 {
             winner = list[0]
+            for i in 0..<4 {
+                if semifinals[i]?.imageUrl == winner?.imageUrl {
+                    semifinals.remove(at: i)
+                    break
+                }
+            }
             return
         }
         

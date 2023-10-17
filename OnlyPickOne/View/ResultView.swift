@@ -29,7 +29,7 @@ struct ResultView: View {
                     
                     VStack(alignment: .leading, spacing: 15) {
                         HStack {
-                            Text((viewModel.game.createdTime ?? 0).toString())
+                            Text((viewModel.game.createdTime ?? "").toLastTimeString())
                                 .font(.caption2)
                                 .fontWeight(.light)
                         }
@@ -91,15 +91,63 @@ struct ResultView: View {
                     .listRowSeparator(.hidden)
                     
                     HStack {
-                        Image("cat1")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                        Image("cat1")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                        Image("cat1")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
+                        GeometryReader { geometry in
+                            HStack {
+                                VStack {
+                                    KFImage(URL(string: viewModel.semifinals[0]?.imageUrl ?? ""))
+                                        .placeholder { //플레이스 홀더 설정
+                                            Image(systemName: "list.dash")
+                                        }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                                        .onSuccess {r in //성공
+                                            print("succes: \(r)")
+                                        }
+                                        .onFailure { e in //실패
+                                            print("failure: \(e)")
+                                        }
+                                        .resizable()
+                                        .frame(width: (geometry.size.width - 10) * (1/3), height: geometry.size.height * (4/5))
+                                        .clipped()
+                                    Text("\(viewModel.semifinals[0]?.caption ?? "")")
+                                        .frame(width: (geometry.size.width - 10) * (1/3), height: geometry.size.height * (1/5))
+                                }
+                                VStack {
+                                    KFImage(URL(string: viewModel.semifinals[1]?.imageUrl ?? ""))
+                                        .placeholder { //플레이스 홀더 설정
+                                            Image(systemName: "list.dash")
+                                        }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                                        .onSuccess {r in //성공
+                                            print("succes: \(r)")
+                                        }
+                                        .onFailure { e in //실패
+                                            print("failure: \(e)")
+                                        }
+                                        .resizable()
+                                        .frame(width: (geometry.size.width - 10) * (1/3), height: geometry.size.height * (4/5))
+                                        .clipped()
+                                    Text("\(viewModel.semifinals[1]?.caption ?? "")")
+                                        .frame(width: (geometry.size.width - 10) * (1/3), height: geometry.size.height * (1/5))
+                                }
+                                VStack {
+                                    KFImage(URL(string: viewModel.semifinals[2]?.imageUrl ?? ""))
+                                        .placeholder { //플레이스 홀더 설정
+                                            Image(systemName: "list.dash")
+                                        }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                                        .onSuccess {r in //성공
+                                            print("succes: \(r)")
+                                        }
+                                        .onFailure { e in //실패
+                                            print("failure: \(e)")
+                                        }
+                                        .resizable()
+                                        .frame(width: (geometry.size.width - 10) * (1/3), height: geometry.size.height * (4/5))
+                                        .clipped()
+                                    Text("\(viewModel.semifinals[2]?.caption ?? "")")
+                                        .frame(width: (geometry.size.width - 10) * (1/3), height: geometry.size.height * (1/5))
+                                }
+                            }
+                        }
+                        .frame(height: 80)
+                        .padding(10)
                     }
                     .listRowSeparator(.hidden)
                 }

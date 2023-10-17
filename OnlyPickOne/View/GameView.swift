@@ -121,7 +121,7 @@ struct GameView: View {
         self.round = round
 //        self.gameId = gameId
         self.info = info
-        self.game = GameViewModel(game: Game(id: info.game.gameId, title: nil, description: nil, createdTime: nil, items: nil), itemCount: round)
+        self.game = GameViewModel(game: Game(id: info.game.gameId, title: info.game.title, description: info.game.description, createdTime: info.game.createdAt, items: nil), itemCount: round)
     }
 }
 

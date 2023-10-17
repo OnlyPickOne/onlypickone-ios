@@ -11,7 +11,7 @@ struct Game {
     let id: Int?
     let title: String?
     let description: String?
-    let createdTime: Int?
+    let createdTime: String?
 //    let author: String?
     let items: [ItemWithUrl]?
 
