@@ -78,6 +78,7 @@ struct ResultView: View {
                         .onFailure { e in //실패
                             print("failure: \(e)")
                         }
+                        .startLoadingBeforeViewAppear()
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .listRowSeparator(.hidden)
@@ -104,6 +105,7 @@ struct ResultView: View {
                                         .onFailure { e in //실패
                                             print("failure: \(e)")
                                         }
+                                        .startLoadingBeforeViewAppear()
                                         .resizable()
                                         .frame(width: (geometry.size.width - 10) * (1/3), height: geometry.size.height * (4/5))
                                         .clipped()
@@ -121,6 +123,7 @@ struct ResultView: View {
                                         .onFailure { e in //실패
                                             print("failure: \(e)")
                                         }
+                                        .startLoadingBeforeViewAppear()
                                         .resizable()
                                         .frame(width: (geometry.size.width - 10) * (1/3), height: geometry.size.height * (4/5))
                                         .clipped()
@@ -138,6 +141,7 @@ struct ResultView: View {
                                         .onFailure { e in //실패
                                             print("failure: \(e)")
                                         }
+                                        .startLoadingBeforeViewAppear()
                                         .resizable()
                                         .frame(width: (geometry.size.width - 10) * (1/3), height: geometry.size.height * (4/5))
                                         .clipped()
@@ -164,6 +168,7 @@ struct ResultView: View {
                                 .onFailure { e in //실패
                                     print("failure: \(e)")
                                 }
+                                .startLoadingBeforeViewAppear()
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 100)

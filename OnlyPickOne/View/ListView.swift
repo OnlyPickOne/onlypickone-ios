@@ -43,6 +43,7 @@ struct ListView: View {
                                                 .onFailure { e in //실패
                                                     print("failure: \(e)")
                                                 }
+                                                .startLoadingBeforeViewAppear()
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fill)
                                                 .frame(width: 40, height: 80)
@@ -57,6 +58,7 @@ struct ListView: View {
                                                 .onFailure { e in //실패
                                                     print("failure: \(e)")
                                                 }
+                                                .startLoadingBeforeViewAppear()
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fill)
                                                 .frame(width: 40, height: 80)
@@ -95,7 +97,7 @@ struct ListView: View {
                         }
                     }
                     .refreshable {
-                        print("새로고침 - 게임 리스트 호출")
+                        viewModel.fetchGameList()
                     }
                     .tint(Color("opoPink"))
                 }
@@ -103,7 +105,6 @@ struct ListView: View {
             }
         }
         .onAppear() {
-            print("토큰 여부 확인해서 게임 리스트 호출")
             viewModel.fetchGameList()
         }
     }

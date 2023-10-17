@@ -40,6 +40,7 @@ struct GameInfoView: View {
                             .onFailure { e in //실패
                                 print("failure: \(e)")
                             }
+                            .startLoadingBeforeViewAppear()
                             .resizable()
                             .scaledToFill()
                             .frame(width: (geometry.size.width - 20) * (1/2), height: geometry.size.height)
@@ -54,6 +55,7 @@ struct GameInfoView: View {
                             .onFailure { e in //실패
                                 print("failure: \(e)")
                             }
+                            .startLoadingBeforeViewAppear()
                             .resizable()
                             .scaledToFill()
                             .frame(width: (geometry.size.width - 20) * (1/2), height: geometry.size.height)

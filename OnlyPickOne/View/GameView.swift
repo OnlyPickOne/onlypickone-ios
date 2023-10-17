@@ -46,6 +46,7 @@ struct GameView: View {
                                 .onFailure { e in //실패
                                     print("failure: \(e)")
                                 }
+                                .startLoadingBeforeViewAppear()
                                 .resizable()
                                 .scaledToFill()
                                 .clipped()
@@ -86,6 +87,7 @@ struct GameView: View {
                                 .onFailure { e in //실패
                                     print("failure: \(e)")
                                 }
+                                .startLoadingBeforeViewAppear()
                                 .resizable()
                                 .scaledToFill()
                                 .clipped()
