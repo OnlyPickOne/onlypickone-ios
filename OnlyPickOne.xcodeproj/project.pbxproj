@@ -41,6 +41,7 @@
 		33222E0F2A95D4FF00D12DA2 /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33222E092A95D4FE00D12DA2 /* AddView.swift */; };
 		33222E102A95D4FF00D12DA2 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33222E082A95D4FE00D12DA2 /* ResultView.swift */; };
 		332466A62AA8494E00F001B8 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332466A52AA8494E00F001B8 /* UIApplication+.swift */; };
+		33277B252ADE793000D6694E /* WinItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33277B242ADE793000D6694E /* WinItem.swift */; };
 		333DC6262ACDAF9400B41FFC /* NoticeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333DC6252ACDAF9400B41FFC /* NoticeListView.swift */; };
 		333DC6292ACE597000B41FFC /* AcknowList in Frameworks */ = {isa = PBXBuildFile; productRef = 333DC6282ACE597000B41FFC /* AcknowList */; };
 		333DC62B2ACE5B9D00B41FFC /* Package.resolved in Resources */ = {isa = PBXBuildFile; fileRef = 333DC62A2ACE5B9D00B41FFC /* Package.resolved */; };
@@ -96,6 +97,7 @@
 		33222E0A2A95D4FF00D12DA2 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		33222E0B2A95D4FF00D12DA2 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		332466A52AA8494E00F001B8 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
+		33277B242ADE793000D6694E /* WinItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinItem.swift; sourceTree = "<group>"; };
 		333DC6252ACDAF9400B41FFC /* NoticeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListView.swift; sourceTree = "<group>"; };
 		333DC62A2ACE5B9D00B41FFC /* Package.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Package.resolved; path = ../OnlyPickOneiOS/OnlyPickOneiOS.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved; sourceTree = "<group>"; };
 		333DC62C2ACE62C100B41FFC /* AskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskView.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 				33217A2D2AB80F9B00F7596E /* Email.swift */,
 				33217A462AC2976300F7596E /* LoginToken.swift */,
 				33217A432AC06E1100F7596E /* Account.swift */,
+				33277B242ADE793000D6694E /* WinItem.swift */,
 				330F91562AAEE0D200B8EB99 /* TestJoke.swift */,
 			);
 			path = Model;
@@ -383,6 +386,7 @@
 				33217A442AC06E1100F7596E /* Account.swift in Sources */,
 				33222E0C2A95D4FF00D12DA2 /* ListView.swift in Sources */,
 				330F915B2AB17ABE00B8EB99 /* ListViewModel.swift in Sources */,
+				33277B252ADE793000D6694E /* WinItem.swift in Sources */,
 				33217A472AC2976300F7596E /* LoginToken.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

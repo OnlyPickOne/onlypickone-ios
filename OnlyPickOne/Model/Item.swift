@@ -18,4 +18,6 @@ struct ItemWithUrl: Codable {
     let itemId: Int?
     let imageUrl: String?
     let caption: String?
+    let winCount: Int?
+    let stats: Double?
 }

@@ -11,6 +11,7 @@ import UIKit.UIImage
 
 enum APIService {
     case start(_ gameId: Int, _ count: Int)
+    case finish(_ gameId: Int, _ itemId: Int)
     case gameList
     case submit
     case statistics
@@ -57,7 +58,7 @@ extension APIService: TargetType {
             return "/auth/login"
         case .refreshToken(_):
             return "/auth/reissue"
-        case .start(let id, _):
+        case .start(let id, _), .finish(let id, _):
             return "/games/\(id)/items"
         case .test:
             return "/users/2"
@@ -68,7 +69,7 @@ extension APIService: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .mailAuthReq(_), .mailVerify(_), .signUp(_), .logIn(_), .setVersion(_), .refreshToken(_), .create(_,_,_):
+        case .mailAuthReq(_), .mailVerify(_), .signUp(_), .logIn(_), .setVersion(_), .refreshToken(_), .create(_,_,_), .finish(_):
             return .post
         case .remove:
             return .delete
@@ -79,8 +80,10 @@ extension APIService: TargetType {
     
     var task: Task {
         switch self {
-        case .start(let id, let count):
+        case .start(_, let count):
             return .requestParameters(parameters: ["count": count], encoding: URLEncoding.queryString)
+        case .finish(_, let id):
+            return .requestJSONEncodable(WinItem(winItemId: id))
         case .mailAuthReq(let mail), .mailVerify(let mail):
             return .requestJSONEncodable(mail)
         case .signUp(let account), .logIn(let account):

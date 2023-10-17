@@ -22,6 +22,7 @@ class GameViewModel: ObservableObject {
     @Published var bottomItem: ItemWithUrl?
     @Published var winner: ItemWithUrl?
     @Published var semifinals: [ItemWithUrl?] = []
+    @Published var statisticsList: [ItemWithUrl?] = []
     
     init(game: Game, itemCount: Int) {
         self.game = game
@@ -48,6 +49,7 @@ class GameViewModel: ObservableObject {
                     break
                 }
             }
+            self.gameFinish()
             return
         }
         
@@ -73,8 +75,25 @@ class GameViewModel: ObservableObject {
         self.fetchGameData(gameId: gameId, count: count)
     }
     
+    private func gameFinish() {
+        guard let gameId = self.game.id, let itemId = self.winner?.itemId else { return }
+        provider.requestPublisher(.finish(gameId, itemId))
+            .sink { completion in
+                switch completion {
+                case let .failure(error):
+                    print("error: \(error)")
+                case .finished:
+                    print("request finished")
+                }
+            } receiveValue: { response in
+                let result = try? response.map(Response<[ItemWithUrl]>.self)
+                if let list = result?.data {
+                    self.statisticsList = list
+                }
+            }.store(in: &subscription)
+    }
+    
     public func fetchGameData(gameId: Int, count: Int) {
-        print(gameId, count)
         provider.requestPublisher(.start(gameId, count))
             .sink { completion in
                 switch completion {

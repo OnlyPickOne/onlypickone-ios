@@ -152,19 +152,42 @@ struct ResultView: View {
                     .listRowSeparator(.hidden)
                 }
                 Section("전체 통계") {
-                    ForEach((0..<10), id: \.self) { index in
+                    ForEach((0..<viewModel.statisticsList.count), id: \.self) { index in
                         HStack {
-                            Image("cat1")
+                            KFImage(URL(string: viewModel.statisticsList[index]?.imageUrl ?? ""))
+                                .placeholder { //플레이스 홀더 설정
+                                    Image(systemName: "list.dash")
+                                }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                                .onSuccess {r in //성공
+                                    print("succes: \(r)")
+                                }
+                                .onFailure { e in //실패
+                                    print("failure: \(e)")
+                                }
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 120)
+                                .frame(width: 100)
                             VStack(alignment: .leading) {
-                                Text("푸마")
+                                Text("\(viewModel.statisticsList[index]?.caption ?? "")")
                                     .font(.headline)
                                     .padding(2)
-                                Text("64%")
+                                Text("\(viewModel.statisticsList[index]?.winCount ?? 0)회")
                                     .font(.subheadline)
                                     .padding(2)
+                                GeometryReader { geometry in
+                                    HStack {
+                                        ZStack(alignment: .leading) {
+                                            RoundedRectangle(cornerRadius: 15)
+                                                .fill(Color("opoPink"))
+                                                .frame(width: geometry.size.width * (viewModel.statisticsList[index]?.stats ?? 0.0) * 0.01, height: geometry.size.height)
+                                            Text(String(format: "%.2f", viewModel.statisticsList[index]?.stats ?? 0.0) + "%")
+                                                .font(.caption2)
+                                                .frame(width: geometry.size.width * (viewModel.statisticsList[index]?.stats ?? 0.0) * 0.01, height: geometry.size.height)
+                                                .lineLimit(1)
+                                        }
+                                    }
+                                }
+                                .frame(height: 20)
                             }
                             .padding(10)
                         }
