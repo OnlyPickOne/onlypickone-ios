@@ -7,6 +7,7 @@
 
 import SwiftUI
 import GoogleMobileAds
+import Kingfisher
 
 struct ResultView: View {
     @ObservedObject var viewModel: GameViewModel
@@ -67,7 +68,16 @@ struct ResultView: View {
                         Spacer()
                     }
                     
-                    Image(uiImage: viewModel.winner?.image ?? UIImage())
+                    KFImage(URL(string: viewModel.winner?.imageUrl ?? ""))
+                        .placeholder { //플레이스 홀더 설정
+                            Image(systemName: "list.dash")
+                        }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                        .onSuccess {r in //성공
+                            print("succes: \(r)")
+                        }
+                        .onFailure { e in //실패
+                            print("failure: \(e)")
+                        }
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .listRowSeparator(.hidden)

@@ -6,20 +6,27 @@
 //
 
 import Foundation
+import Combine
+import Moya
 
 class GameViewModel: ObservableObject {
+    private var subscription = Set<AnyCancellable>()
+    private let provider = MoyaProvider<APIService>()
+    
     public let game: Game
-    private var list: [Item]
-    private var result: [Item] = []
+    public let itemCount: Int
+    private var list: [ItemWithUrl]
+    private var result: [ItemWithUrl] = []
     
-    @Published var topItem: Item?
-    @Published var bottomItem: Item?
-    @Published var winner: Item?
+    @Published var topItem: ItemWithUrl?
+    @Published var bottomItem: ItemWithUrl?
+    @Published var winner: ItemWithUrl?
     
-    init(game: Game) {
+    init(game: Game, itemCount: Int) {
         self.game = game
         self.list = game.items ?? []
-        match()
+        self.itemCount = itemCount
+        fetchGameData(gameId: game.id ?? 0, count: itemCount)
     }
     
     private func match() {
@@ -47,5 +54,25 @@ class GameViewModel: ObservableObject {
         }
         
         match()
+    }
+    
+    public func fetchGameData(gameId: Int, count: Int) {
+        print(gameId, count)
+        provider.requestPublisher(.start(gameId, count))
+            .sink { completion in
+                switch completion {
+                case let .failure(error):
+                    print("error: \(error)")
+                case .finished:
+                    print("request finished")
+                }
+            } receiveValue: { response in
+                let result = try? response.map(Response<[ItemWithUrl]>.self)
+                print(result?.data)
+                if let itemList = result?.data {
+                    self.list = itemList
+                }
+                self.match()
+            }.store(in: &subscription)
     }
 }

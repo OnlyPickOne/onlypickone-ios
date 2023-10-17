@@ -13,7 +13,7 @@ struct Game {
     let description: String?
     let createdTime: Int?
 //    let author: String?
-    let items: [Item]?
+    let items: [ItemWithUrl]?
 
 }
 

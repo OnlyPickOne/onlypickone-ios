@@ -14,3 +14,8 @@ struct Item {
     let image: UIImage?
 }
 
+struct ItemWithUrl: Codable {
+    let itemId: Int?
+    let imageUrl: String?
+    let caption: String?
+}

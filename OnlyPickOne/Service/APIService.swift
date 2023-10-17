@@ -10,7 +10,7 @@ import Moya
 import UIKit.UIImage
 
 enum APIService {
-    case game
+    case start(_ gameId: Int, _ count: Int)
     case gameList
     case submit
     case statistics
@@ -57,6 +57,8 @@ extension APIService: TargetType {
             return "/auth/login"
         case .refreshToken(_):
             return "/auth/reissue"
+        case .start(let id, _):
+            return "/games/\(id)/items"
         case .test:
             return "/users/2"
         default:
@@ -66,8 +68,6 @@ extension APIService: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .test, .getVersion:
-            return .get
         case .mailAuthReq(_), .mailVerify(_), .signUp(_), .logIn(_), .setVersion(_), .refreshToken(_), .create(_,_,_):
             return .post
         case .remove:
@@ -79,6 +79,8 @@ extension APIService: TargetType {
     
     var task: Task {
         switch self {
+        case .start(let id, let count):
+            return .requestParameters(parameters: ["count": count], encoding: URLEncoding.queryString)
         case .mailAuthReq(let mail), .mailVerify(let mail):
             return .requestJSONEncodable(mail)
         case .signUp(let account), .logIn(let account):
@@ -105,7 +107,7 @@ extension APIService: TargetType {
     
     var headers: [String : String]? {
         switch self {
-        case .setVersion(_), .game, .create(_, _, _):
+        case .setVersion(_), .create(_, _, _):
             let accessToken = UserDefaults.standard.string(forKey: "accessToken") ?? ""
             return ["Content-type" : "application/json", "Authorization" : "Bearer \(accessToken)"]
         default:

@@ -11,7 +11,8 @@ import Kingfisher
 struct GameInfoView: View {
     @ObservedObject var viewModel: GameInfoViewModel
     
-    var options = [4, 8, 16, 32, 64, 128, 256]
+    private let gameId: Int
+    private var options = [4, 8, 16, 32, 64, 128, 256]
     @State private var selectionOption = 0
     
     var body: some View {
@@ -79,7 +80,8 @@ struct GameInfoView: View {
                 }
                 
                 NavigationLink {
-                    GameView()
+                    Text("asdf")
+                    GameView(round: options[selectionOption], gameId: gameId)
                         .navigationTitle("2023 망한/웃긴/귀여운 고양이 사진 월드컵")
                         .navigationBarTitleDisplayMode(.inline)
                 } label: {
@@ -89,8 +91,9 @@ struct GameInfoView: View {
         }
     }
     
-    init(game: NewGame?) {
+    init(gameId: Int = 0, game: NewGame?) {
         self.viewModel = GameInfoViewModel(game: game)
+        self.gameId = gameId
     }
 }
 //
