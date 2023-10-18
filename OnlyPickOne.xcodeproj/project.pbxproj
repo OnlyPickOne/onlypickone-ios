@@ -42,6 +42,8 @@
 		33222E102A95D4FF00D12DA2 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33222E082A95D4FE00D12DA2 /* ResultView.swift */; };
 		332466A62AA8494E00F001B8 /* UIApplication+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332466A52AA8494E00F001B8 /* UIApplication+.swift */; };
 		33277B252ADE793000D6694E /* WinItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33277B242ADE793000D6694E /* WinItem.swift */; };
+		33277B282ADFA56B00D6694E /* JWTDecode in Frameworks */ = {isa = PBXBuildFile; productRef = 33277B272ADFA56B00D6694E /* JWTDecode */; };
+		33277B2A2ADFA5C600D6694E /* JWTDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33277B292ADFA5C600D6694E /* JWTDecoder.swift */; };
 		333DC6262ACDAF9400B41FFC /* NoticeListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 333DC6252ACDAF9400B41FFC /* NoticeListView.swift */; };
 		333DC6292ACE597000B41FFC /* AcknowList in Frameworks */ = {isa = PBXBuildFile; productRef = 333DC6282ACE597000B41FFC /* AcknowList */; };
 		333DC62B2ACE5B9D00B41FFC /* Package.resolved in Resources */ = {isa = PBXBuildFile; fileRef = 333DC62A2ACE5B9D00B41FFC /* Package.resolved */; };
@@ -98,6 +100,7 @@
 		33222E0B2A95D4FF00D12DA2 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 		332466A52AA8494E00F001B8 /* UIApplication+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+.swift"; sourceTree = "<group>"; };
 		33277B242ADE793000D6694E /* WinItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WinItem.swift; sourceTree = "<group>"; };
+		33277B292ADFA5C600D6694E /* JWTDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTDecoder.swift; sourceTree = "<group>"; };
 		333DC6252ACDAF9400B41FFC /* NoticeListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeListView.swift; sourceTree = "<group>"; };
 		333DC62A2ACE5B9D00B41FFC /* Package.resolved */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Package.resolved; path = ../OnlyPickOneiOS/OnlyPickOneiOS.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved; sourceTree = "<group>"; };
 		333DC62C2ACE62C100B41FFC /* AskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskView.swift; sourceTree = "<group>"; };
@@ -122,6 +125,7 @@
 			files = (
 				33D94BC52AD7B453001A009F /* Kingfisher in Frameworks */,
 				330F91512AAEDAEF00B8EB99 /* Moya in Frameworks */,
+				33277B282ADFA56B00D6694E /* JWTDecode in Frameworks */,
 				33C79DBD2ADD590300E311F2 /* GoogleMobileAds in Frameworks */,
 				333DC6292ACE597000B41FFC /* AcknowList in Frameworks */,
 				330F914F2AAEDAEF00B8EB99 /* CombineMoya in Frameworks */,
@@ -139,6 +143,7 @@
 				33217A3C2AB968EA00F7596E /* PhotoPicker.swift */,
 				33217A4C2AC2CD7800F7596E /* _privateDataStruct.swift */,
 				33C79DBE2ADD59F000E311F2 /* GoogleADBanner.swift */,
+				33277B292ADFA5C600D6694E /* JWTDecoder.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -281,6 +286,7 @@
 				333DC6282ACE597000B41FFC /* AcknowList */,
 				33D94BC42AD7B453001A009F /* Kingfisher */,
 				33C79DBC2ADD590300E311F2 /* GoogleMobileAds */,
+				33277B272ADFA56B00D6694E /* JWTDecode */,
 			);
 			productName = OnlyPickOne;
 			productReference = 33222DF62A95CFA300D12DA2 /* OnlyPickOne.app */;
@@ -315,6 +321,7 @@
 				333DC6272ACE597000B41FFC /* XCRemoteSwiftPackageReference "AcknowList" */,
 				33D94BC32AD7B453001A009F /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				33C79DBB2ADD590300E311F2 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
+				33277B262ADFA56B00D6694E /* XCRemoteSwiftPackageReference "JWTDecode" */,
 			);
 			productRefGroup = 33222DF72A95CFA300D12DA2 /* Products */;
 			projectDirPath = "";
@@ -373,6 +380,7 @@
 				33217A2E2AB80F9B00F7596E /* Email.swift in Sources */,
 				33217A322AB8216C00F7596E /* SignUpView.swift in Sources */,
 				330F91572AAEE0D200B8EB99 /* TestJoke.swift in Sources */,
+				33277B2A2ADFA5C600D6694E /* JWTDecoder.swift in Sources */,
 				33217A382AB9649200F7596E /* CardViewModel.swift in Sources */,
 				330F91592AB0356400B8EB99 /* AddSheetView.swift in Sources */,
 				332466A62AA8494E00F001B8 /* UIApplication+.swift in Sources */,
@@ -612,6 +620,14 @@
 				minimumVersion = 15.0.0;
 			};
 		};
+		33277B262ADFA56B00D6694E /* XCRemoteSwiftPackageReference "JWTDecode" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/JWTDecode.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.0.0;
+			};
+		};
 		333DC6272ACE597000B41FFC /* XCRemoteSwiftPackageReference "AcknowList" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/vtourraine/AcknowList";
@@ -648,6 +664,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 330F914D2AAEDAEF00B8EB99 /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		33277B272ADFA56B00D6694E /* JWTDecode */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 33277B262ADFA56B00D6694E /* XCRemoteSwiftPackageReference "JWTDecode" */;
+			productName = JWTDecode;
 		};
 		333DC6282ACE597000B41FFC /* AcknowList */ = {
 			isa = XCSwiftPackageProductDependency;
