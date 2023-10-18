@@ -10,9 +10,11 @@ import AcknowList
 
 struct SettingView: View {
     @ObservedObject var viewModel = SettingViewModel()
+    @ObservedObject var adminDecoder = JWTDecoder()
+    
     @Binding var isNeedToAuth: Bool
     @State private var isShowingAskView: Bool = false
-    @State private var isAdmin: Bool = false
+//    @State private var isAdmin: Bool = true
     
 //    var plistName: String
     var body: some View {
@@ -123,7 +125,7 @@ struct SettingView: View {
                     }
                 }
                 
-                if (isAdmin) {
+                if adminDecoder.isAdmin {
                     Section("관리자 메뉴 - 관리자만 보일 예정") {
                         NavigationLink {
                             NoticeSettingView(titleInput: "", contentInput: "")

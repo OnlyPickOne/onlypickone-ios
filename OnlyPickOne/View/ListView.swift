@@ -12,6 +12,7 @@ import GoogleMobileAds
 struct ListView: View {
     @State var isModal: Bool = false
     @ObservedObject private var viewModel = ListViewModel()
+    @ObservedObject var adminDecoder = JWTDecoder()
     
     @ViewBuilder func admob() -> some View {
         GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
@@ -101,7 +102,10 @@ struct ListView: View {
                     }
                     .tint(Color("opoPink"))
                 }
-                admob()
+                
+                if adminDecoder.isAdmin == false {
+                    admob()
+                }
             }
         }
         .onAppear() {

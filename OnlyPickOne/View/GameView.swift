@@ -12,19 +12,9 @@ import Kingfisher
 struct GameView: View {
     @ObservedObject var info: GameInfoViewModel
     @ObservedObject var game: GameViewModel
-//    @ObservedObject var game: GameViewModel = GameViewModel(game: Game(id: 0, title: "게임 이름 1", description: "안녕하세요. 망한/웃긴/귀여운 고양이들 사진중 원하는 사진을 고르시면 됩니다. 중복이 있으면 바로말해주세요. (자료출처: 구글 이미지, 유튜브 타임스낵과 다양한 동물의 짤, 네이버 카페, 인스타그램, 제작자) (업데이트: ○)", createdTime: 23400, items: [
-//        Item(id: 0, caption: "00", image: UIImage(named: "cat1")),
-//        Item(id: 1, caption: "01", image: UIImage(named: "cat2")),
-//        Item(id: 2, caption: "02", image: UIImage(named: "football")),
-//        Item(id: 3, caption: "03", image: UIImage(named: "street")),
-//        Item(id: 4, caption: "04", image: UIImage(named: "cat1")),
-//        Item(id: 5, caption: "05", image: UIImage(named: "cat2")),
-//        Item(id: 6, caption: "가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하가나다라마바사아자차카타파하", image: UIImage(named: "football")),
-//        Item(id: 7, caption: "가나다라마바사아자차카타파하가나다라마바사아자차카타파하", image: UIImage(named: "street"))
-//        ]))
+    @ObservedObject var adminDecoder = JWTDecoder()
     
     private let round: Int
-//    private let gameId: Int
     
     @ViewBuilder func admob() -> some View {
         GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
@@ -107,7 +97,9 @@ struct GameView: View {
                     .frame(width: geometry.size.width, height: (geometry.size.height - 50) * 0.45)
                     .clipped()
                     
-                    admob()
+                    if adminDecoder.isAdmin == false {
+                        admob()
+                    }
                 }
                 .onAppear() {
                     game.fetchGameData(gameId: info.game.gameId ?? 0, count: self.round)
