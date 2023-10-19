@@ -30,7 +30,6 @@ class ListViewModel: ObservableObject {
                 }
             } receiveValue: { response in
                 let result = try? response.map(Response<GameList>.self)
-                print(result)
                 if result?.data != nil {
                     self.newGameList = result!.data!
                 }

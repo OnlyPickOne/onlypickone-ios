@@ -16,7 +16,6 @@ class JWTDecoder: ObservableObject {
         let jwt = try? decode(jwt: accessToken)
         if let auth = jwt?["auth"].string, auth == "ROLE_ADMIN" {
             self.isAdmin = true
-            print("true")
         }
     }
     
