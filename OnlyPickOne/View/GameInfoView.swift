@@ -83,7 +83,7 @@ struct GameInfoView: View {
                 
                 NavigationLink {
                     GameView(round: options[selectionOption], info: self.viewModel)
-                        .navigationTitle("2023 망한/웃긴/귀여운 고양이 사진 월드컵")
+                        .navigationTitle(viewModel.game.title ?? "")
                         .navigationBarTitleDisplayMode(.inline)
                 } label: {
                     Text("게임 시작")

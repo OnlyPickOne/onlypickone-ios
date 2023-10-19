@@ -30,12 +30,6 @@ struct GameView: View {
                                 .placeholder { //플레이스 홀더 설정
                                     Image(systemName: "list.dash")
                                 }.retry(maxCount: 3, interval: .seconds(5)) //재시도
-                                .onSuccess {r in //성공
-                                    print("succes: \(r)")
-                                }
-                                .onFailure { e in //실패
-                                    print("failure: \(e)")
-                                }
                                 .startLoadingBeforeViewAppear()
                                 .resizable()
                                 .scaledToFill()
@@ -55,12 +49,22 @@ struct GameView: View {
                     .frame(width: geometry.size.width, height: (geometry.size.height - 50) * 0.45)
                     .clipped()
                     
-                    HStack {
-                        ZStack {
-                            Color(uiColor: .systemBackground)
+                    ZStack {
+                        Color(uiColor: .systemBackground)
+                        HStack {
+                            Text(game.current)
+                                .font(.subheadline)
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity)
+                                .multilineTextAlignment(.trailing)
                             Text("VS")
                                 .font(.largeTitle)
                                 .fontWeight(.heavy)
+                            Text("\(game.round)/\(game.itemCount)")
+                                .font(.subheadline)
+                                .fontWeight(.bold)
+                                .frame(maxWidth: .infinity)
+                                .multilineTextAlignment(.trailing)
                         }
                     }
                     .frame(width: geometry.size.width, height: (geometry.size.height - 50) * 0.1)
@@ -71,12 +75,6 @@ struct GameView: View {
                                 .placeholder { //플레이스 홀더 설정
                                     Image(systemName: "list.dash")
                                 }.retry(maxCount: 3, interval: .seconds(5)) //재시도
-                                .onSuccess {r in //성공
-                                    print("succes: \(r)")
-                                }
-                                .onFailure { e in //실패
-                                    print("failure: \(e)")
-                                }
                                 .startLoadingBeforeViewAppear()
                                 .resizable()
                                 .scaledToFill()
@@ -113,14 +111,7 @@ struct GameView: View {
     
     init(round: Int, info: GameInfoViewModel) {
         self.round = round
-//        self.gameId = gameId
         self.info = info
         self.game = GameViewModel(game: Game(id: info.game.gameId, title: info.game.title, description: info.game.description, createdTime: info.game.createdAt, items: nil), itemCount: round)
     }
 }
-
-//struct GameView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        GameView(round: 4, gameId: 0)
-//    }
-//}

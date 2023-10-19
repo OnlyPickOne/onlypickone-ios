@@ -15,6 +15,8 @@ class GameViewModel: ObservableObject {
     
     public var game: Game
     public var itemCount: Int
+    public var round: Int = 1
+    public var current: String = ""
     private var list: [ItemWithUrl]
     private var result: [ItemWithUrl] = []
     
@@ -28,7 +30,16 @@ class GameViewModel: ObservableObject {
         self.game = game
         self.list = game.items ?? []
         self.itemCount = itemCount
+        self.setCurrent()
         fetchGameData(gameId: game.id ?? 0, count: itemCount)
+    }
+    
+    public func setCurrent() {
+        var round = 2
+        while round <= (self.itemCount - self.round) {
+            round *= 2
+        }
+        self.current = round <= 2 ? "결승" : "\(round)강"
     }
     
     private func match() {
@@ -66,6 +77,8 @@ class GameViewModel: ObservableObject {
             result.append(bottomItem)
         }
         
+        self.round += 1
+        self.setCurrent()
         match()
     }
     
