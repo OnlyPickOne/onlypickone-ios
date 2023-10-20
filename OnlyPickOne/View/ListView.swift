@@ -11,6 +11,7 @@ import GoogleMobileAds
 
 struct ListView: View {
     @State var isModal: Bool = false
+//    @State var searchKeyword: String = ""
     @ObservedObject private var viewModel = ListViewModel()
     @ObservedObject var adminDecoder = JWTDecoder()
     
@@ -108,6 +109,8 @@ struct ListView: View {
                 }
             }
         }
+        .searchable(text: $viewModel.searchKeyword, placement: .navigationBarDrawer,
+                    prompt: "제목 또는 키워드를 입력해주세요")
         .onAppear() {
             viewModel.fetchGameList()
         }
