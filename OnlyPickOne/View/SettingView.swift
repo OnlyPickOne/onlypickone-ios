@@ -61,7 +61,7 @@ struct SettingView: View {
                     }
                     .foregroundColor(Color(uiColor: .label))
                     NavigationLink {
-                        Text("회원 탈퇴")
+                        LeaveView()
                     } label: {
                         Text("회원 탈퇴")
                     }
@@ -158,6 +158,43 @@ struct SettingView: View {
         .fullScreenCover(isPresented: $isShowingAskView) {
             AskView()
         }
+    }
+}
+
+fileprivate struct LeaveView: View {
+    var body: some View {
+        VStack {
+            Text("""
+             탈퇴에 앞서서 아래의 내용을 반드시 확인해주시기 바랍니다.
+             
+             탈퇴하셔도 지금까지 등록한 게임은 삭제되지 않습니다.
+             탈퇴 전에 미리 확인하셔서 삭제가 필요한 게임은 미리 삭제해주시기 바랍니다.
+             
+             탈퇴를 진행하신 직후부터는 더 이상 로그인을 하실 수 없으며, 남아 있는 게임에서 발생할 수 있는 법적 문제 및 분쟁 여지를 해결할 수 있는 최소한의 정보만 남기고 모든 정보를 파기합니다. 탈퇴 이후 필요하신 업무가 있으시면 개발팀 연락처(dev.hantae@gmail.com)로 연락 바랍니다.
+             
+             앞으로 만족스러운 서비스를 제공할 수 있도록 더욱 노력하겠습니다.
+             정말로 탈퇴하시겠습니까?
+             """)
+            .font(.body)
+            .padding(15)
+            
+            Button {
+                print("탈퇴 프로세스 진행")
+            } label: {
+                HStack {
+                    Image(systemName: "checkmark.circle.fill")
+                    Text("동의하고 탈퇴하기")
+                }
+            }
+//            .sheet(isPresented: $viewModel.isShowingAddSheet) {
+//                AddSheetView(viewModel: viewModel)
+//            }
+            .tint(Color("opoPink"))
+            .padding()
+        }
+        .navigationTitle("회원 탈퇴")
+        .navigationBarTitleDisplayMode(.inline)
+        .tint(Color("opoPink"))
     }
 }
 
