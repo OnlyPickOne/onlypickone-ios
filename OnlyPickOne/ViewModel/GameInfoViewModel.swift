@@ -10,7 +10,19 @@ import Foundation
 class GameInfoViewModel: ObservableObject {
     @Published var game: NewGame
     
+    public func deleteGame() {
+        print("delete")
+    }
+    
+    public func likeGame() {
+        print("like")
+    }
+    
+    public func reportGamte() {
+        print("report")
+    }
+    
     init(game: NewGame?) {
-        self.game = game ?? NewGame(gameId: nil, title: nil, description: nil, viewCount: nil, playCount: nil, itemCount: nil, reportCount: nil, createdAt: nil, imageUrls: nil)
+        self.game = game ?? NewGame(gameId: nil, title: nil, description: nil, viewCount: nil, playCount: nil, itemCount: nil, reportCount: nil, createdAt: nil, imageUrls: nil, isMyGame: nil)
     }
 }

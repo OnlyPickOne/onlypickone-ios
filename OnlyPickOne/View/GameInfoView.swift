@@ -66,12 +66,28 @@ struct GameInfoView: View {
             }
             
             Section("게임 플레이") {
-                Button {
-                    print("신고하기")
-                } label: {
-                    Text("신고하기")
+                if (viewModel.game.isMyGame ?? false) {
+                    Button {
+                        viewModel.deleteGame()
+                    } label: {
+                        Text("게임 삭제")
+                    }
+                    .foregroundColor(Color(uiColor: .label))
+                } else {
+                    Button {
+                        viewModel.likeGame()
+                    } label: {
+                        Text("좋아요")
+                    }
+                    .foregroundColor(Color(uiColor: .label))
+                    
+                    Button {
+                        viewModel.reportGamte()
+                    } label: {
+                        Text("신고하기")
+                    }
+                    .foregroundColor(Color(uiColor: .label))
                 }
-                .foregroundColor(Color(uiColor: .label))
                 
                 Picker("토너먼트 선택", selection: $selectionOption) {
                     ForEach(0 ..< options.count) {
