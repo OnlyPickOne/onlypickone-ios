@@ -66,11 +66,25 @@ struct GameInfoView: View {
             }
             
             Section("게임 플레이") {
-                if (viewModel.game.isMyGame ?? false) {
+                if (viewModel.game.isCreated ?? false) {
                     Button {
                         viewModel.deleteGame()
                     } label: {
                         Text("게임 삭제")
+                    }
+                    .foregroundColor(Color(uiColor: .label))
+                } else if (viewModel.game.isLiked ?? false) {
+                    Button {
+                        viewModel.likeGame()
+                    } label: {
+                        Text("좋아요 취소")
+                    }
+                    .foregroundColor(Color(uiColor: .label))
+                    
+                    Button {
+                        viewModel.reportGamte()
+                    } label: {
+                        Text("신고하기")
                     }
                     .foregroundColor(Color(uiColor: .label))
                 } else {

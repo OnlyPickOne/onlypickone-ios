@@ -27,5 +27,6 @@ struct NewGame: Codable {
     let reportCount: Int?
     let createdAt: String?
     let imageUrls: [String]?
-    let isMyGame: Bool?
+    let isCreated: Bool?
+    let isLiked: Bool?
 }
