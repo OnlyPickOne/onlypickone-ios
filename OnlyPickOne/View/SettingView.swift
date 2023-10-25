@@ -49,7 +49,7 @@ struct SettingView: View {
                 
                 Section("개인 설정") {
                     NavigationLink {
-                        ListView()
+                        MyGameListView()
                     } label: {
                         Text("내 게임")
                     }
