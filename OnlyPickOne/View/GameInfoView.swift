@@ -16,6 +16,7 @@ struct GameInfoView: View {
     private var options = [4, 8, 16, 32, 64, 128, 256]
     @State private var selectionOption = 0
     @State private var deleteConfirmDialog: Bool = false
+    @State private var deleteFailDialog: Bool = false
     @State private var updateView: Bool = false
     
     var body: some View {
@@ -79,13 +80,22 @@ struct GameInfoView: View {
                     .alert("삭제하시겠습니까?", isPresented: $deleteConfirmDialog) {
                         Button("삭제", role: .destructive) {
                             deleteConfirmDialog = false
-                            viewModel.deleteGame() {
-                                presentationMode.wrappedValue.dismiss()
-                                updateView.toggle()
+                            viewModel.deleteGame() { success in
+                                if success {
+                                    presentationMode.wrappedValue.dismiss()
+                                    updateView.toggle()
+                                } else {
+                                    deleteFailDialog = true
+                                }
                             }
                         }
                         Button("취소", role: .cancel) {
                             deleteConfirmDialog = false
+                        }
+                    }
+                    .alert("삭제 요청에 실패하였습니다.", isPresented: $deleteFailDialog) {
+                        Button("확인") {
+                            deleteFailDialog = false
                         }
                     }
                 } else if (viewModel.game.isLiked ?? false) {

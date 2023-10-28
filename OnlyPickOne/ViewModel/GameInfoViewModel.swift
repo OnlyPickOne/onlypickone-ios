@@ -17,7 +17,7 @@ class GameInfoViewModel: ObservableObject {
     @Published var game: NewGame
     @Published var goBack: Bool = false
     
-    public func deleteGame(completion: @escaping () -> ()) {
+    public func deleteGame(completion: @escaping (Bool) -> ()) {
         provider.requestPublisher(.remove(game.gameId ?? -1))
             .sink { completion in
                 switch completion {
@@ -30,7 +30,7 @@ class GameInfoViewModel: ObservableObject {
                 let result = try? response.map(Response<String>.self)
                 if result?.isSuccess == true {
 //                    self.goBack = true
-                    completion()
+                    completion(true)
                 }
             }.store(in: &subscription)
     }
