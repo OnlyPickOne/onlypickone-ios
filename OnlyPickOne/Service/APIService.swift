@@ -16,7 +16,7 @@ enum APIService {
     case submit
     case statistics
     case create(_ title: String, _ description: String, _ multipartFiles: [Item])
-    case remove
+    case remove(_ uid: Int)
     case report
     case join
     case login
@@ -44,8 +44,11 @@ extension APIService: TargetType {
     
     var path: String {
         switch self {
-        case .gameList, .create(_,_,_), .remove:
+        case .gameList, .create(_,_,_):
             return "/games"
+        case . remove(let id):
+            print("/games/\(id)")
+            return "/games/\(id)"
         case .getVersion, .setVersion(_):
             return "/versions"
         case .mailAuthReq(_):
@@ -71,7 +74,7 @@ extension APIService: TargetType {
         switch self {
         case .mailAuthReq(_), .mailVerify(_), .signUp(_), .logIn(_), .setVersion(_), .refreshToken(_), .create(_,_,_), .finish(_):
             return .post
-        case .remove:
+        case .remove(_):
             return .delete
         default:
             return .get
@@ -110,7 +113,7 @@ extension APIService: TargetType {
     
     var headers: [String : String]? {
         switch self {
-        case .setVersion(_), .create(_, _, _), .gameList:
+        case .setVersion(_), .create(_, _, _), .gameList, .remove(_):
             let accessToken = UserDefaults.standard.string(forKey: "accessToken") ?? ""
             return ["Content-type" : "application/json", "Authorization" : "Bearer \(accessToken)"]
         default:

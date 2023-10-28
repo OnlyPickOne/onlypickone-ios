@@ -9,11 +9,14 @@ import SwiftUI
 import Kingfisher
 
 struct GameInfoView: View {
+    @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: GameInfoViewModel
     
     private let gameId: Int
     private var options = [4, 8, 16, 32, 64, 128, 256]
     @State private var selectionOption = 0
+    @State private var deleteConfirmDialog: Bool = false
+    @State private var updateView: Bool = false
     
     var body: some View {
         List {
@@ -68,11 +71,23 @@ struct GameInfoView: View {
             Section("게임 플레이") {
                 if (viewModel.game.isCreated ?? false) {
                     Button {
-                        viewModel.deleteGame()
+                        deleteConfirmDialog = true
                     } label: {
                         Text("게임 삭제")
                     }
                     .foregroundColor(Color(uiColor: .label))
+                    .alert("삭제하시겠습니까?", isPresented: $deleteConfirmDialog) {
+                        Button("삭제", role: .destructive) {
+                            deleteConfirmDialog = false
+                            viewModel.deleteGame() {
+                                presentationMode.wrappedValue.dismiss()
+                                updateView.toggle()
+                            }
+                        }
+                        Button("취소", role: .cancel) {
+                            deleteConfirmDialog = false
+                        }
+                    }
                 } else if (viewModel.game.isLiked ?? false) {
                     Button {
                         viewModel.likeGame()

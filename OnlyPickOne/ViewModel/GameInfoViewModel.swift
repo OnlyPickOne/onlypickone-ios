@@ -6,12 +6,33 @@
 //
 
 import Foundation
+import Moya
+import Combine
 
 class GameInfoViewModel: ObservableObject {
-    @Published var game: NewGame
+    private var subscription = Set<AnyCancellable>()
+    private let provider = MoyaProvider<APIService>()
+    private let decoder = JWTDecoder()
     
-    public func deleteGame() {
-        print("delete")
+    @Published var game: NewGame
+    @Published var goBack: Bool = false
+    
+    public func deleteGame(completion: @escaping () -> ()) {
+        provider.requestPublisher(.remove(game.gameId ?? -1))
+            .sink { completion in
+                switch completion {
+                case let .failure(error):
+                    print("error: \(error)")
+                case .finished:
+                    print("request finished")
+                }
+            } receiveValue: { response in
+                let result = try? response.map(Response<String>.self)
+                if result?.isSuccess == true {
+//                    self.goBack = true
+                    completion()
+                }
+            }.store(in: &subscription)
     }
     
     public func likeGame() {
