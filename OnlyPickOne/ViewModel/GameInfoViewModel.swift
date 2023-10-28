@@ -15,7 +15,6 @@ class GameInfoViewModel: ObservableObject {
     private let decoder = JWTDecoder()
     
     @Published var game: NewGame
-    @Published var goBack: Bool = false
     
     public func deleteGame(completion: @escaping (Bool) -> ()) {
         provider.requestPublisher(.remove(game.gameId ?? -1))
@@ -29,7 +28,6 @@ class GameInfoViewModel: ObservableObject {
             } receiveValue: { response in
                 let result = try? response.map(Response<String>.self)
                 if result?.isSuccess == true {
-//                    self.goBack = true
                     completion(true)
                 }
             }.store(in: &subscription)
