@@ -33,6 +33,27 @@ class SettingViewModel: ObservableObject {
             }.store(in: &subscription)
     }
     
+    public func leave(completion: @escaping (Bool) -> ()) {
+        provider.requestPublisher(.leave(JWTDecoder().userId))
+            .sink { completion in
+                switch completion {
+                case let .failure(error):
+                    print("error: \(error)")
+                case .finished:
+                    print("request finished")
+                }
+            } receiveValue: { response in
+                let result = try? response.map(Response<String>.self)
+                if result?.isSuccess == true {
+                    /// 서버 로직은 구현 후 추가할 예정
+                    /// 현재는 토큰만 지우는 식으로 임시 구현
+                    UserDefaults.standard.set(nil, forKey: "accessToken")
+                    UserDefaults.standard.set(nil, forKey: "refreshToken")
+                    completion(true)
+                }
+            }.store(in: &subscription)
+    }
+    
     public func logout() {
         /// 서버 로직은 구현 후 추가할 예정
         /// 현재는 토큰만 지우는 식으로 임시 구현

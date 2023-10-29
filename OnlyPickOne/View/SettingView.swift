@@ -61,7 +61,11 @@ struct SettingView: View {
                     }
                     .foregroundColor(Color(uiColor: .label))
                     NavigationLink {
-                        LeaveView()
+                        LeaveView(viewModel: viewModel) { success in
+                            if success {
+                                isNeedToAuth = true
+                            }
+                        }
                     } label: {
                         Text("회원 탈퇴")
                     }
@@ -162,6 +166,11 @@ struct SettingView: View {
 }
 
 fileprivate struct LeaveView: View {
+    @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var viewModel: SettingViewModel
+    
+    let completionBlock: (Bool) -> ()
+    
     var body: some View {
         VStack {
             Text("""
@@ -180,6 +189,12 @@ fileprivate struct LeaveView: View {
             
             Button {
                 print("탈퇴 프로세스 진행")
+                viewModel.leave { success in
+                    if success {
+                        presentationMode.wrappedValue.dismiss()
+                        completionBlock(true)
+                    }
+                }
             } label: {
                 HStack {
                     Image(systemName: "checkmark.circle.fill")
