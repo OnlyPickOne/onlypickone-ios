@@ -11,7 +11,7 @@ import GoogleMobileAds
 
 struct ListView: View {
     @State var isModal: Bool = false
-    @ObservedObject private var viewModel = ListViewModel()
+    @ObservedObject private var viewModel: ListViewModel
     @ObservedObject var adminDecoder = JWTDecoder()
     
     @ViewBuilder func admob() -> some View {
@@ -114,6 +114,10 @@ struct ListView: View {
             viewModel.fetchGameList()
         }
     }
+    
+    init(viewModel: ListViewModel) {
+        self.viewModel = viewModel
+    }
 }
 
 struct MyGameListView: View {
@@ -209,11 +213,5 @@ struct MyGameListView: View {
         .onAppear() {
             viewModel.fetchGameList()
         }
-    }
-}
-
-struct ListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ListView()
     }
 }
