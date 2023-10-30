@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SignUpView: View {
+    @Environment(\.presentationMode) var presentationMode
     @Binding var isShowingLogInSheet: Bool
     @State var emailInput = ""
     @State var passwordInput = ""
@@ -122,7 +123,8 @@ struct SignUpView: View {
                     Button {
                         //                    isShowingLogInSheet = false
                         viewModel.signUp(email: emailInput, password: passwordInput) { isSucess in
-                            self.isShowingLogInSheet = !isSucess
+//                            self.isShowingLogInSheet = !isSucess
+                            presentationMode.wrappedValue.dismiss()
                         }
                     } label: {
                         Text("가입하기")
