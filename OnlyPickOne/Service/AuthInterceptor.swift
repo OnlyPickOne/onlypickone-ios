@@ -39,7 +39,6 @@ final class AuthInterceptor: RequestInterceptor {
         }
 
         // 토큰 갱신 API 호출
-        var subscription = Set<AnyCancellable>()
         let provider = MoyaProvider<APIService>(session: Session(interceptor: AuthInterceptor.shared))
         
         guard let accessToken = UserDefaults.standard.string(forKey: "accessToken"), let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") else { return }

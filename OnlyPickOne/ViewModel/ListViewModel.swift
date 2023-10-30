@@ -16,8 +16,10 @@ class ListViewModel: ObservableObject {
     @Published var newGameList: GameList = GameList(content: nil, pageable: nil, totalPages: nil, totalElements: nil, last: nil, numberOfElements: nil, size: nil, first: nil, number: nil, sort: nil, empty: nil)
     @Published var searchKeyword: String = ""
     @Published var testString: String = ""
+    @Published var refreshTabView: Bool = false
+    
     private var subscription = Set<AnyCancellable>()
-    private let provider = MoyaProvider<APIService>()
+    private let provider = MoyaProvider<APIService>(session: Session(interceptor: AuthInterceptor.shared))
     
     func fetchGameList() {
         provider.requestPublisher(.gameList)

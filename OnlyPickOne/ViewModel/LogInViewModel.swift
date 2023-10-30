@@ -12,7 +12,7 @@ import CombineMoya
 
 class LogInViewModel: ObservableObject {
     private var subscription = Set<AnyCancellable>()
-    private let provider = MoyaProvider<APIService>()
+    private let provider = MoyaProvider<APIService>(session: Session(interceptor: AuthInterceptor.shared))
     
     @Published var isSucessLogIn: Bool = false
     @Published var isFailureLogIn: Bool = false

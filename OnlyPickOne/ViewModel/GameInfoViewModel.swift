@@ -11,7 +11,7 @@ import Combine
 
 class GameInfoViewModel: ObservableObject {
     private var subscription = Set<AnyCancellable>()
-    private let provider = MoyaProvider<APIService>()
+    private let provider = MoyaProvider<APIService>(session: Session(interceptor: AuthInterceptor.shared))
     private let decoder = JWTDecoder()
     
     @Published var game: NewGame

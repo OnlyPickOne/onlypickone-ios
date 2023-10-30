@@ -66,20 +66,20 @@ struct ListView: View {
                                                 .clipped()
                                         }
                                         VStack(alignment: .leading, spacing: 5) {
-                                            HStack {
-                                                Spacer()
-                                                Text(viewModel.newGameList.content?[index].createdAt?.toLastTimeString() ?? "")
-                                                    .font(.caption2)
-                                                    .fontWeight(.light)
-                                                    .multilineTextAlignment(.trailing)
-                                            }
-                                            Spacer()
                                             Text("\(viewModel.newGameList.content?[index].description ?? "please refresh or restart the application")")
                                                 .font(.caption)
                                                 .fontWeight(.light)
                                                 .multilineTextAlignment(.leading)
                                                 .lineLimit(4)
-                                                .frame(height: 64)
+                                                .frame(height: 32)
+                                            Spacer()
+                                            HStack {
+                                                Spacer()
+                                                Text(viewModel.newGameList.content?[index].createdAt?.toLastTimeString() ?? "")
+                                                    .font(.caption)
+                                                    .fontWeight(.light)
+                                                    .multilineTextAlignment(.trailing)
+                                            }
                                             Spacer()
                                         }
                                     }
@@ -90,13 +90,13 @@ struct ListView: View {
                     }
                     .navigationTitle("OnlyPickOne")
                     .navigationBarTitleDisplayMode(.inline)
-                    .toolbar {
-                        Menu("정렬") {
-                            Text("최신순")
-                            Text("조회순")
-                            Text("최다플레이순")
-                        }
-                    }
+//                    .toolbar {
+//                        Menu("정렬") {
+//                            Text("최신순")
+//                            Text("조회순")
+//                            Text("최다플레이순")
+//                        }
+//                    }
                     .refreshable {
                         viewModel.fetchGameList()
                     }
@@ -108,8 +108,8 @@ struct ListView: View {
                 }
             }
         }
-        .searchable(text: $viewModel.searchKeyword, placement: .navigationBarDrawer,
-                    prompt: "제목 또는 키워드를 입력해주세요")
+//        .searchable(text: $viewModel.searchKeyword, placement: .navigationBarDrawer,
+//                    prompt: "제목 또는 키워드를 입력해주세요")
         .onAppear() {
             viewModel.fetchGameList()
         }

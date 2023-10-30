@@ -11,7 +11,7 @@ import Moya
 
 class GameViewModel: ObservableObject {
     private var subscription = Set<AnyCancellable>()
-    private let provider = MoyaProvider<APIService>()
+    private let provider = MoyaProvider<APIService>(session: Session(interceptor: AuthInterceptor.shared))
     
     public var game: Game
     public var itemCount: Int

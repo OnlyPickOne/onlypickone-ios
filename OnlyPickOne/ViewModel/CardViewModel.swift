@@ -12,7 +12,7 @@ import CombineMoya
 
 class CardViewModel: ObservableObject {
     private var subscription = Set<AnyCancellable>()
-    private let provider = MoyaProvider<APIService>()
+    private let provider = MoyaProvider<APIService>(session: Session(interceptor: AuthInterceptor.shared))
     
     @Published var imageUrls: [String] = []
     
