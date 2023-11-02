@@ -12,7 +12,7 @@ import CombineMoya
 
 class HomeViewModel: ObservableObject {
     private var subscription = Set<AnyCancellable>()
-    private let provider = MoyaProvider<APIService>()
+    private let provider = MoyaProvider<APIService>(session: Session(interceptor: AuthInterceptor.shared))
     
     @Published var minimumVersion: String = ""
     @Published var latestVersion: String = ""
@@ -22,8 +22,10 @@ class HomeViewModel: ObservableObject {
     
     public func checkToken() -> Bool {
         if UserDefaults.standard.string(forKey: "accessToken") != nil && UserDefaults.standard.string(forKey: "refreshToken") != nil {
+            self.isNeedToAuth = false
             return true
         }
+        self.isNeedToAuth = true
         return false
     }
     
@@ -35,12 +37,12 @@ class HomeViewModel: ObservableObject {
                     print("error: \(error)")
                 case .finished:
                     print("request finished")
-                    self.checkCurrentVersion()
                 }
             } receiveValue: { response in
                 let result = try? response.map(Response<Info>.self)
                 self.minimumVersion = result?.data?.minimum ?? ""
                 self.latestVersion = result?.data?.latest ?? ""
+                self.checkCurrentVersion()
             }.store(in: &subscription)
     }
     
@@ -81,10 +83,9 @@ class HomeViewModel: ObservableObject {
         print(self.isNeedToUpdate, self.toLeadToUpdate)
     }
     
-    init(subscription: Set<AnyCancellable> = Set<AnyCancellable>(), isAuthorized: Bool = false) {
-        self.subscription = subscription
-        self.isNeedToAuth = isAuthorized
-//        self.info()
+    init() {
+        self.info()
+        self.checkToken()
     }
 }
 
