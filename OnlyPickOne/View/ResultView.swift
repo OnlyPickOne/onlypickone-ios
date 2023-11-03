@@ -201,7 +201,7 @@ struct ResultView: View {
             }
             .navigationTitle("최종 결과")
             
-            admob()
+//            admob()
         }
     }
 }

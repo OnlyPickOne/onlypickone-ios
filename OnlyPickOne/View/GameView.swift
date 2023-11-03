@@ -122,9 +122,9 @@ struct GameView: View {
                             .frame(width: geometry.size.width, height: (geometry.size.height - 50) * 0.45)
                             .clipped()
                             
-                            if adminDecoder.isAdmin == false {
-                                admob()
-                            }
+//                            if adminDecoder.isAdmin == false {
+//                                admob()
+//                            }
                         }
                     }
                 }

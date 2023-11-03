@@ -103,9 +103,9 @@ struct ListView: View {
                     .tint(Color("opoPink"))
                 }
                 
-                if adminDecoder.isAdmin == false {
-                    admob()
-                }
+//                if adminDecoder.isAdmin == false {
+//                    admob()
+//                }
             }
         }
 //        .searchable(text: $viewModel.searchKeyword, placement: .navigationBarDrawer,
@@ -206,9 +206,9 @@ struct MyGameListView: View {
                 .tint(Color("opoPink"))
             }
             
-            if adminDecoder.isAdmin == false {
-                admob()
-            }
+//            if adminDecoder.isAdmin == false {
+//                admob()
+//            }
         }
         .onAppear() {
             viewModel.fetchGameList()

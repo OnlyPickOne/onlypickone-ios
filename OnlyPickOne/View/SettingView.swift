@@ -21,11 +21,11 @@ struct SettingView: View {
         NavigationView {
             List {
                 Section("고객센터") {
-                    NavigationLink {
-                        NoticeListView()
-                    } label: {
-                        Text("공지사항")
-                    }
+//                    NavigationLink {
+//                        NoticeListView()
+//                    } label: {
+//                        Text("공지사항")
+//                    }
                     Button {
                         isShowingAskView.toggle()
                     } label: {
@@ -48,11 +48,11 @@ struct SettingView: View {
                 }
                 
                 Section("개인 설정") {
-                    NavigationLink {
-                        MyGameListView()
-                    } label: {
-                        Text("내 게임")
-                    }
+//                    NavigationLink {
+//                        MyGameListView()
+//                    } label: {
+//                        Text("내 게임")
+//                    }
                     Button {
                         viewModel.logout()
                         isNeedToAuth = true
