@@ -11,6 +11,9 @@ import Kingfisher
 
 struct ResultView: View {
     @ObservedObject var viewModel: GameViewModel
+    @State var isSharePresented = false
+    @State private var renderedImage = Image(systemName: "photo")
+    @Environment(\.displayScale) var displayScale
     
     @ViewBuilder func admob() -> some View {
         GADBanner().frame(width: GADAdSizeBanner.size.width, height: GADAdSizeBanner.size.height)
@@ -200,8 +203,40 @@ struct ResultView: View {
                 }
             }
             .navigationTitle("최종 결과")
+            .toolbar {
+                if #available(iOS 16.0, *) {
+                    ShareLink(item: renderedImage, preview: SharePreview(Text("OnlyPickOne Shared Image"), image: renderedImage))
+                }
+            }
             
 //            admob()
         }
+        .onAppear { render() }
+    }
+    
+    @MainActor func render() {
+        if #available(iOS 16.0, *) {
+            let renderer = ImageRenderer(content: RenderView(text: viewModel.winner?.caption ?? ""))
+            
+            // make sure and use the correct display scale for this device
+            renderer.scale = displayScale
+            
+            if let uiImage = renderer.uiImage {
+                renderedImage = Image(uiImage: uiImage)
+            }
+        }
+    }
+}
+
+struct RenderView: View {
+    let text: String
+
+    var body: some View {
+        Text(text)
+            .font(.largeTitle)
+            .foregroundStyle(.white)
+            .padding()
+            .background(.blue)
+            .clipShape(Capsule())
     }
 }
