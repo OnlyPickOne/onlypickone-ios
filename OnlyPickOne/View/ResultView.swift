@@ -13,6 +13,7 @@ struct ResultView: View {
     @ObservedObject var viewModel: GameViewModel
     @State var isSharePresented = false
     @State private var renderedImage = Image(systemName: "photo")
+    @State var tempImage = Image(systemName: "photo")
     @Environment(\.displayScale) var displayScale
     
     @ViewBuilder func admob() -> some View {
@@ -77,6 +78,8 @@ struct ResultView: View {
                         }.retry(maxCount: 3, interval: .seconds(5)) //재시도
                         .onSuccess {r in //성공
                             print("succes: \(r)")
+                            tempImage = Image(uiImage: r.image)
+                            render()
                         }
                         .onFailure { e in //실패
                             print("failure: \(e)")
@@ -216,27 +219,92 @@ struct ResultView: View {
     
     @MainActor func render() {
         if #available(iOS 16.0, *) {
-            let renderer = ImageRenderer(content: RenderView(text: viewModel.winner?.caption ?? ""))
+            let renderer = ImageRenderer(content: RenderView(gameTitle: viewModel.game.title ?? "", gameDescription: viewModel.game.description ?? "", winItemCaption: viewModel.winner?.caption ?? "", winItemImage: tempImage))
             
             // make sure and use the correct display scale for this device
-            renderer.scale = displayScale
+            renderer.scale = 3.0
             
             if let uiImage = renderer.uiImage {
-                renderedImage = Image(uiImage: uiImage)
+                let data = uiImage.pngData()
+                var fullImage = UIImage(data: data!)
+                renderedImage = Image(uiImage: fullImage!)
             }
         }
     }
 }
 
 struct RenderView: View {
-    let text: String
+    let gameTitle: String
+    let gameDescription: String
+    let winItemCaption: String
+    let winItemImage: Image
 
     var body: some View {
-        Text(text)
-            .font(.largeTitle)
-            .foregroundStyle(.white)
-            .padding()
-            .background(.blue)
-            .clipShape(Capsule())
+        ZStack {
+            Color("opoBackground")
+            VStack(spacing: 15) {
+                Spacer()
+                
+                Text(gameTitle)
+                    .font(.title2)
+                    .fontWeight(.medium)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2)
+                    .listRowSeparator(.hidden)
+                
+                Text(gameDescription)
+                    .font(.caption)
+                    .fontWeight(.light)
+                    .multilineTextAlignment(.leading)
+                
+                HStack {
+                    Spacer()
+                    Image(systemName: "trophy.fill")
+                        .foregroundColor(.yellow)
+                    Text("우승")
+                        .font(.headline)
+                    Image(systemName: "trophy.fill")
+                        .foregroundColor(.yellow)
+                    Spacer()
+                }
+                
+                HStack {
+                    Spacer()
+                    Text("\"")
+                        .font(.title)
+                        .fontWeight(.heavy)
+                    Text(winItemCaption)
+                        .font(.title2)
+                        .multilineTextAlignment(.center)
+                    Text("\"")
+                        .font(.title)
+                        .fontWeight(.heavy)
+                    Spacer()
+                }
+                
+                winItemImage
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 220)
+                
+                HStack(spacing: 10) {
+                    Image("opoImage")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40)
+                    Text("지금 OnlyPickOne에서 직접 플레이해보세요!")
+                        .font(.subheadline)
+                }
+                
+                Spacer()
+            }
+            .frame(width: 240)
+        }
+    }
+}
+
+struct RenderView_Previews: PreviewProvider {
+    static var previews: some View {
+        RenderView(gameTitle: "걸그룹 이상형 월드컵", gameDescription: "걸그룹 이상형 월드컵 (2~4세대) 입니다.", winItemCaption: "제육볶음", winItemImage: Image(systemName: "bolt"))
     }
 }
