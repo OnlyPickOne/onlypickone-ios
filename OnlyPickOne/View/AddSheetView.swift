@@ -105,6 +105,7 @@ struct AddSheetView: View {
                 Button("삭제", role: .destructive) {
                     viewModel.resetValue()
                     alertToReset.toggle()
+                    viewModel.isShowingAddSheet = false
                 }
                 Button("취소", role: .cancel) {
                     alertToReset.toggle()

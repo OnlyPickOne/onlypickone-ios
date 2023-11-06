@@ -43,7 +43,7 @@ struct AddView: View {
                         Text("동의하고 게임 생성하기")
                     }
                 }
-                .sheet(isPresented: $viewModel.isShowingAddSheet) {
+                .fullScreenCover(isPresented: $viewModel.isShowingAddSheet) {
                     AddSheetView(viewModel: viewModel)
                 }
                 .tint(Color("opoPink"))
