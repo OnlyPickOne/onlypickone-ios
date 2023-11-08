@@ -11,6 +11,7 @@ import Kingfisher
 
 struct ResultView: View {
     @ObservedObject var viewModel: GameViewModel
+    @ObservedObject var adminDecoder = JWTDecoder()
     @State var isSharePresented = false
     @State private var renderedImage = Image(systemName: "photo")
     @State var tempImage = Image(systemName: "photo")
@@ -212,7 +213,9 @@ struct ResultView: View {
                 }
             }
             
-//            admob()
+            if adminDecoder.isAdmin == false {
+                admob()
+            }
         }
         .onAppear { render() }
     }
