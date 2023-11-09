@@ -33,9 +33,14 @@ struct CardView: View {
                                     .onTapGesture {
                                         if num == viewModel.imageList.count - 1 {
                                             showImagePicker = true
-                                        } else {
-                                            viewModel.imageList.remove(at: num)
-                                            viewModel.input.remove(at: num)
+                                        }
+                                    }
+                                    .onLongPressGesture(minimumDuration: 0.05) {
+                                        withAnimation {
+                                            if num != viewModel.imageList.count - 1 {
+                                                viewModel.imageList.remove(at: num)
+                                                viewModel.input.remove(at: num)
+                                            }
                                         }
                                     }
                                 if num != viewModel.imageList.count - 1 {
@@ -67,7 +72,7 @@ struct CardView: View {
                 .buttonStyle(.borderedProminent)
                 .frame(height: 50)
                 .padding(15)
-                Text("사진은 최소 4장에서 최대 128장까지 선택하실 수 있습니다.\n사진은 중복으로 추가될 수 있으며, 추가된 사진을 터치하면 제거됩니다.")
+                Text("사진은 최소 4장에서 최대 128장까지 선택하실 수 있습니다.\n사진은 중복으로 추가될 수 있으며, 추가된 사진을 꾹 누르시면 제거됩니다.")
                     .font(.caption)
                 Spacer()
             }
