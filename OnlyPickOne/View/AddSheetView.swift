@@ -51,7 +51,7 @@ struct AddSheetView: View {
                                     Button {
                                         alertToReset.toggle()
                                     } label: {
-                                        Image(systemName: "trash.fill")
+                                        Text("취소")
                                     }
                                 }
                                 .alert("캡션을 모두 채워주세요", isPresented: $viewModel.isShowingAlertBlankCaption) {
@@ -78,7 +78,7 @@ struct AddSheetView: View {
                             Button {
                                 alertToReset.toggle()
                             } label: {
-                                Image(systemName: "trash.fill")
+                                Text("취소")
                             }
                         }
                     })
@@ -98,7 +98,7 @@ struct AddSheetView: View {
                 Button {
                     alertToReset.toggle()
                 } label: {
-                    Image(systemName: "trash.fill")
+                    Text("취소")
                 }
             }
             .alert("작성하신 모든 내용이 삭제됩니다.", isPresented: $alertToReset) {
@@ -111,6 +111,7 @@ struct AddSheetView: View {
                     alertToReset.toggle()
                 }
             }
+            .alertButtonTint(color: Color(red: 255/255, green: 182/255, blue: 193/255))
             .onAppear {
                 UIApplication.shared.hideKeyboard()
             }
