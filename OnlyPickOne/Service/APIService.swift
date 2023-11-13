@@ -18,6 +18,7 @@ enum APIService {
     case create(_ title: String, _ description: String, _ multipartFiles: [Item])
     case remove(_ uid: Int)
     case report
+    case like(_ gid: Int)
     case join
     case login
     case leave(_ id: Int)
@@ -62,6 +63,8 @@ extension APIService: TargetType {
             return "/auth/reissue"
         case .start(let id, _), .finish(let id, _):
             return "/games/\(id)/items"
+        case .like(let id):
+            return "/games/\(id)/likes"
         case .leave(let id):
             return "/members/\(id)"
         case .test:
@@ -73,7 +76,7 @@ extension APIService: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .mailAuthReq(_), .mailVerify(_), .signUp(_), .logIn(_), .setVersion(_), .refreshToken(_), .create(_,_,_), .finish(_):
+        case .mailAuthReq(_), .mailVerify(_), .signUp(_), .logIn(_), .setVersion(_), .refreshToken(_), .create(_,_,_), .finish(_,_), .like(_):
             return .post
         case .remove(_), .leave(_):
             return .delete
@@ -114,7 +117,7 @@ extension APIService: TargetType {
     
     var headers: [String : String]? {
         switch self {
-        case .setVersion(_), .create(_, _, _), .gameList, .remove(_), .leave(_):
+        case .setVersion(_), .create(_, _, _), .gameList, .remove(_), .leave(_), .like(_):
             let accessToken = UserDefaults.standard.string(forKey: "accessToken") ?? ""
             return ["Content-type" : "application/json", "Authorization" : "Bearer \(accessToken)"]
         default:

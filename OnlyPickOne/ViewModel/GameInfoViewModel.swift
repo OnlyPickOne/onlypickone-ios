@@ -15,6 +15,7 @@ class GameInfoViewModel: ObservableObject {
     private let decoder = JWTDecoder()
     
     @Published var game: NewGame
+    @Published var isLiked: Bool = false
     
     public func deleteGame(completion: @escaping (Bool) -> ()) {
         provider.requestPublisher(.remove(game.gameId ?? -1))
@@ -35,6 +36,21 @@ class GameInfoViewModel: ObservableObject {
     
     public func likeGame() {
         print("like")
+        provider.requestPublisher(.like(game.gameId ?? -1))
+            .sink { completion in
+                switch completion {
+                case let .failure(error):
+                    print("error: \(error)")
+                case .finished:
+                    print("request finished")
+                }
+            } receiveValue: { response in
+                let result = try? response.map(Response<String>.self)
+                if result?.isSuccess == true {
+                    print("sucess")
+                    self.isLiked = true
+                }
+            }.store(in: &subscription)
     }
     
     public func reportGamte() {
@@ -43,5 +59,6 @@ class GameInfoViewModel: ObservableObject {
     
     init(game: NewGame?) {
         self.game = game ?? NewGame(gameId: nil, title: nil, description: nil, viewCount: nil, playCount: nil, itemCount: nil, reportCount: nil, createdAt: nil, imageUrls: nil, isCreated: nil, isLiked: nil)
+        self.isLiked = game?.isLiked ?? false
     }
 }
