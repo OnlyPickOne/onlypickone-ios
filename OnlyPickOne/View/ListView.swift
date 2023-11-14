@@ -34,36 +34,60 @@ struct ListView: View {
                                         .lineLimit(2)
                                     HStack(spacing: 15) {
                                         HStack(spacing: 0) {
-                                            KFImage(URL(string: "\(viewModel.newGameList.content?[index].imageUrls?[0] ?? "")"))
-                                                .placeholder { //플레이스 홀더 설정
-                                                    Image(systemName: "list.dash")
-                                                }.retry(maxCount: 3, interval: .seconds(5)) //재시도
-                                                .onSuccess {r in //성공
-                                                    print("succes: \(r)")
-                                                }
-                                                .onFailure { e in //실패
-                                                    print("failure: \(e)")
-                                                }
-                                                .startLoadingBeforeViewAppear()
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fill)
-                                                .frame(width: 40, height: 80)
-                                                .clipped()
-                                            KFImage(URL(string: "\(viewModel.newGameList.content?[index].imageUrls?[1] ?? "")"))
-                                                .placeholder { //플레이스 홀더 설정
-                                                    Image(systemName: "list.dash")
-                                                }.retry(maxCount: 3, interval: .seconds(5)) //재시도
-                                                .onSuccess {r in //성공
-                                                    print("succes: \(r)")
-                                                }
-                                                .onFailure { e in //실패
-                                                    print("failure: \(e)")
-                                                }
-                                                .startLoadingBeforeViewAppear()
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fill)
-                                                .frame(width: 40, height: 80)
-                                                .clipped()
+                                            if viewModel.newGameList.content?[index].imageUrls?.count ?? 0 >= 2 {
+                                                KFImage(URL(string: "\(viewModel.newGameList.content?[index].imageUrls?[0] ?? "")"))
+                                                    .placeholder { //플레이스 홀더 설정
+                                                        Image(systemName: "list.dash")
+                                                    }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                                                    .onSuccess {r in //성공
+                                                        print("succes: \(r)")
+                                                    }
+                                                    .onFailure { e in //실패
+                                                        print("failure: \(e)")
+                                                    }
+                                                    .startLoadingBeforeViewAppear()
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fill)
+                                                    .frame(width: 40, height: 80)
+                                                    .clipped()
+                                                KFImage(URL(string: "\(viewModel.newGameList.content?[index].imageUrls?[1] ?? "")"))
+                                                    .placeholder { //플레이스 홀더 설정
+                                                        Image(systemName: "list.dash")
+                                                    }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                                                    .onSuccess {r in //성공
+                                                        print("succes: \(r)")
+                                                    }
+                                                    .onFailure { e in //실패
+                                                        print("failure: \(e)")
+                                                    }
+                                                    .startLoadingBeforeViewAppear()
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fill)
+                                                    .frame(width: 40, height: 80)
+                                                    .clipped()
+                                            } else if viewModel.newGameList.content?[index].imageUrls?.count ?? 0 == 1 {
+                                                KFImage(URL(string: "\(viewModel.newGameList.content?[index].imageUrls?[0] ?? "")"))
+                                                    .placeholder { //플레이스 홀더 설정
+                                                        Image(systemName: "list.dash")
+                                                    }.retry(maxCount: 3, interval: .seconds(5)) //재시도
+                                                    .onSuccess {r in //성공
+                                                        print("succes: \(r)")
+                                                    }
+                                                    .onFailure { e in //실패
+                                                        print("failure: \(e)")
+                                                    }
+                                                    .startLoadingBeforeViewAppear()
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fill)
+                                                    .frame(width: 80, height: 80)
+                                                    .clipped()
+                                            } else {
+                                                Image(systemName: "exclamationmark.circle.fill")
+//                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fill)
+                                                    .frame(width: 80, height: 80)
+                                                    .clipped()
+                                            }
                                         }
                                         VStack(alignment: .leading, spacing: 5) {
                                             Text("\(viewModel.newGameList.content?[index].description ?? "please refresh or restart the application")")

@@ -24,31 +24,31 @@ struct GameView: View {
     
     var body: some View {
         ZStack {
-            if isShowingSuffleView {
-                HStack(spacing: 0) {
-                    Text("랜덤생성중...")
-                        .onAppear {
-                            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
-                                withAnimation {
-                                    isShowingSuffleView = false
+            if game.winner == nil {
+                if isShowingSuffleView {
+                    HStack(spacing: 0) {
+                        Text("랜덤생성중...")
+                            .onAppear {
+                                Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
+                                    withAnimation {
+                                        isShowingSuffleView = false
+                                    }
                                 }
                             }
-                        }
-                    Image(systemName: "hourglass")
-                        .frame(width: 15, height: 15)
-                        .rotationEffect(isAnimating ? .degrees(15) : .degrees(-15))
-                        .animation(.easeInOut(duration: 0.1))
-                        .onAppear() {
-                            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
-                                withAnimation {
-                                    isAnimating.toggle()
+                        Image(systemName: "hourglass")
+                            .frame(width: 15, height: 15)
+                            .rotationEffect(isAnimating ? .degrees(15) : .degrees(-15))
+                            .animation(.easeInOut(duration: 0.1))
+                            .onAppear() {
+                                Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { _ in
+                                    withAnimation {
+                                        isAnimating.toggle()
+                                    }
                                 }
+                                
                             }
-                            
-                        }
-                }
-            } else {
-                if game.winner == nil {
+                    }
+                } else {
                     GeometryReader { geometry in
                         VStack(spacing: 0) {
                             ZStack {
@@ -122,16 +122,14 @@ struct GameView: View {
                             .frame(width: geometry.size.width, height: (geometry.size.height - 50) * 0.45)
                             .clipped()
                             
-//                            if adminDecoder.isAdmin == false {
-//                                admob()
-//                            }
+                            //                            if adminDecoder.isAdmin == false {
+                            //                                admob()
+                            //                            }
                         }
                     }
                 }
-                else {
-                    ResultView(viewModel: game)
-                }
-                
+            } else {
+                ResultView(viewModel: game)
             }
         }
     }
