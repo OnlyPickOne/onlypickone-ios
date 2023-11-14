@@ -99,7 +99,7 @@ struct GameInfoView: View {
                             deleteFailDialog = false
                         }
                     }
-                } else if (viewModel.game.isLiked ?? false) {
+                } else if (viewModel.isLiked) {
                     Button {
                         viewModel.likeGame()
                     } label: {

@@ -35,22 +35,41 @@ class GameInfoViewModel: ObservableObject {
     }
     
     public func likeGame() {
-        print("like")
-        provider.requestPublisher(.like(game.gameId ?? -1))
-            .sink { completion in
-                switch completion {
-                case let .failure(error):
-                    print("error: \(error)")
-                case .finished:
-                    print("request finished")
-                }
-            } receiveValue: { response in
-                let result = try? response.map(Response<String>.self)
-                if result?.isSuccess == true {
-                    print("sucess")
-                    self.isLiked = true
-                }
-            }.store(in: &subscription)
+        if self.isLiked {
+            print("like cancel")
+            provider.requestPublisher(.deleteLike(game.gameId ?? -1))
+                .sink { completion in
+                    switch completion {
+                    case let .failure(error):
+                        print("error: \(error)")
+                    case .finished:
+                        print("request finished")
+                    }
+                } receiveValue: { response in
+                    let result = try? response.map(Response<String>.self)
+                    if result?.isSuccess == true {
+                        print("sucess")
+                        self.isLiked = false
+                    }
+                }.store(in: &subscription)
+        } else {
+            print("like")
+            provider.requestPublisher(.like(game.gameId ?? -1))
+                .sink { completion in
+                    switch completion {
+                    case let .failure(error):
+                        print("error: \(error)")
+                    case .finished:
+                        print("request finished")
+                    }
+                } receiveValue: { response in
+                    let result = try? response.map(Response<String>.self)
+                    if result?.isSuccess == true {
+                        print("sucess")
+                        self.isLiked = true
+                    }
+                }.store(in: &subscription)
+        }
     }
     
     public func reportGamte() {
