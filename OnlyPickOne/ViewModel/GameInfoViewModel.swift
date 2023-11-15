@@ -16,6 +16,8 @@ class GameInfoViewModel: ObservableObject {
     
     @Published var game: NewGame
     @Published var isLiked: Bool = false
+    @Published var isShowingReportSucess: Bool = false
+    @Published var isShowingReportFail: Bool = false
     
     public func deleteGame(completion: @escaping (Bool) -> ()) {
         provider.requestPublisher(.remove(game.gameId ?? -1))
@@ -62,11 +64,11 @@ class GameInfoViewModel: ObservableObject {
                     case .finished:
                         print("request finished")
                     }
-                } receiveValue: { response in
+                } receiveValue: { [weak self] response in
                     let result = try? response.map(Response<String>.self)
                     if result?.isSuccess == true {
                         print("sucess")
-                        self.isLiked = true
+                        self?.isLiked = true
                     }
                 }.store(in: &subscription)
         }
@@ -74,6 +76,23 @@ class GameInfoViewModel: ObservableObject {
     
     public func reportGamte() {
         print("report")
+        provider.requestPublisher(.report(game.gameId ?? -1))
+            .sink { completion in
+                switch completion {
+                case let .failure(error):
+                    print("error: \(error)")
+                case .finished:
+                    print("request finished")
+                }
+            } receiveValue: { [weak self] response in
+                let result = try? response.map(Response<String>.self)
+                if result?.isSuccess == true {
+                    print("sucess")
+                    self?.isShowingReportSucess = true
+                } else {
+                    self?.isShowingReportFail = true
+                }
+            }.store(in: &subscription)
     }
     
     init(game: NewGame?) {

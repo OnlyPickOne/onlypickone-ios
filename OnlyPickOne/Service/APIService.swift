@@ -17,7 +17,7 @@ enum APIService {
     case statistics
     case create(_ title: String, _ description: String, _ multipartFiles: [Item])
     case remove(_ uid: Int)
-    case report
+    case report(_ gid: Int)
     case like(_ gid: Int)
     case deleteLike(_ gid: Int)
     case join
@@ -66,6 +66,8 @@ extension APIService: TargetType {
             return "/games/\(id)/items"
         case .like(let id), .deleteLike(let id):
             return "/games/\(id)/likes"
+        case .report(let id):
+            return "/games/\(id)/reports"
         case .leave(let id):
             return "/members/\(id)"
         case .test:
@@ -77,7 +79,7 @@ extension APIService: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .mailAuthReq(_), .mailVerify(_), .signUp(_), .logIn(_), .setVersion(_), .refreshToken(_), .create(_,_,_), .finish(_,_), .like(_):
+        case .mailAuthReq(_), .mailVerify(_), .signUp(_), .logIn(_), .setVersion(_), .refreshToken(_), .create(_,_,_), .finish(_,_), .like(_), .report(_):
             return .post
         case .remove(_), .leave(_), .deleteLike(_):
             return .delete
@@ -118,7 +120,7 @@ extension APIService: TargetType {
     
     var headers: [String : String]? {
         switch self {
-        case .setVersion(_), .create(_, _, _), .gameList, .remove(_), .leave(_), .like(_), .deleteLike(_):
+        case .setVersion(_), .create(_, _, _), .gameList, .remove(_), .leave(_), .like(_), .deleteLike(_), .report(_):
             let accessToken = UserDefaults.standard.string(forKey: "accessToken") ?? ""
             return ["Content-type" : "application/json", "Authorization" : "Bearer \(accessToken)"]
         default:

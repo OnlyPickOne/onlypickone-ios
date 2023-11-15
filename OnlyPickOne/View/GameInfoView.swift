@@ -154,6 +154,16 @@ struct GameInfoView: View {
                     alertToReport.toggle()
                 }
             }
+            .alert("신고가 접수되었습니다. 긴급한 조치가 필요한 경우 개발팀 연락처로 제보 바랍니다.", isPresented: $viewModel.isShowingReportSucess) {
+                Button("확인", role: .cancel) {
+                    viewModel.isShowingReportSucess = false
+                }
+            }
+            .alert("이미 신고된 게시글입니다.", isPresented: $viewModel.isShowingReportFail) {
+                Button("확인", role: .cancel) {
+                    viewModel.isShowingReportFail = false
+                }
+            }
         }
     }
     
