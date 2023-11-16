@@ -10,6 +10,7 @@ import Kingfisher
 
 struct GameInfoView: View {
     @Environment(\.presentationMode) var presentationMode
+    @ObservedObject var listViewModel: ListViewModel
     @ObservedObject var viewModel: GameInfoViewModel
     
     private let gameId: Int
@@ -18,7 +19,6 @@ struct GameInfoView: View {
     @State private var selectionOption = 0
     @State private var deleteConfirmDialog: Bool = false
     @State private var deleteFailDialog: Bool = false
-    @State private var updateView: Bool = false
     
     var body: some View {
         List {
@@ -84,7 +84,7 @@ struct GameInfoView: View {
                             viewModel.deleteGame() { success in
                                 if success {
                                     presentationMode.wrappedValue.dismiss()
-                                    updateView.toggle()
+                                    listViewModel.fetchGameList()
                                 } else {
                                     deleteFailDialog = true
                                 }
@@ -108,7 +108,7 @@ struct GameInfoView: View {
                     .foregroundColor(Color(uiColor: .label))
                     
                     Button {
-                        viewModel.reportGamte()
+                        alertToReport.toggle()
                     } label: {
                         Text("신고하기")
                     }
@@ -148,7 +148,12 @@ struct GameInfoView: View {
             .alert("여러 사용자들에 의해 신고가 누적되면 게임은 임시로 차단 조치됩니다. 즉각 삭제 처리가 필요한 경우 고객센터를 통해 운영진에게 연락 바랍니다.", isPresented: $alertToReport) {
                 Button("신고", role: .destructive) {
                     alertToReport.toggle()
-                    viewModel.reportGamte()
+                    viewModel.reportGamte() { success in
+                        if success {
+                            presentationMode.wrappedValue.dismiss()
+                            listViewModel.fetchGameList()
+                        }
+                    }
                 }
                 Button("취소", role: .cancel) {
                     alertToReport.toggle()
@@ -159,17 +164,18 @@ struct GameInfoView: View {
                     viewModel.isShowingReportSucess = false
                 }
             }
-            .alert("이미 신고된 게시글입니다.", isPresented: $viewModel.isShowingReportFail) {
-                Button("확인", role: .cancel) {
-                    viewModel.isShowingReportFail = false
-                }
-            }
+//            .alert("이미 신고된 게시글입니다.", isPresented: $viewModel.isShowingReportFail) {
+//                Button("확인", role: .cancel) {
+//                    viewModel.isShowingReportFail = false
+//                }
+//            }
         }
     }
     
-    init(gameId: Int = 0, game: NewGame?) {
+    init(gameId: Int = 0, game: NewGame?, list: ListViewModel) {
         self.viewModel = GameInfoViewModel(game: game)
         self.gameId = gameId
+        self.listViewModel = list
     }
 }
 //

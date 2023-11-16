@@ -17,6 +17,7 @@ class ListViewModel: ObservableObject {
     @Published var searchKeyword: String = ""
     @Published var testString: String = ""
     @Published var refreshTabView: Bool = false
+    @Published var sortBy: GameSort = .byDate
     
     private var subscription = Set<AnyCancellable>()
     private let provider = MoyaProvider<APIService>(session: Session(interceptor: AuthInterceptor.shared))

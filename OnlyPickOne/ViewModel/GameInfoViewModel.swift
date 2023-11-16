@@ -74,7 +74,7 @@ class GameInfoViewModel: ObservableObject {
         }
     }
     
-    public func reportGamte() {
+    public func reportGamte(completion: @escaping (Bool) -> ()) {
         print("report")
         provider.requestPublisher(.report(game.gameId ?? -1))
             .sink { completion in
@@ -85,12 +85,11 @@ class GameInfoViewModel: ObservableObject {
                     print("request finished")
                 }
             } receiveValue: { [weak self] response in
+                print(response)
                 let result = try? response.map(Response<String>.self)
                 if result?.isSuccess == true {
                     print("sucess")
-                    self?.isShowingReportSucess = true
-                } else {
-                    self?.isShowingReportFail = true
+                    completion(true)
                 }
             }.store(in: &subscription)
     }
