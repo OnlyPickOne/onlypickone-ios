@@ -11,6 +11,7 @@ import GoogleMobileAds
 
 struct ListView: View {
     @State var isModal: Bool = false
+    @State private var selected : Int = 0
     @ObservedObject private var viewModel: ListViewModel
     @ObservedObject var adminDecoder = JWTDecoder()
     
@@ -114,13 +115,15 @@ struct ListView: View {
                     }
                     .navigationTitle("OnlyPickOne")
                     .navigationBarTitleDisplayMode(.inline)
-//                    .toolbar {
-//                        Menu("정렬") {
-//                            Text("최신순")
-//                            Text("조회순")
-//                            Text("최다플레이순")
-//                        }
-//                    }
+                    .toolbar {
+                        Menu("정렬") {
+                            Picker("Auto-Join Hotspot", selection: $viewModel.sortBy) {
+                                ForEach(GameSort.allCases) { option in
+                                    Text(String(describing: option))
+                                }
+                            }
+                        }
+                    }
                     .refreshable {
                         viewModel.fetchGameList()
                     }
