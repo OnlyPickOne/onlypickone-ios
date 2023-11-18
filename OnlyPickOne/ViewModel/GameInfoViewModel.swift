@@ -20,7 +20,7 @@ class GameInfoViewModel: ObservableObject {
     @Published var isShowingReportFail: Bool = false
     
     public func deleteGame(completion: @escaping (Bool) -> ()) {
-        provider.requestPublisher(.remove(game.gameId ?? -1))
+        provider.requestPublisher(.remove(game.id ?? -1))
             .sink { completion in
                 switch completion {
                 case let .failure(error):
@@ -39,7 +39,7 @@ class GameInfoViewModel: ObservableObject {
     public func likeGame() {
         if self.isLiked {
             print("like cancel")
-            provider.requestPublisher(.deleteLike(game.gameId ?? -1))
+            provider.requestPublisher(.deleteLike(game.id ?? -1))
                 .sink { completion in
                     switch completion {
                     case let .failure(error):
@@ -56,7 +56,7 @@ class GameInfoViewModel: ObservableObject {
                 }.store(in: &subscription)
         } else {
             print("like")
-            provider.requestPublisher(.like(game.gameId ?? -1))
+            provider.requestPublisher(.like(game.id ?? -1))
                 .sink { completion in
                     switch completion {
                     case let .failure(error):
@@ -76,7 +76,7 @@ class GameInfoViewModel: ObservableObject {
     
     public func reportGamte(completion: @escaping (Bool) -> ()) {
         print("report")
-        provider.requestPublisher(.report(game.gameId ?? -1))
+        provider.requestPublisher(.report(game.id ?? -1))
             .sink { completion in
                 switch completion {
                 case let .failure(error):
@@ -95,7 +95,7 @@ class GameInfoViewModel: ObservableObject {
     }
     
     init(game: NewGame?) {
-        self.game = game ?? NewGame(gameId: nil, title: nil, description: nil, viewCount: nil, playCount: nil, itemCount: nil, reportCount: nil, createdAt: nil, imageUrls: nil, isCreated: nil, isLiked: nil)
+        self.game = game ?? NewGame(id: nil, title: nil, description: nil, viewCount: nil, playCount: nil, likeCount: nil, itemCount: nil, reportCount: nil, createdAt: nil, imageUrls: nil, isCreated: nil, isLiked: nil)
         self.isLiked = game?.isLiked ?? false
     }
 }

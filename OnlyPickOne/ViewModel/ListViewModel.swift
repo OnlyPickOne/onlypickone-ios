@@ -11,8 +11,7 @@ import Moya
 import CombineMoya
 
 class ListViewModel: ObservableObject {
-    @Published var gameList: [Game] = [Game(id: 0, title: "첫번째 테스트용 게임", description: "짧은 설명입니다", createdTime: "", items: []),
-                                       Game(id: 0, title: "두번째 테스트용 게임", description: "안녕하세요. 망한/웃긴/귀여운 고양이들 사진중 원하는 사진을 고르시면 됩니다. 중복이 있으면 바로말해주세요. (자료출처: 구글 이미지, 유튜브 타임스낵과 다양한 동물의 짤, 네이버 카페, 인스타그램, 제작자) (업데이트: ○)", createdTime: "", items: [])]
+    @Published var gameList: [NewGame] = []
     @Published var newGameList: GameList = GameList(content: nil, pageable: nil, totalPages: nil, totalElements: nil, last: nil, numberOfElements: nil, size: nil, first: nil, number: nil, sort: nil, empty: nil)
     @Published var searchKeyword: String = ""
     @Published var testString: String = ""
@@ -21,6 +20,42 @@ class ListViewModel: ObservableObject {
     
     private var subscription = Set<AnyCancellable>()
     private let provider = MoyaProvider<APIService>(session: Session(interceptor: AuthInterceptor.shared))
+    
+    private let dataPerPage = 2
+    private var nextIndex = 0
+    private var lastCreatedAt = ""
+    private var lastPlayCount = 0
+    private var lastLikeCount = 0
+    var lastGameId = 0
+    
+    var isLastPage: Bool = false
+    
+    func fetchData() {
+        guard isLastPage == false else { return }
+        
+        provider.requestPublisher(.gameListByPaging(sortBy, dataPerPage, lastGameId, lastCreatedAt, lastPlayCount, lastLikeCount))
+            .sink { completion in
+                switch completion {
+                case let .failure(error):
+                    print("error: \(error)")
+                case .finished:
+                    print("request finished")
+                }
+            } receiveValue: { [weak self] response in
+                let result = try? response.map(Response<GameList>.self)
+                
+                guard let data = result?.data else { return }
+                self?.isLastPage = data.last ?? false
+                self?.nextIndex += data.content?.count ?? 0
+                self?.lastCreatedAt = data.content?.last?.createdAt ?? ""
+                self?.lastPlayCount = data.content?.last?.playCount ?? 0
+                self?.lastLikeCount = data.content?.last?.likeCount ?? 0
+                self?.lastGameId = data.content?.last?.id ?? 0
+                self?.gameList.append(contentsOf: data.content ?? [])
+                self?.newGameList = data
+                
+            }.store(in: &subscription)
+    }
     
     func fetchGameList() {
         provider.requestPublisher(.gameList)
@@ -31,11 +66,11 @@ class ListViewModel: ObservableObject {
                 case .finished:
                     print("request finished")
                 }
-            } receiveValue: { response in
+            } receiveValue: { [weak self] response in
                 let result = try? response.map(Response<GameList>.self)
-                if result?.data != nil {
-                    self.newGameList = result!.data!
-                }
+                guard let data = result?.data else { return }
+                self?.gameList.append(contentsOf: data.content ?? [])
+                self?.newGameList = data
             }.store(in: &subscription)
 
     }

@@ -24,19 +24,19 @@ struct ListView: View {
             VStack {
                 ZStack {
                     List {
-                        ForEach((0..<(viewModel.newGameList.content?.count ?? 0)), id: \.self) { index in
+                        ForEach((0..<(viewModel.gameList.count)), id: \.self) { index in
                             NavigationLink {
-                                GameInfoView(gameId: index, game: viewModel.newGameList.content?[index], list: viewModel)
+                                GameInfoView(gameId: index, game: viewModel.gameList[index], list: viewModel)
                             } label: {
                                 VStack(alignment: .leading) {
-                                    Text("\(viewModel.newGameList.content?[index].title ?? "unknown game")")
+                                    Text("\(viewModel.gameList[index].title ?? "unknown game")")
                                         .font(.headline)
                                         .fontWeight(.medium)
                                         .lineLimit(2)
                                     HStack(spacing: 15) {
                                         HStack(spacing: 0) {
-                                            if viewModel.newGameList.content?[index].imageUrls?.count ?? 0 >= 2 {
-                                                KFImage(URL(string: "\(viewModel.newGameList.content?[index].imageUrls?[0] ?? "")"))
+                                            if viewModel.gameList[index].imageUrls?.count ?? 0 >= 2 {
+                                                KFImage(URL(string: "\(viewModel.gameList[index].imageUrls?[0] ?? "")"))
                                                     .placeholder { //플레이스 홀더 설정
                                                         Image(systemName: "list.dash")
                                                     }.retry(maxCount: 3, interval: .seconds(5)) //재시도
@@ -51,7 +51,7 @@ struct ListView: View {
                                                     .aspectRatio(contentMode: .fill)
                                                     .frame(width: 40, height: 80)
                                                     .clipped()
-                                                KFImage(URL(string: "\(viewModel.newGameList.content?[index].imageUrls?[1] ?? "")"))
+                                                KFImage(URL(string: "\(viewModel.gameList[index].imageUrls?[1] ?? "")"))
                                                     .placeholder { //플레이스 홀더 설정
                                                         Image(systemName: "list.dash")
                                                     }.retry(maxCount: 3, interval: .seconds(5)) //재시도
@@ -66,8 +66,8 @@ struct ListView: View {
                                                     .aspectRatio(contentMode: .fill)
                                                     .frame(width: 40, height: 80)
                                                     .clipped()
-                                            } else if viewModel.newGameList.content?[index].imageUrls?.count ?? 0 == 1 {
-                                                KFImage(URL(string: "\(viewModel.newGameList.content?[index].imageUrls?[0] ?? "")"))
+                                            } else if viewModel.gameList[index].imageUrls?.count ?? 0 == 1 {
+                                                KFImage(URL(string: "\(viewModel.gameList[index].imageUrls?[0] ?? "")"))
                                                     .placeholder { //플레이스 홀더 설정
                                                         Image(systemName: "list.dash")
                                                     }.retry(maxCount: 3, interval: .seconds(5)) //재시도
@@ -91,7 +91,7 @@ struct ListView: View {
                                             }
                                         }
                                         VStack(alignment: .leading, spacing: 5) {
-                                            Text("\(viewModel.newGameList.content?[index].description ?? "please refresh or restart the application")")
+                                            Text("\(viewModel.gameList[index].description ?? "please refresh or restart the application")")
                                                 .font(.caption)
                                                 .fontWeight(.light)
                                                 .multilineTextAlignment(.leading)
@@ -100,7 +100,7 @@ struct ListView: View {
                                             Spacer()
                                             HStack {
                                                 Spacer()
-                                                Text(viewModel.newGameList.content?[index].createdAt?.toLastTimeString() ?? "")
+                                                Text(viewModel.gameList[index].createdAt?.toLastTimeString() ?? "")
                                                     .font(.caption)
                                                     .fontWeight(.light)
                                                     .multilineTextAlignment(.trailing)
@@ -110,6 +110,13 @@ struct ListView: View {
                                     }
                                 }
                                 .padding(5)
+                            }
+                            .onAppear {
+//                                guard let index = viewModel.gameList.firstIndex(where: { $0.id == viewModel.gameList[index].id }) else { return }
+                                // 해당 index가 마지막 index라면 데이터 추가
+                                if viewModel.lastGameId == viewModel.gameList[index].id {
+                                    viewModel.fetchData()
+                                }
                             }
                         }
                     }
@@ -125,7 +132,7 @@ struct ListView: View {
                         }
                     }
                     .refreshable {
-                        viewModel.fetchGameList()
+                        viewModel.fetchData()
                     }
                     .tint(Color("opoPink"))
                 }
@@ -138,7 +145,7 @@ struct ListView: View {
 //        .searchable(text: $viewModel.searchKeyword, placement: .navigationBarDrawer,
 //                    prompt: "제목 또는 키워드를 입력해주세요")
         .onAppear() {
-            viewModel.fetchGameList()
+            viewModel.fetchData()
         }
     }
     
@@ -160,18 +167,18 @@ struct MyGameListView: View {
         VStack {
             ZStack {
                 List {
-                    ForEach((0..<(viewModel.newGameList.content?.count ?? 0)), id: \.self) { index in
+                    ForEach((0..<(viewModel.gameList.count ?? 0)), id: \.self) { index in
                         NavigationLink {
-                            GameInfoView(gameId: index, game: viewModel.newGameList.content?[index], list: viewModel)
+                            GameInfoView(gameId: index, game: viewModel.gameList[index], list: viewModel)
                         } label: {
                             VStack(alignment: .leading) {
-                                Text("\(viewModel.newGameList.content?[index].title ?? "unknown game")")
+                                Text("\(viewModel.gameList[index].title ?? "unknown game")")
                                     .font(.headline)
                                     .fontWeight(.medium)
                                     .lineLimit(2)
                                 HStack(spacing: 15) {
                                     HStack(spacing: 0) {
-                                        KFImage(URL(string: "\(viewModel.newGameList.content?[index].imageUrls?[0] ?? "")"))
+                                        KFImage(URL(string: "\(viewModel.gameList[index].imageUrls?[0] ?? "")"))
                                             .placeholder { //플레이스 홀더 설정
                                                 Image(systemName: "list.dash")
                                             }.retry(maxCount: 3, interval: .seconds(5)) //재시도
@@ -186,7 +193,7 @@ struct MyGameListView: View {
                                             .aspectRatio(contentMode: .fill)
                                             .frame(width: 40, height: 80)
                                             .clipped()
-                                        KFImage(URL(string: "\(viewModel.newGameList.content?[index].imageUrls?[1] ?? "")"))
+                                        KFImage(URL(string: "\(viewModel.gameList[index].imageUrls?[1] ?? "")"))
                                             .placeholder { //플레이스 홀더 설정
                                                 Image(systemName: "list.dash")
                                             }.retry(maxCount: 3, interval: .seconds(5)) //재시도
@@ -205,13 +212,13 @@ struct MyGameListView: View {
                                     VStack(alignment: .leading, spacing: 5) {
                                         HStack {
                                             Spacer()
-                                            Text(viewModel.newGameList.content?[index].createdAt?.toLastTimeString() ?? "")
+                                            Text(viewModel.gameList[index].createdAt?.toLastTimeString() ?? "")
                                                 .font(.caption2)
                                                 .fontWeight(.light)
                                                 .multilineTextAlignment(.trailing)
                                         }
                                         Spacer()
-                                        Text("\(viewModel.newGameList.content?[index].description ?? "please refresh or restart the application")")
+                                        Text("\(viewModel.gameList[index].description ?? "please refresh or restart the application")")
                                             .font(.caption)
                                             .fontWeight(.light)
                                             .multilineTextAlignment(.leading)
@@ -228,7 +235,7 @@ struct MyGameListView: View {
                 .navigationTitle("내 게임")
                 .navigationBarTitleDisplayMode(.inline)
                 .refreshable {
-                    viewModel.fetchGameList()
+                    viewModel.fetchData()
                 }
                 .tint(Color("opoPink"))
             }
@@ -238,7 +245,7 @@ struct MyGameListView: View {
             }
         }
         .onAppear() {
-            viewModel.fetchGameList()
+            viewModel.fetchData()
         }
     }
 }
