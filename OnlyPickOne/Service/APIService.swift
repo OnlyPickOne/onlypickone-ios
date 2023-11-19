@@ -135,10 +135,10 @@ extension APIService: TargetType {
                     return .requestParameters(parameters: ["size" : size, "sort" : "createdAt,desc", "gameId" : "\(gid)", "createdAt" : createdAt], encoding: URLEncoding.queryString)
 //                    return "/games?size=\(size)&sort=createdAt,desc&gameId=\(gid)&createdAt=\(createdAt)"
                 case .byPlayCount:
-                    return .requestParameters(parameters: ["size" : size, "sort" : "playCount,desc"], encoding: URLEncoding.queryString)
+                    return .requestParameters(parameters: ["size" : size, "sort" : "playCount,desc", "gameId" : "\(gid)", "playCount" : "\(playCount)"], encoding: URLEncoding.queryString)
 //                    return "/games?size=\(size)&sort=playCount,desc&gameId=\(gid)&playCount=\(playCount)"
                 case .byLikeCount:
-                    return .requestParameters(parameters: ["size" : size, "sort" : "likeCount,desc"], encoding: URLEncoding.queryString)
+                    return .requestParameters(parameters: ["size" : size, "sort" : "likeCount,desc", "gameId" : "\(gid)", "likeCount" : "\(likeCount)"], encoding: URLEncoding.queryString)
 //                    return "/games?size=\(size)&sort=likeCount,desc&gameId=\(gid)&likeCount=\(likeCount)"
                 }
             }
