@@ -129,9 +129,14 @@ struct ListView: View {
                                     Text(String(describing: option))
                                 }
                             }
+                            .onChange(of: viewModel.sortBy) { _ in
+                                viewModel.refreshData()
+                                viewModel.fetchData()
+                            }
                         }
                     }
                     .refreshable {
+                        viewModel.refreshData()
                         viewModel.fetchData()
                     }
                     .tint(Color("opoPink"))

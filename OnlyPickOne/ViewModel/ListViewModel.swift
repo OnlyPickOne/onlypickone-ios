@@ -26,11 +26,27 @@ class ListViewModel: ObservableObject {
     private var lastCreatedAt = ""
     private var lastPlayCount = 0
     private var lastLikeCount = 0
-    var lastGameId = 0
+    private var currentSortBy: GameSort = .byDate
     
+    var lastGameId = 0
     var isLastPage: Bool = false
     
+    func refreshData() {
+        newGameList = GameList(content: nil, pageable: nil, totalPages: nil, totalElements: nil, last: nil, numberOfElements: nil, size: nil, first: nil, number: nil, sort: nil, empty: nil)
+        gameList = []
+        lastCreatedAt = ""
+        lastPlayCount = 0
+        lastLikeCount = 0
+        currentSortBy = sortBy
+        lastGameId = 0
+        isLastPage = false
+    }
     func fetchData() {
+        if currentSortBy != sortBy {
+            // sort 방식 변경 시 기존 리스트 리셋
+            refreshData()
+        }
+        
         guard isLastPage == false else { return }
         
         provider.requestPublisher(.gameListByPaging(sortBy, dataPerPage, lastGameId, lastCreatedAt, lastPlayCount, lastLikeCount))
