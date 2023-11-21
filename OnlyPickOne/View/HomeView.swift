@@ -32,6 +32,7 @@ struct HomeView: View {
             LogInSheetView(isShowingLogInSheet: $viewModel.isNeedToAuth)
                 .tint(Color("opoPink"))
                 .onDisappear() {
+                    listViewModel.refreshData()
                     listViewModel.fetchGameList()
                 }
         }
