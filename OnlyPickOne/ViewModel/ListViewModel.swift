@@ -20,6 +20,7 @@ class ListViewModel: ObservableObject {
     
     private var subscription = Set<AnyCancellable>()
     private let provider = MoyaProvider<APIService>(session: Session(interceptor: AuthInterceptor.shared))
+    let searchSubject = PassthroughSubject<String, Never>()
     
     private let dataPerPage = 2
     private var nextIndex = 0
@@ -31,6 +32,17 @@ class ListViewModel: ObservableObject {
     var lastGameId = 0
     var isLastPage: Bool = false
     
+    func startSearching() {
+        let debouncedPublisher = searchSubject
+            .debounce(for: .seconds(0.3), scheduler: DispatchQueue.main)
+        let subscriber = Subscribers.Sink<String, Never>(receiveCompletion: { _ in
+        }, receiveValue: { _ in
+            self.refreshData()
+            self.fetchData()
+        })
+        debouncedPublisher.subscribe(subscriber)
+    }
+    
     func refreshData() {
         newGameList = GameList(content: nil, pageable: nil, totalPages: nil, totalElements: nil, last: nil, numberOfElements: nil, size: nil, first: nil, number: nil, sort: nil, empty: nil)
         gameList = []
@@ -41,7 +53,8 @@ class ListViewModel: ObservableObject {
         lastGameId = 0
         isLastPage = false
     }
-    func fetchData() {
+    
+    func fetchData(_ query: String = "") {
         if currentSortBy != sortBy {
             // sort 방식 변경 시 기존 리스트 리셋
             refreshData()
@@ -49,7 +62,7 @@ class ListViewModel: ObservableObject {
         
         guard isLastPage == false else { return }
         
-        provider.requestPublisher(.gameListByPaging(sortBy, dataPerPage, lastGameId, lastCreatedAt, lastPlayCount, lastLikeCount))
+        provider.requestPublisher(.gameListByPaging(sortBy, dataPerPage, lastGameId, lastCreatedAt, lastPlayCount, lastLikeCount, searchKeyword))
             .sink { completion in
                 switch completion {
                 case let .failure(error):
@@ -73,21 +86,20 @@ class ListViewModel: ObservableObject {
             }.store(in: &subscription)
     }
     
-    func fetchGameList() {
-        provider.requestPublisher(.gameList)
-            .sink { completion in
-                switch completion {
-                case let .failure(error):
-                    print("error: \(error)")
-                case .finished:
-                    print("request finished")
-                }
-            } receiveValue: { [weak self] response in
-                let result = try? response.map(Response<GameList>.self)
-                guard let data = result?.data else { return }
-                self?.gameList.append(contentsOf: data.content ?? [])
-                self?.newGameList = data
-            }.store(in: &subscription)
-
-    }
+//    func fetchGameList() {
+//        provider.requestPublisher(.gameList)
+//            .sink { completion in
+//                switch completion {
+//                case let .failure(error):
+//                    print("error: \(error)")
+//                case .finished:
+//                    print("request finished")
+//                }
+//            } receiveValue: { [weak self] response in
+//                let result = try? response.map(Response<GameList>.self)
+//                guard let data = result?.data else { return }
+//                self?.gameList.append(contentsOf: data.content ?? [])
+//                self?.newGameList = data
+//            }.store(in: &subscription)
+//    }
 }

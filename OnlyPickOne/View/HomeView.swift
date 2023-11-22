@@ -33,7 +33,7 @@ struct HomeView: View {
                 .tint(Color("opoPink"))
                 .onDisappear() {
                     listViewModel.refreshData()
-                    listViewModel.fetchGameList()
+                    listViewModel.fetchData()
                 }
         }
         .alert("필수 업데이트가 있습니다.", isPresented: $viewModel.isNeedToUpdate, actions: {

@@ -13,7 +13,7 @@ enum APIService {
     case start(_ gameId: Int, _ count: Int)
     case finish(_ gameId: Int, _ itemId: Int)
     case gameList
-    case gameListByPaging(_ sortBy: GameSort, _ size: Int, _ gameId: Int = 0, _ createdAt: String = "", _ playCount: Int = 0, _ likeCount: Int = 0)
+    case gameListByPaging(_ sortBy: GameSort, _ size: Int, _ gameId: Int = 0, _ createdAt: String = "", _ playCount: Int = 0, _ likeCount: Int = 0, _ keyword: String = "")
     case submit
     case statistics
     case create(_ title: String, _ description: String, _ multipartFiles: [Item])
@@ -47,30 +47,8 @@ extension APIService: TargetType {
     
     var path: String {
         switch self {
-        case .gameList, .create(_,_,_), .gameListByPaging(_, _, _, _, _, _):
+        case .gameList, .create(_,_,_), .gameListByPaging(_, _, _, _, _, _, _):
             return "/games"
-//        case .gameListByPaging(let sort, let size, let gid, let createdAt, let playCount, let likeCount):
-//            if gid == 0 {
-//                switch sort {
-//                case .byDate:
-//                    print("/games?size=\(size)&sort=createdAt,desc")
-//                    return "/games?size=\(size)&sort=createdAt,desc"
-//                case .byPlayCount:
-//                    return "/games?size=\(size)&sort=playCount,desc"
-//                case .byLikeCount:
-//                    return "/games?size=\(size)&sort=likeCount,desc"
-//                }
-//            } else {
-//                switch sort {
-//                case .byDate:
-//                    print("/games?size=\(size)&sort=createdAt,desc&gameId=\(gid)&createdAt=\(createdAt)")
-//                    return "/games?size=\(size)&sort=createdAt,desc&gameId=\(gid)&createdAt=\(createdAt)"
-//                case .byPlayCount:
-//                    return "/games?size=\(size)&sort=playCount,desc&gameId=\(gid)&playCount=\(playCount)"
-//                case .byLikeCount:
-//                    return "/games?size=\(size)&sort=likeCount,desc&gameId=\(gid)&likeCount=\(likeCount)"
-//                }
-//            }
         case . remove(let id):
             return "/games/\(id)"
         case .getVersion, .setVersion(_):
@@ -117,31 +95,6 @@ extension APIService: TargetType {
             return .requestParameters(parameters: ["count": count], encoding: URLEncoding.queryString)
         case .finish(_, let id):
             return .requestJSONEncodable(WinItem(winItemId: id))
-        case .gameListByPaging(let sort, let size, let gid, let createdAt, let playCount, let likeCount):
-            if gid == 0 {
-                switch sort {
-                case .byDate:
-                    print("/games?size=\(size)&sort=createdAt,desc")
-                    return .requestParameters(parameters: ["size" : size, "sort" : "createdAt,desc"], encoding: URLEncoding.queryString)
-                case .byPlayCount:
-                    return .requestParameters(parameters: ["size" : size, "sort" : "playCount,desc"], encoding: URLEncoding.queryString)
-                case .byLikeCount:
-                    return .requestParameters(parameters: ["size" : size, "sort" : "likeCount,desc"], encoding: URLEncoding.queryString)
-                }
-            } else {
-                switch sort {
-                case .byDate:
-                    print("/games?size=\(size)&sort=createdAt,desc&gameId=\(gid)&createdAt=\(createdAt)")
-                    return .requestParameters(parameters: ["size" : size, "sort" : "createdAt,desc", "gameId" : "\(gid)", "createdAt" : createdAt], encoding: URLEncoding.queryString)
-//                    return "/games?size=\(size)&sort=createdAt,desc&gameId=\(gid)&createdAt=\(createdAt)"
-                case .byPlayCount:
-                    return .requestParameters(parameters: ["size" : size, "sort" : "playCount,desc", "gameId" : "\(gid)", "playCount" : "\(playCount)"], encoding: URLEncoding.queryString)
-//                    return "/games?size=\(size)&sort=playCount,desc&gameId=\(gid)&playCount=\(playCount)"
-                case .byLikeCount:
-                    return .requestParameters(parameters: ["size" : size, "sort" : "likeCount,desc", "gameId" : "\(gid)", "likeCount" : "\(likeCount)"], encoding: URLEncoding.queryString)
-//                    return "/games?size=\(size)&sort=likeCount,desc&gameId=\(gid)&likeCount=\(likeCount)"
-                }
-            }
         case .mailAuthReq(let mail), .mailVerify(let mail):
             return .requestJSONEncodable(mail)
         case .signUp(let account), .logIn(let account):
@@ -161,6 +114,34 @@ extension APIService: TargetType {
                 }
             }
             return .uploadMultipart(formData)
+        case .gameListByPaging(let sort, let size, let gid, let createdAt, let playCount, let likeCount, let keyword):
+            var param: [String : Any] = ["size" : size]
+            
+            switch sort {
+            case .byDate:
+                param["sort"] = "createdAt,desc"
+            case .byPlayCount:
+                param["sort"] = "playCount,desc"
+            case .byLikeCount:
+                param["sort"] = "likeCount,desc"
+            }
+            
+            if gid != 0 {
+                param["gameId"] = "\(gid)"
+                switch sort {
+                case .byDate:
+                    param["createdAt"] = createdAt
+                case .byPlayCount:
+                    param["playCount"] = "\(playCount)"
+                case .byLikeCount:
+                    param["likeCount"] = "\(likeCount)"
+                }
+            }
+            
+            if keyword != "" {
+                param["query"] = keyword
+            }
+            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
         default:
             return .requestPlain
         }
@@ -168,7 +149,7 @@ extension APIService: TargetType {
     
     var headers: [String : String]? {
         switch self {
-        case .setVersion(_), .create(_, _, _), .gameList, .gameListByPaging(_, _, _, _, _, _), .remove(_), .leave(_), .like(_), .deleteLike(_), .report(_):
+        case .setVersion(_), .create(_, _, _), .gameList, .gameListByPaging(_, _, _, _, _, _, _), .remove(_), .leave(_), .like(_), .deleteLike(_), .report(_):
             let accessToken = UserDefaults.standard.string(forKey: "accessToken") ?? ""
             return ["Content-type" : "application/json", "Authorization" : "Bearer \(accessToken)"]
         default:

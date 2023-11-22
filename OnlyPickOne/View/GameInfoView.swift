@@ -84,7 +84,7 @@ struct GameInfoView: View {
                             viewModel.deleteGame() { success in
                                 if success {
                                     presentationMode.wrappedValue.dismiss()
-                                    listViewModel.fetchGameList()
+                                    listViewModel.fetchData()
                                 } else {
                                     deleteFailDialog = true
                                 }
@@ -151,7 +151,7 @@ struct GameInfoView: View {
                     viewModel.reportGamte() { success in
                         if success {
                             presentationMode.wrappedValue.dismiss()
-                            listViewModel.fetchGameList()
+                            listViewModel.fetchData()
                         }
                     }
                 }
