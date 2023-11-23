@@ -12,7 +12,7 @@ import UIKit.UIImage
 
 class AddSheetViewModel: ObservableObject {
     private var subscription = Set<AnyCancellable>()
-    private let provider = MoyaProvider<APIService>(session: Session(interceptor: AuthInterceptor.shared))
+    private let provider = MoyaProvider<APIService>()
     
     @Published var titleInput: String = ""
     @Published var detailInput: String = ""
