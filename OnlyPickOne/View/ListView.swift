@@ -84,7 +84,6 @@ struct ListView: View {
                                                     .clipped()
                                             } else {
                                                 Image(systemName: "exclamationmark.circle.fill")
-//                                                    .resizable()
                                                     .aspectRatio(contentMode: .fill)
                                                     .frame(width: 80, height: 80)
                                                     .clipped()
@@ -112,8 +111,6 @@ struct ListView: View {
                                 .padding(5)
                             }
                             .onAppear {
-//                                guard let index = viewModel.gameList.firstIndex(where: { $0.id == viewModel.gameList[index].id }) else { return }
-                                // 해당 index가 마지막 index라면 데이터 추가
                                 if viewModel.lastGameId == viewModel.gameList[index].id {
                                     viewModel.fetchData()
                                 }
