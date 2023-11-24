@@ -12,7 +12,7 @@ import CombineMoya
 
 class LogInViewModel: ObservableObject {
     private var subscription = Set<AnyCancellable>()
-    private let provider = MoyaProvider<APIService>(session: Session(interceptor: AuthInterceptor.shared))
+    private let provider = MoyaProvider<APIService>()
     
     @Published var isSucessLogIn: Bool = false
     @Published var isFailureLogIn: Bool = false
@@ -24,6 +24,7 @@ class LogInViewModel: ObservableObject {
             .sink { completion in
                 switch completion {
                 case let .failure(error):
+                    self.isFailureLogIn = true
                     print("error: \(error)")
                 case .finished:
                     print("request finished")
@@ -31,7 +32,7 @@ class LogInViewModel: ObservableObject {
             } receiveValue: { response in
                 let result = try? response.map(Response<LoginToken>.self)
                 print(result)
-                self.isFailureLogIn = !(result?.isSuccess ?? false)
+                
                 self.isSucessLogIn = result?.isSuccess ?? false
                 
                 // Token Save
