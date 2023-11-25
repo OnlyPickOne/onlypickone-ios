@@ -50,17 +50,14 @@ class SignUpViewModel: ObservableObject {
                 self.isLoading = false
                 switch completion {
                 case let .failure(error):
+                    self.isShowingUsingEmailError = true
+                    self.isShowingAuthField = false
                     print("error: \(error)")
                 case .finished:
                     print("request finished")
                 }
             } receiveValue: { response in
                 let result = try? response.map(Response<String>.self)
-                if result?.isSuccess ?? false == false && result?.code ?? "" == "MEMBER000" {
-                    self.isShowingUsingEmailError = true
-                    self.isShowingAuthField = false
-                }
-                print(result?.message ?? "")
             }.store(in: &subscription)
     }
     
@@ -72,6 +69,7 @@ class SignUpViewModel: ObservableObject {
                 self.isLoading = false
                 switch completion {
                 case let .failure(error):
+                    self.isShowingVerifyError = true
                     print("error: \(error)")
                 case .finished:
                     print("request finished")
@@ -79,12 +77,6 @@ class SignUpViewModel: ObservableObject {
             } receiveValue: { response in
                 let result = try? response.map(Response<String>.self)
                 self.isSucessAuthEmail = result?.isSuccess ?? false
-                if result?.isSuccess ?? false == false && result?.code ?? "" == "MEMBER000" {
-                    self.isShowingUsingEmailError = true
-                } else {
-                    self.isShowingVerifyError = !(result?.isSuccess ?? false)
-                }
-                print(result?.isSuccess)
             }.store(in: &subscription)
     }
     
@@ -102,7 +94,6 @@ class SignUpViewModel: ObservableObject {
                 }
             } receiveValue: { response in
                 let result = try? response.map(Response<String>.self)
-                print(result)
                 completion(result?.isSuccess ?? false)
             }.store(in: &subscription)
     }
