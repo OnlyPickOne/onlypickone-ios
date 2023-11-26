@@ -26,6 +26,8 @@ struct SignUpView: View {
                         HStack {
                             TextField("유효한 이메일을 입력해주세요", text: $emailInput)
                                 .textInputAutocapitalization(.never)
+                                .textFieldStyle(.roundedBorder)
+                                .showClearButton($emailInput)
                                 .onChange(of: emailInput) {
                                     viewModel.checkValidEmail(email: $0)
                                 }
@@ -59,6 +61,8 @@ struct SignUpView: View {
                             HStack {
                                 TextField("인증코드는 10분 간 유효합니다.", text: $codeInput)
                                     .textInputAutocapitalization(.never)
+                                    .textFieldStyle(.roundedBorder)
+                                    .showClearButton($codeInput)
                                     .keyboardType(.numberPad)
                                 Button {
                                     print("확인")
@@ -93,6 +97,8 @@ struct SignUpView: View {
                             .font(.headline)
                         SecureField("비밀번호를 입력하세요", text: $passwordInput)
                             .font(.body)
+                            .textFieldStyle(.roundedBorder)
+                            .showClearButton($passwordInput)
                             .onChange(of: passwordInput) {
                                 viewModel.checkValidPassword(password: $0)
                             }
@@ -107,6 +113,8 @@ struct SignUpView: View {
                         }
                         SecureField("한번 더 입력하세요", text: $repeatInput)
                             .font(.body)
+                            .textFieldStyle(.roundedBorder)
+                            .showClearButton($repeatInput)
                             .onChange(of: passwordInput) {
                                 viewModel.checkValidPassword(password: $0)
                             }
@@ -121,9 +129,7 @@ struct SignUpView: View {
                         }
                     }
                     Button {
-                        //                    isShowingLogInSheet = false
                         viewModel.signUp(email: emailInput, password: passwordInput) { isSucess in
-//                            self.isShowingLogInSheet = !isSucess
                             presentationMode.wrappedValue.dismiss()
                         }
                     } label: {
