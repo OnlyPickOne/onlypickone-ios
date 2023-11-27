@@ -33,13 +33,18 @@ struct LogInSheetView: View {
                                         .font(.headline)
                                     TextField("가입하신 이메일을 입력해주세요.", text: $emailInput)
                                         .textInputAutocapitalization(.never)
+                                        .textFieldStyle(.roundedBorder)
+                                        .showClearButton($emailInput)
                                 }
                                 VStack(alignment: .leading, spacing: 10) {
                                     Text("비밀번호")
                                         .font(.headline)
                                     SecureField("비밀번호를 입력해주세요.", text: $passwordInput)
+                                        .textFieldStyle(.roundedBorder)
+                                        .showClearButton($passwordInput)
                                 }
                                 Text("로그인 정보가 정확하지 않습니다.")
+                                    .foregroundColor(Color("opoRed"))
                                     .opacity(viewModel.isFailureLogIn ? 1 : 0)
                                 Button {
                                     viewModel.isFailureLogIn = false
@@ -60,10 +65,6 @@ struct LogInSheetView: View {
                                 .disabled(!(emailInput.count > 0 && passwordInput.count > 0))
                             }
                             .padding(36)
-                            .onAppear() {
-//                                viewModel.isSucessLogIn = false
-//                                self.isShowingLogInSheet = !viewModel.isSucessLogIn
-                            }
                         }
                     } label: {
                         Text("로그인")
