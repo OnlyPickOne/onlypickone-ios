@@ -20,7 +20,7 @@ class ListViewModel: ObservableObject {
     private let provider = MoyaProvider<APIService>(session: Session(interceptor: AuthInterceptor.shared))
     let searchSubject = PassthroughSubject<String, Never>()
     
-    private let dataPerPage = 2
+    private let dataPerPage = 5
     private var nextIndex = 0
     private var lastCreatedAt = ""
     private var lastPlayCount = 0
