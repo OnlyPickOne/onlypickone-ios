@@ -10,48 +10,6 @@ import SwiftUI
 import PhotosUI
 
 struct PhotoPicker: UIViewControllerRepresentable {
-//    let configuration: PHPickerConfiguration
-//    let numOfSelectedPictures: Int
-//    @Binding var isPresented: Bool
-//    @Binding var images: [UIImage?]
-//
-//    func makeUIViewController(context: Context) -> PHPickerViewController {
-//        let controller = PHPickerViewController(configuration: configuration)
-//        controller.delegate = context.coordinator
-//        return controller
-//    }
-//
-//    func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {}
-//
-//    func makeCoordinator() -> Coordinator {
-//        Coordinator(self)
-//    }
-//
-//    // Use a Coordinator to act as your PHPickerViewControllerDelegate
-//    class Coordinator: PHPickerViewControllerDelegate {
-//        private let parent: PhotoPicker
-//
-//        init(_ parent: PhotoPicker) {
-//            self.parent = parent
-//        }
-//
-//        func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-////            print(results)
-////            print("ASDFFDSDFS")
-////            parent.isPresented = false // Set isPresented to false because picking has finished.
-//            picker.dismiss(animated: true, completion: nil)
-//
-//            guard let provider = results.first?.itemProvider else { return }
-//
-//            if provider.canLoadObject(ofClass: UIImage.self) {
-//                provider.loadObject(ofClass: UIImage.self) { image, _ in
-////                    self.parent.image = image as? UIImage
-//                    images.append(image as? UIImage)
-//                }
-//            }
-//        }
-//    }
-    
     typealias UIViewControllerType = PHPickerViewController
     
     @Binding var images: [UIImage]
@@ -90,12 +48,10 @@ struct PhotoPicker: UIViewControllerRepresentable {
         }
         
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-            //Dismiss picker
             picker.dismiss(animated: true)
             
             if !results.isEmpty {
                 parent.itemProviders = []
-//                parent.images = [UIImage(named: "street")!]
             }
             
             parent.itemProviders = results.map(\.itemProvider)
@@ -105,12 +61,11 @@ struct PhotoPicker: UIViewControllerRepresentable {
         private func loadImage() {
             for itemProvider in parent.itemProviders {
                 if self.parent.images.count > self.parent.maxCount { return }
-                if itemProvider.canLoadObject(ofClass: UIImage.self) {
-                    itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
+                
+                itemProvider.loadImage { image, error in
+                    DispatchQueue.main.async{
                         if let image = image as? UIImage {
                             DispatchQueue.main.async{
-//                                self.parent.images.insert(image, at: self.parent.images.count - 1)
-//                                self.parent.inputs.insert("", at: self.parent.images.count - 1)
                                 self.parent.viewModel.addImage(image: image, caption: "")
                             }
                         } else {
@@ -119,7 +74,6 @@ struct PhotoPicker: UIViewControllerRepresentable {
                     }
                 }
             }
-//            parent.showImagePicker = false
         }
         
     }
