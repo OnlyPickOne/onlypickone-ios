@@ -89,13 +89,13 @@ struct ListView: View {
                                                     .clipped()
                                             }
                                         }
-                                        VStack(alignment: .leading, spacing: 5) {
+                                        VStack(alignment: .leading, spacing: 0) {
                                             Text("\(viewModel.gameList[index].description ?? "please refresh or restart the application")")
                                                 .font(.caption)
                                                 .fontWeight(.light)
                                                 .multilineTextAlignment(.leading)
-                                                .lineLimit(4)
-                                                .frame(height: 32)
+                                                .lineLimit(5)
+                                                .frame(height: 66)
                                             Spacer()
                                             HStack {
                                                 Spacer()
@@ -104,7 +104,6 @@ struct ListView: View {
                                                     .fontWeight(.light)
                                                     .multilineTextAlignment(.trailing)
                                             }
-                                            Spacer()
                                         }
                                     }
                                 }
