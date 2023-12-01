@@ -61,6 +61,7 @@ struct AddSheetView: View {
                                         Text("확인")
                                     }
                                 }
+                                .alertButtonTint(color: Color("opoBlue"))
                             },
                                            label: {
                                 Text("다음")
@@ -111,7 +112,6 @@ struct AddSheetView: View {
                     alertToReset.toggle()
                 }
             }
-            .alertButtonTint(color: Color(red: 255/255, green: 182/255, blue: 193/255))
             .onAppear {
                 UIApplication.shared.hideKeyboard()
             }

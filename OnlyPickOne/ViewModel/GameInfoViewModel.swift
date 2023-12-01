@@ -80,6 +80,7 @@ class GameInfoViewModel: ObservableObject {
             .sink { completion in
                 switch completion {
                 case let .failure(error):
+                    self.isShowingReportFail = true
                     print("error: \(error)")
                 case .finished:
                     print("request finished")

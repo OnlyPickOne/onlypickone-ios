@@ -99,6 +99,7 @@ struct GameInfoView: View {
                             deleteFailDialog = false
                         }
                     }
+                    .alertButtonTint(color: Color("opoBlue"))
                 } else if (viewModel.isLiked) {
                     Button {
                         viewModel.likeGame()
@@ -164,11 +165,12 @@ struct GameInfoView: View {
                     viewModel.isShowingReportSucess = false
                 }
             }
-//            .alert("이미 신고된 게시글입니다.", isPresented: $viewModel.isShowingReportFail) {
-//                Button("확인", role: .cancel) {
-//                    viewModel.isShowingReportFail = false
-//                }
-//            }
+            .alert("이미 신고된 게시글입니다.", isPresented: $viewModel.isShowingReportFail) {
+                Button("확인", role: .cancel) {
+                    viewModel.isShowingReportFail = false
+                }
+            }
+            .alertButtonTint(color: Color("opoBlue"))
         }
     }
     

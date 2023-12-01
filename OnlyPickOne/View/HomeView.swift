@@ -55,6 +55,7 @@ struct HomeView: View {
                 Text("다음에 알림")
             }
         })
+        .alertButtonTint(color: Color("opoBlue"))
     }
 }
 
