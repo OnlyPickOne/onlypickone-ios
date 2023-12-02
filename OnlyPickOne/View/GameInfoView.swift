@@ -99,7 +99,7 @@ struct GameInfoView: View {
                             deleteFailDialog = false
                         }
                     }
-                    .alertButtonTint(color: Color("opoBlue"))
+                    .alertButtonTint(color: Color("opoPurple"))
                 } else if (viewModel.isLiked) {
                     Button {
                         viewModel.likeGame()
@@ -170,7 +170,7 @@ struct GameInfoView: View {
                     viewModel.isShowingReportFail = false
                 }
             }
-            .alertButtonTint(color: Color("opoBlue"))
+            .alertButtonTint(color: Color("opoPurple"))
         }
     }
     

@@ -61,7 +61,7 @@ struct AddSheetView: View {
                                         Text("확인")
                                     }
                                 }
-                                .alertButtonTint(color: Color("opoBlue"))
+                                .alertButtonTint(color: Color("opoPurple"))
                             },
                                            label: {
                                 Text("다음")

@@ -159,7 +159,7 @@ struct SignUpView: View {
                         Text("확인")
                     }
                 })
-                .alertButtonTint(color: Color("opoBlue"))
+                .alertButtonTint(color: Color("opoPurple"))
                 .onAppear() {
                     viewModel.isValidEmail = false
                     viewModel.isValidPassword = false

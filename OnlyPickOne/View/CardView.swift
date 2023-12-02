@@ -21,7 +21,7 @@ struct CardView: View {
                             Image(uiImage: viewModel.imageList[num])
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: geo.size.width - 40, height: 300)
+                                .frame(width: geo.size.width - 40, height: 280)
                                 .clipped()
                                 .cornerRadius(8)
                                 .overlay(
@@ -43,18 +43,21 @@ struct CardView: View {
                                     }
                                 }
                             if num != viewModel.imageList.count - 1 {
-                                HStack {
-                                    TextField("캡션을 입력하세요", text: $viewModel.input[num])
-                                        .textFieldStyle(.roundedBorder)
-                                        .frame(height: 36)
-                                    ZStack {
-                                        Color(UIColor.systemBackground)
-                                            .frame(width: 80, height: 36)
-                                            .cornerRadius(8)
-                                        Text("\(num + 1) / \(viewModel.imageList.count - 1)")
+                                VStack(spacing: 20) {
+                                    HStack {
+                                        TextField("캡션을 입력하세요", text: $viewModel.input[num])
+                                            .textFieldStyle(.roundedBorder)
+                                            .frame(height: 36)
+                                        ZStack {
+                                            Color(UIColor.systemBackground)
+                                                .frame(width: 80, height: 36)
+                                                .cornerRadius(8)
+                                            Text("\(num + 1) / \(viewModel.imageList.count - 1)")
+                                        }
                                     }
+                                    .padding(10)
+                                    Text("")
                                 }
-                                .padding(20)
                             }
                         }
                         .padding(20)
