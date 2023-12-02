@@ -64,7 +64,7 @@ struct PhotoPicker: UIViewControllerRepresentable {
                 
                 itemProvider.loadImage { image, error in
                     DispatchQueue.main.async{
-                        if let image = image as? UIImage {
+                        if let image = image {
                             DispatchQueue.main.async{
                                 self.parent.viewModel.addImage(image: image, caption: "")
                             }
