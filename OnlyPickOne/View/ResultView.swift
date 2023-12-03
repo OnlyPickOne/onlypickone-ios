@@ -302,6 +302,7 @@ struct RenderView: View {
                 Spacer()
             }
             .frame(width: 240)
+            .padding(20)
         }
     }
 }
