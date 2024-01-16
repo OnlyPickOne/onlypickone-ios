@@ -21,11 +21,11 @@ struct SettingView: View {
         NavigationView {
             List {
                 Section("고객센터") {
-//                    NavigationLink {
-//                        NoticeListView()
-//                    } label: {
-//                        Text("공지사항")
-//                    }
+                    NavigationLink {
+                        NoticeListView()
+                    } label: {
+                        Text("공지사항")
+                    }
                     Button {
                         isShowingAskView.toggle()
                     } label: {
