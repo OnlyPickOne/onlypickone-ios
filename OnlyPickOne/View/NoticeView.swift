@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct NoticeView: View {
+    @ObservedObject var adminDecoder = JWTDecoder()
+    
     var body: some View {
         List {
             VStack(alignment: .leading, spacing: 10) {
@@ -34,6 +36,18 @@ struct NoticeView: View {
             }
             .padding(5)
         }
+        .navigationTitle("공지사항")
+        .toolbar {
+            if adminDecoder.isAdmin == true {
+                Button {
+                    print("")
+                } label: {
+                    Text("수정")
+                }
+
+            }
+        }
+        
     }
 }
 
