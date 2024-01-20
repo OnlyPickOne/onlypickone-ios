@@ -109,7 +109,7 @@ extension APIService: TargetType {
             var formData: [Moya.MultipartFormData] = [Moya.MultipartFormData(provider: .data(titleData), name: "title")]
             formData.append(Moya.MultipartFormData(provider: .data(descriptionData), name: "description"))
             for mFile in multipartFiles {
-                if let caption = mFile.caption, let image = mFile.image, let imageData = image.jpegData(compressionQuality: 0.05) {
+                if let caption = mFile.caption, let image = mFile.image, let imageData = image.jpegData(compressionQuality: 0.4) {
                     formData.append(Moya.MultipartFormData(provider: .data(imageData), name: "multipartFiles", fileName: "\(caption).jpeg", mimeType: "image/jpeg"))
                 }
             }
