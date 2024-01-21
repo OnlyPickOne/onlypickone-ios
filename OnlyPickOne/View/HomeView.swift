@@ -37,16 +37,12 @@ struct HomeView: View {
                 }
         }
         .alert("필수 업데이트가 있습니다.", isPresented: $viewModel.isNeedToUpdate, actions: {
-            Button {
-                print("필수업데이트")
-            } label: {
+            Link(destination: URL(string: "https://apps.apple.com/kr/app/onlypickone/id6469682692")!) {
                 Text("업데이트")
             }
         })
         .alert("최신 버전이 있습니다. 더욱 좋은 서비스를 위해 업데이트를 해주세요", isPresented: $viewModel.toLeadToUpdate, actions: {
-            Button {
-                print("선택업데이트")
-            } label: {
+            Link(destination: URL(string: "https://apps.apple.com/kr/app/onlypickone/id6469682692")!) {
                 Text("업데이트")
             }
             Button {
