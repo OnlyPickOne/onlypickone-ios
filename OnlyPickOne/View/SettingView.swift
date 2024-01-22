@@ -159,7 +159,7 @@ struct SettingView: View {
             .navigationBarTitleDisplayMode(.inline)
             .tint(Color("opoPink"))
         }
-        .fullScreenCover(isPresented: $isShowingAskView) {
+        .sheet(isPresented: $isShowingAskView) {
             AskView()
         }
     }

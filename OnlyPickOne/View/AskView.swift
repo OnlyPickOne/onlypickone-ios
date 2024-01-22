@@ -11,14 +11,24 @@ import MessageUI
 import SwiftUI
 
 struct AskView: View {
+    @State private var result: Result<MFMailComposeResult, Error>? = nil
+
     var body: some View {
-        EmailSender()
-                    .navigationBarTitle("문의하기")
-                    .edgesIgnoringSafeArea(.all)
+        if MFMailComposeViewController.canSendMail() {
+            EmailSender(result: $result)
+                .navigationBarTitle("문의하기")
+                .edgesIgnoringSafeArea(.all)
+        } else {
+            VStack {
+                Text("메일 앱이 없습니다")
+            }
+        }
+        
     }
 }
 
 struct EmailSender: UIViewControllerRepresentable {
+    @Binding var result: Result<MFMailComposeResult, Error>?
     @Environment(\.presentationMode) var presentationMode
     
     func makeUIViewController(context: Context) -> MFMailComposeViewController {
@@ -51,23 +61,28 @@ struct EmailSender: UIViewControllerRepresentable {
     typealias UIViewControllerType = MFMailComposeViewController
     
     class Coordinator: NSObject, MFMailComposeViewControllerDelegate, UINavigationControllerDelegate {
+        @Binding var result: Result<MFMailComposeResult, Error>?
+
         var parent: EmailSender
         
-        init(_ parent: EmailSender) {
+        init(_ parent: EmailSender, result: Binding<Result<MFMailComposeResult, Error>?>) {
+            _result = result
             self.parent = parent
         }
         
         func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-            // TODO(iOS버그)
-            // Error creating the CFMessagePort needed to communicate with PPT. 가 오는데 메일 정상적으로 보내지는 문제 https://stackoverflow.com/questions/63441752/error-creating-the-cfmessageport-needed-to-communicate-with-ppt
+            if let error = error {
+                self.result = .failure(error)
+            } else {
+                self.result = .success(result)
+            }
             
-            // https://developer.apple.com/forums/thread/662643
             controller.dismiss(animated: true, completion: nil)
         }
     }
     
     func makeCoordinator() -> Coordinator {
-        Coordinator(self)
+        Coordinator(self, result: $result)
     }
     
     // Device Identifier 찾기
