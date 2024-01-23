@@ -36,11 +36,23 @@ struct HomeView: View {
                     listViewModel.fetchData()
                 }
         }
-        .alert("필수 업데이트가 있습니다.", isPresented: $viewModel.isNeedToUpdate, actions: {
-            Link(destination: URL(string: "https://apps.apple.com/kr/app/onlypickone/id6469682692")!) {
-                Text("업데이트")
+        .fullScreenCover(isPresented: $viewModel.isNeedToUpdate) {
+            VStack(spacing: 30) {
+                Text("필수 업데이트 안내")
+                    .font(.headline)
+                Text("안정적이고 편리한 사용을 위해 꾸준히 업데이트 중입니다. 이번 업데이트는 필수 업데이트이므로 반드시 진행해주시기 바랍니다. 더욱 좋은 서비스를 위해 노력하겠습니다. 감사합니다.")
+                Link(destination: URL(string: "https://apps.apple.com/kr/app/onlypickone/id6469682692")!) {
+                    Text("업데이트 하러가기")
+                }
+                .foregroundColor(.pink)
             }
-        })
+            .padding(30)
+        }
+//        .alert("필수 업데이트가 있습니다.", isPresented: $viewModel.isNeedToUpdate, actions: {
+//            Link(destination: URL(string: "https://apps.apple.com/kr/app/onlypickone/id6469682692")!) {
+//                Text("업데이트")
+//            }
+//        })
         .alert("최신 버전이 있습니다. 더욱 좋은 서비스를 위해 업데이트를 해주세요", isPresented: $viewModel.toLeadToUpdate, actions: {
             Link(destination: URL(string: "https://apps.apple.com/kr/app/onlypickone/id6469682692")!) {
                 Text("업데이트")
