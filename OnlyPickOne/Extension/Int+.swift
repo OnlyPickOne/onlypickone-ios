@@ -8,6 +8,15 @@
 import Foundation
 
 extension Int {
+    func secondsPerMinutes() -> String {
+        if self == 0 {
+            return "만료됨"
+        } else {
+            var min = Int((self / 60))
+            var sec = (self % 60)
+            return sec < 10 ? min.toString() + ":0" + sec.toString() : min.toString() + ":" + sec.toString()
+        }
+    }
     
     func toLastTimeString() -> String {
         let time = self

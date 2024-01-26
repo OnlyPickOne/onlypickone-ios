@@ -33,11 +33,17 @@ struct SignUpView: View {
                                 }
                             Button {
                                 print("인증 요청")
+                                viewModel.startTimer()
                                 viewModel.isShowingAuthField = true
                                 viewModel.mailAuthReqeust(email: emailInput)
                             } label: {
-                                Text("인증요청")
-                                    .font(.subheadline)
+                                if viewModel.isEnabledRetryButton {
+                                    Text("재시도")
+                                        .font(.subheadline)
+                                } else {
+                                    Text("인증요청")
+                                        .font(.subheadline)
+                                }
                             }
                             .frame(width: 80, height: 40)
                             .background(viewModel.isValidEmail ? Color("opoBlue") : Color(cgColor: UIColor.systemGray5.cgColor))
@@ -56,8 +62,15 @@ struct SignUpView: View {
                     
                     if viewModel.isShowingAuthField {
                         VStack(alignment: .leading, spacing: 10) {
-                            Text("인증번호")
-                                .font(.headline)
+                            HStack {
+                                Text("인증번호")
+                                    .font(.headline)
+                                
+                                Spacer()
+                                
+                                Text("\(viewModel.timer.secondsPerMinutes())")
+                                    .font(.subheadline)
+                            }
                             HStack {
                                 TextField("인증코드는 10분 간 유효합니다.", text: $codeInput)
                                     .textInputAutocapitalization(.never)

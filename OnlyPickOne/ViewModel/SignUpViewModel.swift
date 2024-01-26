@@ -14,6 +14,9 @@ class SignUpViewModel: ObservableObject {
     private var subscription = Set<AnyCancellable>()
     private let provider = MoyaProvider<APIService>(session: Session(interceptor: AuthInterceptor.shared))
     
+    // 인증 만료 시간 600초
+    private let expirationTime: Int = 600
+    
     @Published var isValidEmail: Bool = false
     @Published var isValidPassword: Bool = false
     @Published var isShowingAuthField: Bool = false
@@ -21,6 +24,19 @@ class SignUpViewModel: ObservableObject {
     @Published var isShowingVerifyError: Bool = false
     @Published var isShowingUsingEmailError: Bool = false
     @Published var isLoading: Bool = false
+    @Published var isEnabledRetryButton: Bool = false
+    @Published var timer: Int = 0
+    
+    public func startTimer() {
+        self.timer = expirationTime
+        _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            if self.timer > 0 {
+                self.timer -= 1
+            } else {
+                timer.invalidate() // 타이머 중지
+            }
+        }
+    }
     
     public func checkValidEmail(email: String?) {
         guard let email = email else { return }
