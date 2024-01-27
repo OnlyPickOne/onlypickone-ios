@@ -30,6 +30,9 @@ struct GameInfoView: View {
             Section("게임 설명") {
                 Text(viewModel.game.description ?? "unknwon game")
                     .font(.subheadline)
+                    .padding(.vertical, 10)
+                Text("총 플레이 \(viewModel.game.playCount ?? 0)회 좋아요 \(viewModel.game.likeCount ?? 0)회")
+                    .font(.subheadline)
             }
             
             Section("예시 사진") {
