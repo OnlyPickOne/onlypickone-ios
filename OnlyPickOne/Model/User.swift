@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+struct User: Codable {
+    let userId: Int?
+    let email: String?
+    let createdDate: String?
+    let lastRequestDate: String?
+    let isBanned: Bool?
+    let isLeft: Bool?
+}

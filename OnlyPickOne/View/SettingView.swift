@@ -137,7 +137,7 @@ struct SettingView: View {
                             Text("공지 작성")
                         }
                         NavigationLink {
-                            Text("유저 목록")
+                            UserListView()
                         } label: {
                             Text("유저 목록")
                         }
