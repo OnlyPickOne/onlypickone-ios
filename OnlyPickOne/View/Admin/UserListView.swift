@@ -37,6 +37,15 @@ struct UserListView: View {
                             .foregroundColor(.blue)
                     }
                 }
+                .swipeActions {
+                    Button {
+                        viewModel.blockUser()
+                    } label: {
+                        Image(systemName: "arrow.up.arrow.down.square")
+                    }
+                    .tint(.red)
+
+                }
             }
         }
         .navigationTitle("유저 목록")
