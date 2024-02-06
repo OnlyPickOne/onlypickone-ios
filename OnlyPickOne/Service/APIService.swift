@@ -32,6 +32,7 @@ enum APIService {
     case logIn(_ account: Account)
     case refreshToken(_ token: LoginToken)
     case notice
+    case noticeList(noticeId: Int?, createdAt: String?)
     case test
 }
 
@@ -71,6 +72,8 @@ extension APIService: TargetType {
             return "/games/\(id)/reports"
         case .leave(let id):
             return "/members/\(id)"
+        case .noticeList(_, _):
+            return "/notices"
         case .test:
             return "/users/2"
         default:
@@ -142,6 +145,15 @@ extension APIService: TargetType {
                 param["query"] = keyword
             }
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+        case .noticeList(noticeId: let nid, createdAt: let createdAt):
+            var param: [String : Any] = ["size" : 20, "sort" : "createdAt,desc"]
+            
+            if let nid = nid, let createdAt = createdAt {
+                param["noticeId"] = nid
+                param["createdAt"] = createdAt
+            }
+            
+            return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
         default:
             return .requestPlain
         }
@@ -149,7 +161,7 @@ extension APIService: TargetType {
     
     var headers: [String : String]? {
         switch self {
-        case .setVersion(_), .create(_, _, _), .gameList, .gameListByPaging(_, _, _, _, _, _, _), .remove(_), .leave(_), .like(_), .deleteLike(_), .report(_):
+        case .setVersion(_), .create(_, _, _), .gameList, .gameListByPaging(_, _, _, _, _, _, _), .remove(_), .leave(_), .like(_), .deleteLike(_), .report(_), .noticeList(noticeId: _, createdAt: _):
             let accessToken = UserDefaults.standard.string(forKey: "accessToken") ?? ""
             return ["Content-type" : "application/json", "Authorization" : "Bearer \(accessToken)"]
         default:
