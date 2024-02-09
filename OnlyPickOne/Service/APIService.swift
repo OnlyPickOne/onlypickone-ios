@@ -14,6 +14,7 @@ enum APIService {
     case finish(_ gameId: Int, _ itemId: Int)
     case gameList
     case gameListByPaging(_ sortBy: GameSort, _ size: Int, _ gameId: Int = 0, _ createdAt: String = "", _ playCount: Int = 0, _ likeCount: Int = 0, _ keyword: String = "")
+    case gameInfo(_ gameId: Int)
     case submit
     case statistics
     case create(_ title: String, _ description: String, _ multipartFiles: [Item])
@@ -50,7 +51,7 @@ extension APIService: TargetType {
         switch self {
         case .gameList, .create(_,_,_), .gameListByPaging(_, _, _, _, _, _, _):
             return "/games"
-        case . remove(let id):
+        case .remove(let id), .gameInfo(let id):
             return "/games/\(id)"
         case .getVersion, .setVersion(_):
             return "/versions"
@@ -161,7 +162,7 @@ extension APIService: TargetType {
     
     var headers: [String : String]? {
         switch self {
-        case .setVersion(_), .create(_, _, _), .gameList, .gameListByPaging(_, _, _, _, _, _, _), .remove(_), .leave(_), .like(_), .deleteLike(_), .report(_), .noticeList(noticeId: _, createdAt: _):
+        case .setVersion(_), .create(_, _, _), .gameList, .gameListByPaging(_, _, _, _, _, _, _), .remove(_), .leave(_), .like(_), .deleteLike(_), .report(_), .noticeList(noticeId: _, createdAt: _), .gameInfo(_):
             let accessToken = UserDefaults.standard.string(forKey: "accessToken") ?? ""
             return ["Content-type" : "application/json", "Authorization" : "Bearer \(accessToken)"]
         default:

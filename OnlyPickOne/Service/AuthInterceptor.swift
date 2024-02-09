@@ -22,7 +22,7 @@ final class AuthInterceptor: RequestInterceptor {
             completion(.success(urlRequest))
             return
         }
-        
+
         var urlRequest = urlRequest
         urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-type")
@@ -40,10 +40,18 @@ final class AuthInterceptor: RequestInterceptor {
 
         // 토큰 갱신 API 호출
         let provider = MoyaProvider<APIService>(session: Session(interceptor: AuthInterceptor.shared))
+        var isRefreshTokenAPI = false
         
         guard let accessToken = UserDefaults.standard.string(forKey: "accessToken"), let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") else { return }
         print(accessToken, refreshToken)
-        provider.request(.refreshToken(LoginToken(grantType: nil, accessToken: accessToken, refreshToken: refreshToken, accessTokenExpiresIn: nil))) { (result) in
+        
+        let urlString = request.request?.url?.absoluteString
+        if let slashIndex = urlString?.lastIndex(of: "/") {
+            let afterSlashString = String((urlString?.suffix(from: (urlString?.index(after: slashIndex))!))!)
+            isRefreshTokenAPI = afterSlashString == "reissue"
+        }
+        
+        provider.request(.refreshToken(LoginToken(grantType: nil, accessToken: isRefreshTokenAPI ? nil : accessToken, refreshToken: isRefreshTokenAPI ? nil : refreshToken, accessTokenExpiresIn: nil))) { (result) in
             switch result {
             case let .success(response):
                 let result = try? response.map(Response<LoginToken>.self)
