@@ -28,16 +28,6 @@ class AddSheetViewModel: ObservableObject {
     }
     
     public func submitGame() {
-        print(titleInput)
-        print(detailInput)
-        
-        for inputText in input {
-            if inputText == "" {
-                self.isShowingAlertBlankCaption = true
-                return
-            }
-        }
-        
         self.isShowingAddSheet = false
         
         refeshToken { [self] in

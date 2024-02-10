@@ -54,14 +54,6 @@ struct AddSheetView: View {
                                         Text("취소")
                                     }
                                 }
-                                .alert("캡션을 모두 채워주세요", isPresented: $viewModel.isShowingAlertBlankCaption) {
-                                    Button {
-                                        viewModel.isShowingAlertBlankCaption = false
-                                    } label: {
-                                        Text("확인")
-                                    }
-                                }
-                                .alertButtonTint(color: Color("opoPurple"))
                             },
                                            label: {
                                 Text("다음")
