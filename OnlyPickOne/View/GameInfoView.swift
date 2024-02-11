@@ -16,7 +16,6 @@ struct GameInfoView: View {
     private let gameId: Int
     private var options = [4, 8, 16, 32, 64, 128, 256]
     @State var alertToReport: Bool = false
-    @State private var selectionOption = 0
     @State private var deleteConfirmDialog: Bool = false
     @State private var deleteFailDialog: Bool = false
     
@@ -97,7 +96,7 @@ struct GameInfoView: View {
                 .padding(.horizontal, 30)
                 
                 HStack {
-                    Picker("토너먼트 선택", selection: $selectionOption) {
+                    Picker("토너먼트 선택", selection: $viewModel.selectionOption) {
                         ForEach(0..<options.count) {
                             if (options[$0] <= viewModel.game.itemCount ?? 0) {
                                 Text("\(options[$0])강")
@@ -106,7 +105,7 @@ struct GameInfoView: View {
                     }
                     
                     NavigationLink {
-                        GameView(round: options[selectionOption], info: self.viewModel)
+                        GameView(round: options[viewModel.selectionOption], info: self.viewModel)
                             .navigationTitle(viewModel.game.title ?? "")
                             .navigationBarTitleDisplayMode(.inline)
                     } label: {
@@ -150,6 +149,9 @@ struct GameInfoView: View {
                 }
             }
             .alertButtonTint(color: Color("opoPurple"))
+        }
+        .onAppear {
+            viewModel.fetchGameInfo()
         }
         .toolbar {
             Menu {
@@ -233,7 +235,7 @@ struct GameInfoView: View {
     }
     
     init(gameId: Int = 0, game: NewGame?, list: ListViewModel) {
-        self.viewModel = GameInfoViewModel(game: game)
+        self.viewModel = GameInfoViewModel(gameId: gameId)
         self.gameId = gameId
         self.listViewModel = list
     }

@@ -18,6 +18,42 @@ class GameInfoViewModel: ObservableObject {
     @Published var isLiked: Bool = false
     @Published var isShowingReportSucess: Bool = false
     @Published var isShowingReportFail: Bool = false
+    @Published var selectionOption = 0
+    
+    let gameId: Int
+    
+    func fetchGameInfo() {
+        provider.requestPublisher(.gameInfo(self.gameId))
+            .sink { completion in
+                switch completion {
+                case let .failure(error):
+                    print("error: \(error)")
+                case .finished:
+                    print("request finished")
+                }
+            } receiveValue: { [weak self] response in
+                print(response)
+                let result = try? response.map(Response<NewGame>.self)
+                if result?.isSuccess == true {
+                    print("sucess")
+                    if let game = result?.data {
+                        self?.game = game
+                        switch self?.game.itemCount ?? 0 {
+                        case 5...8:
+                            self?.selectionOption = 1
+                        case 9...16:
+                            self?.selectionOption = 2
+                        case 17...32:
+                            self?.selectionOption = 3
+                        case 33...150:
+                            self?.selectionOption = 4
+                        default:
+                            self?.selectionOption = 0
+                        }
+                    }
+                }
+            }.store(in: &subscription)
+    }
     
     public func deleteGame(completion: @escaping (Bool) -> ()) {
         provider.requestPublisher(.remove(game.id ?? -1))
@@ -85,7 +121,7 @@ class GameInfoViewModel: ObservableObject {
                 case .finished:
                     print("request finished")
                 }
-            } receiveValue: { [weak self] response in
+            } receiveValue: { response in
                 print(response)
                 let result = try? response.map(Response<String>.self)
                 if result?.isSuccess == true {
@@ -95,8 +131,12 @@ class GameInfoViewModel: ObservableObject {
             }.store(in: &subscription)
     }
     
-    init(game: NewGame?) {
-        self.game = game ?? NewGame(id: nil, title: nil, description: nil, viewCount: nil, playCount: nil, likeCount: nil, itemCount: nil, reportCount: nil, createdAt: nil, imageUrls: nil, isCreated: nil, isLiked: nil)
-        self.isLiked = game?.isLiked ?? false
+    init(subscription: Set<AnyCancellable> = Set<AnyCancellable>(), game: NewGame = NewGame(id: 0, title: "", description: "", viewCount: 0, playCount: 0, likeCount: 0, itemCount: 0, reportCount: 0, createdAt: "", imageUrls: ["",""], isCreated: false, isLiked: false), isLiked: Bool = false, isShowingReportSucess: Bool = false, isShowingReportFail: Bool = false, gameId: Int) {
+        self.subscription = subscription
+        self.game = game
+        self.isLiked = isLiked
+        self.isShowingReportSucess = isShowingReportSucess
+        self.isShowingReportFail = isShowingReportFail
+        self.gameId = gameId
     }
 }
