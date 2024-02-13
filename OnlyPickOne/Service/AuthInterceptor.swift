@@ -23,10 +23,19 @@ final class AuthInterceptor: RequestInterceptor {
             return
         }
 
+        /// refreshToken 시 만료된 토큰을 헤더에서 제외 요구 반영
+        print(urlRequest)
         var urlRequest = urlRequest
-        urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-type")
-        print("new header adopted \(urlRequest.headers)")
+        let urlString = urlRequest.url?.absoluteString
+        if let slashIndex = urlString?.lastIndex(of: "/") {
+            let afterSlashString = String((urlString?.suffix(from: (urlString?.index(after: slashIndex))!))!)
+            if afterSlashString != "reissue" {
+                urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+                urlRequest.setValue("application/json", forHTTPHeaderField: "Content-type")
+                print("new header adopted \(urlRequest.headers)")
+            }
+        }
+        
         completion(.success(urlRequest))
     }
     
@@ -39,7 +48,7 @@ final class AuthInterceptor: RequestInterceptor {
         }
 
         // 토큰 갱신 API 호출
-        let provider = MoyaProvider<APIService>(session: Session(interceptor: AuthInterceptor.shared))
+        var provider = MoyaProvider<APIService>(session: Session(interceptor: AuthInterceptor.shared))
         var isRefreshTokenAPI = false
         
         guard let accessToken = UserDefaults.standard.string(forKey: "accessToken"), let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") else { return }
@@ -50,6 +59,10 @@ final class AuthInterceptor: RequestInterceptor {
             let afterSlashString = String((urlString?.suffix(from: (urlString?.index(after: slashIndex))!))!)
             isRefreshTokenAPI = afterSlashString == "reissue"
         }
+        
+//        if isRefreshTokenAPI {
+//            provider = MoyaProvider<APIService>()
+//        }
         
         provider.request(.refreshToken(LoginToken(grantType: nil, accessToken: isRefreshTokenAPI ? nil : accessToken, refreshToken: isRefreshTokenAPI ? nil : refreshToken, accessTokenExpiresIn: nil))) { (result) in
             switch result {
