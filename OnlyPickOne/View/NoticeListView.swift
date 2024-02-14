@@ -8,33 +8,55 @@
 import SwiftUI
 
 struct NoticeListView: View {
+    @ObservedObject private var viewModel: NoticeListViewModel
     var body: some View {
         ZStack {
             List {
-                ForEach((0..<20), id: \.self) { index in
+                ForEach((0..<(viewModel.noticeList.count)), id: \.self) { index in
                     NavigationLink {
                         NoticeView()
                     } label: {
                         VStack(alignment: .leading, spacing: 5) {
-                            Text("온리픽원 서비스 이용 안내")
+                            Text("\(viewModel.noticeList[index].title ?? "")")
                                 .font(.headline)
-                            Text("1시간 전")
+                            Text("\(viewModel.noticeList[index].createdAt ?? "")")
                                 .font(.subheadline)
                                 .fontWeight(.bold)
                                 .foregroundColor(.gray)
                         }
                         .padding(5)
                     }
+                    .onAppear {
+                        if viewModel.noticeList.count == 0 {
+                            viewModel.refreshData()
+                            viewModel.fetchData()
+                        }
+                        else if viewModel.lastNoticeId == viewModel.noticeList[index].noticeId && viewModel.isLastPage == false {
+                            viewModel.fetchData()
+                        }
+                    }
                 }
+            }
+            .refreshable {
+                viewModel.refreshData()
+                viewModel.fetchData()
             }
             .navigationTitle("공지사항")
             .tint(Color("opoPink"))
         }
+        .onAppear() {
+//            viewModel.refreshData()
+//            viewModel.fetchData()
+        }
+    }
+    
+    init(viewModel: NoticeListViewModel) {
+        self.viewModel = viewModel
     }
 }
 
 struct NoticeListView_Previews: PreviewProvider {
     static var previews: some View {
-        NoticeListView()
+        NoticeListView(viewModel: NoticeListViewModel())
     }
 }
