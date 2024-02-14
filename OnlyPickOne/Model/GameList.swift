@@ -10,8 +10,6 @@ import Foundation
 struct GameList: Codable {
     let content: [NewGame]?
     let pageable: Pageable?
-    let totalPages: Int?
-    let totalElements: Int?
     let last: Bool?
     let numberOfElements: Int?
     let size: Int?

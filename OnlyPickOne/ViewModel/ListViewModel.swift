@@ -12,7 +12,7 @@ import CombineMoya
 
 class ListViewModel: ObservableObject {
     @Published var gameList: [NewGame] = []
-    @Published var newGameList: GameList = GameList(content: nil, pageable: nil, totalPages: nil, totalElements: nil, last: nil, numberOfElements: nil, size: nil, first: nil, number: nil, sort: nil, empty: nil)
+    @Published var newGameList: GameList = GameList(content: nil, pageable: nil, last: nil, numberOfElements: nil, size: nil, first: nil, number: nil, sort: nil, empty: nil)
     @Published var searchKeyword: String = ""
     @Published var sortBy: GameSort = .byDate
     
@@ -20,7 +20,7 @@ class ListViewModel: ObservableObject {
     private let provider = MoyaProvider<APIService>(session: Session(interceptor: AuthInterceptor.shared))
     let searchSubject = PassthroughSubject<String, Never>()
     
-    private let dataPerPage = 5
+    private let dataPerPage = 20
     private var nextIndex = 0
     private var lastCreatedAt = ""
     private var lastPlayCount = 0
@@ -42,7 +42,7 @@ class ListViewModel: ObservableObject {
     }
     
     func refreshData() {
-        newGameList = GameList(content: nil, pageable: nil, totalPages: nil, totalElements: nil, last: nil, numberOfElements: nil, size: nil, first: nil, number: nil, sort: nil, empty: nil)
+        newGameList = GameList(content: nil, pageable: nil, last: nil, numberOfElements: nil, size: nil, first: nil, number: nil, sort: nil, empty: nil)
         gameList = []
         lastCreatedAt = ""
         lastPlayCount = 0
@@ -73,7 +73,7 @@ class ListViewModel: ObservableObject {
                 
                 guard let data = result?.data else { return }
                 self?.isLastPage = data.last ?? false
-                self?.nextIndex += data.content?.count ?? 0
+//                self?.nextIndex += data.content?.count ?? 0
                 self?.lastCreatedAt = data.content?.last?.createdAt ?? ""
                 self?.lastPlayCount = data.content?.last?.playCount ?? 0
                 self?.lastLikeCount = data.content?.last?.likeCount ?? 0
