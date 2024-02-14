@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+struct Notice: Codable {
+    let noticeId: Int?
+    let title: String?
+    let content: String?
+    let viewCount: Int?
+    let createdAt: String?
+}
