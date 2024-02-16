@@ -16,6 +16,7 @@ class SignUpViewModel: ObservableObject {
     
     // 인증 만료 시간 600초
     private let expirationTime: Int = 600
+    private var timer: Timer = Timer()
     
     @Published var isValidEmail: Bool = false
     @Published var isValidPassword: Bool = false
@@ -25,13 +26,15 @@ class SignUpViewModel: ObservableObject {
     @Published var isShowingUsingEmailError: Bool = false
     @Published var isLoading: Bool = false
     @Published var isEnabledRetryButton: Bool = false
-    @Published var timer: Int = 0
+    @Published var isRetryButton: Bool = false
+    @Published var timeLast: Int = 0
     
     public func startTimer() {
-        self.timer = expirationTime
-        _ = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-            if self.timer > 0 {
-                self.timer -= 1
+        self.timeLast = expirationTime
+        self.timer.invalidate()
+        self.timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            if self.timeLast > 0 {
+                self.timeLast -= 1
             } else {
                 timer.invalidate() // 타이머 중지
             }
@@ -74,6 +77,7 @@ class SignUpViewModel: ObservableObject {
                 }
             } receiveValue: { response in
                 let result = try? response.map(Response<String>.self)
+                self.isRetryButton = true
             }.store(in: &subscription)
     }
     
@@ -93,6 +97,7 @@ class SignUpViewModel: ObservableObject {
             } receiveValue: { response in
                 let result = try? response.map(Response<String>.self)
                 self.isSucessAuthEmail = result?.isSuccess ?? false
+                self.timer.invalidate()
             }.store(in: &subscription)
     }
     
