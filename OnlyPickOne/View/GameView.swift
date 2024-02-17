@@ -53,15 +53,15 @@ struct GameView: View {
                         VStack(spacing: 0) {
                             ZStack {
                                 if let topItem = game.topItem, let image = topItem.imageUrl, let caption = topItem.caption {
-                                    KFImage(URL(string: image))
+                                    KFAnimatedImage(URL(string: image))
                                         .placeholder { //플레이스 홀더 설정
                                             Image(systemName: "list.dash")
                                         }.retry(maxCount: 3, interval: .seconds(5)) //재시도
                                         .startLoadingBeforeViewAppear()
-                                        .resizable()
+//                                        .resizable()
                                         .scaledToFill()
                                         .clipped()
-                                        .animation(.easeIn(duration: 0.2), value: image)
+//                                        .animation(.easeIn(duration: 0.2), value: image)
                                     Text(caption)
                                         .fontWeight(.bold)
                                         .font(.title)
@@ -98,15 +98,18 @@ struct GameView: View {
                             
                             ZStack {
                                 if let bottomItem = game.bottomItem, let image = bottomItem.imageUrl, let caption = bottomItem.caption {
-                                    KFImage(URL(string: image))
+                                    KFAnimatedImage(URL(string: image))
                                         .placeholder { //플레이스 홀더 설정
                                             Image(systemName: "list.dash")
                                         }.retry(maxCount: 3, interval: .seconds(5)) //재시도
                                         .startLoadingBeforeViewAppear()
-                                        .resizable()
+//                                        .resizable()
                                         .scaledToFill()
                                         .clipped()
-                                        .animation(.easeIn(duration: 0.2), value: image)
+//                                        .animation(.easeIn(duration: 0.2), value: image)
+                                        .onAppear() {
+                                            print("\(image)")
+                                        }
                                     Text(caption)
                                         .fontWeight(.bold)
                                         .font(.title)
@@ -137,6 +140,6 @@ struct GameView: View {
     init(round: Int, info: GameInfoViewModel) {
         self.round = round
         self.info = info
-        self.game = GameViewModel(game: Game(id: info.game.gameId, title: info.game.title, description: info.game.description, createdTime: info.game.createdAt, items: nil), itemCount: round)
+        self.game = GameViewModel(game: Game(id: info.game.id, title: info.game.title, description: info.game.description, createdTime: info.game.createdAt, items: nil), itemCount: round)
     }
 }
