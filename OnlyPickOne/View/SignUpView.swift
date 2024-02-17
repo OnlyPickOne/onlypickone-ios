@@ -37,13 +37,8 @@ struct SignUpView: View {
                                 viewModel.isShowingAuthField = true
                                 viewModel.mailAuthReqeust(email: emailInput)
                             } label: {
-                                if viewModel.isEnabledRetryButton {
-                                    Text("재시도")
-                                        .font(.subheadline)
-                                } else {
-                                    Text("인증요청")
-                                        .font(.subheadline)
-                                }
+                                Text(viewModel.isRetryButton ? "재전송" : "인증요청")
+                                    .font(.subheadline)
                             }
                             .frame(width: 80, height: 40)
                             .background(viewModel.isValidEmail ? Color("opoBlue") : Color(cgColor: UIColor.systemGray5.cgColor))
@@ -57,8 +52,11 @@ struct SignUpView: View {
                                 .foregroundColor(Color("opoRed"))
                                 .font(.caption)
                         }
-                    }.disabled(viewModel.isShowingAuthField)
-                        .opacity(viewModel.isShowingAuthField ? 0.4 : 1)
+                    }
+                    .disabled(viewModel.isSucessAuthEmail)
+                    .opacity(viewModel.isSucessAuthEmail ? 0.4 : 1)
+//                    .disabled(viewModel.isShowingAuthField)
+//                    .opacity(viewModel.isShowingAuthField ? 0.4 : 1)
                     
                     if viewModel.isShowingAuthField {
                         VStack(alignment: .leading, spacing: 10) {
@@ -68,7 +66,7 @@ struct SignUpView: View {
                                 
                                 Spacer()
                                 
-                                Text("\(viewModel.timer.secondsPerMinutes())")
+                                Text("\(viewModel.timeLast.secondsPerMinutes())")
                                     .font(.subheadline)
                             }
                             HStack {
@@ -180,7 +178,11 @@ struct SignUpView: View {
                     viewModel.isSucessAuthEmail = false
                 }
             }
+            .disabled(viewModel.isLoading)
+            
             if viewModel.isLoading {
+                Color(uiColor: .systemBackground)
+                    .opacity(0.6)
                 ProgressView()
             }
         }
