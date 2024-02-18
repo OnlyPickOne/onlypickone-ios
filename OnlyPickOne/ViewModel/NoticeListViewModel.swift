@@ -32,7 +32,6 @@ class NoticeListViewModel: ObservableObject {
     
     func fetchData(_ query: String = "") {
         guard isLastPage == false else { return }
-        print(isLastPage)
         
         provider.requestPublisher(.noticeList(noticeId: lastNoticeId, createdAt: lastCreatedAt))
             .sink { completion in
@@ -49,7 +48,6 @@ class NoticeListViewModel: ObservableObject {
                 self?.lastNoticeId = content.last?.noticeId ?? 0
                 self?.lastCreatedAt = content.last?.createdAt ?? ""
                 self?.isLastPage = data.last ?? false
-                print(content)
                 self?.noticeList.append(contentsOf: content)
             }.store(in: &subscription)
     }

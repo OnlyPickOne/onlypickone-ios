@@ -32,7 +32,6 @@ class GameInfoViewModel: ObservableObject {
                     print("request finished")
                 }
             } receiveValue: { [weak self] response in
-                print(response)
                 let result = try? response.map(Response<NewGame>.self)
                 if result?.isSuccess == true {
                     print("sucess")
@@ -74,7 +73,6 @@ class GameInfoViewModel: ObservableObject {
     
     public func likeGame() {
         if self.isLiked {
-            print("like cancel")
             provider.requestPublisher(.deleteLike(game.id ?? -1))
                 .sink { completion in
                     switch completion {
@@ -91,7 +89,6 @@ class GameInfoViewModel: ObservableObject {
                     }
                 }.store(in: &subscription)
         } else {
-            print("like")
             provider.requestPublisher(.like(game.id ?? -1))
                 .sink { completion in
                     switch completion {
@@ -111,7 +108,6 @@ class GameInfoViewModel: ObservableObject {
     }
     
     public func reportGamte(completion: @escaping (Bool) -> ()) {
-        print("report")
         provider.requestPublisher(.report(game.id ?? -1))
             .sink { completion in
                 switch completion {
@@ -122,10 +118,8 @@ class GameInfoViewModel: ObservableObject {
                     print("request finished")
                 }
             } receiveValue: { response in
-                print(response)
                 let result = try? response.map(Response<String>.self)
                 if result?.isSuccess == true {
-                    print("sucess")
                     completion(true)
                 }
             }.store(in: &subscription)

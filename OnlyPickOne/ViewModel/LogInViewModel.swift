@@ -19,7 +19,6 @@ class LogInViewModel: ObservableObject {
     
     public func logIn(email: String?, password: String?, completion: @escaping (Bool)->()) {
         guard let email = email, let password = password else { return }
-        print("\(email) \(password)")
         provider.requestPublisher(.logIn(Account(email: email, password: password)))
             .sink { completion in
                 switch completion {
@@ -31,7 +30,6 @@ class LogInViewModel: ObservableObject {
                 }
             } receiveValue: { response in
                 let result = try? response.map(Response<LoginToken>.self)
-                print(result)
                 
                 self.isSucessLogIn = result?.isSuccess ?? false
                 

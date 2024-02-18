@@ -80,7 +80,6 @@ class HomeViewModel: ObservableObject {
             self.isNeedToUpdate = false
             self.toLeadToUpdate = false
         }
-        print(self.isNeedToUpdate, self.toLeadToUpdate)
     }
     
     init() {

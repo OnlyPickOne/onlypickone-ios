@@ -188,7 +188,6 @@ fileprivate struct LeaveView: View {
             .padding(15)
             
             Button {
-                print("탈퇴 프로세스 진행")
                 viewModel.leave { success in
                     if success {
                         presentationMode.wrappedValue.dismiss()

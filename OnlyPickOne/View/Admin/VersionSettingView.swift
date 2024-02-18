@@ -28,7 +28,6 @@ struct VersionSettingView: View {
             }
             .padding(5)
             Button {
-                print("submit")
                 viewModel.setVersion(minimum: leastInput, latest: latestInput)
                 self.presentationMode.wrappedValue.dismiss()
             } label: {

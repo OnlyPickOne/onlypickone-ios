@@ -32,7 +32,6 @@ struct SignUpView: View {
                                     viewModel.checkValidEmail(email: $0)
                                 }
                             Button {
-                                print("인증 요청")
                                 viewModel.startTimer()
                                 viewModel.isShowingAuthField = true
                                 viewModel.mailAuthReqeust(email: emailInput)
@@ -76,7 +75,6 @@ struct SignUpView: View {
                                     .showClearButton($codeInput)
                                     .keyboardType(.numberPad)
                                 Button {
-                                    print("확인")
                                     viewModel.mailVerify(email: emailInput, code: codeInput)
                                 } label: {
                                     Text("인증")

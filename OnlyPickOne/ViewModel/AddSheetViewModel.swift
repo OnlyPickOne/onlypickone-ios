@@ -24,7 +24,6 @@ class AddSheetViewModel: ObservableObject {
     public func addImage(image: UIImage, caption: String) {
         self.imageList.insert(image, at: self.imageList.count - 1)
         self.input.insert(caption, at: self.input.count - 1)
-        print(self.imageList.count)
     }
     
     public func submitGame() {
@@ -36,7 +35,7 @@ class AddSheetViewModel: ObservableObject {
                 let item = Item(id: nil, caption: self.input[i], image: self.imageList[i])
                 multipartFiles.append(item)
             }
-            print(multipartFiles)
+            
             provider.requestPublisher(.create(titleInput, detailInput, multipartFiles))
                 .sink { completion in
                     switch completion {
@@ -62,7 +61,7 @@ class AddSheetViewModel: ObservableObject {
     
     private func refeshToken(completion: @escaping () -> ()) {
         guard let accessToken = UserDefaults.standard.string(forKey: "accessToken"), let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") else { return }
-        print(accessToken, refreshToken)
+        
         provider.request(.refreshToken(LoginToken(grantType: nil, accessToken: accessToken, refreshToken: refreshToken, accessTokenExpiresIn: nil))) { (result) in
             switch result {
             case let .success(response):

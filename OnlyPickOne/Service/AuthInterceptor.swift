@@ -24,7 +24,6 @@ final class AuthInterceptor: RequestInterceptor {
         }
 
         /// refreshToken 시 만료된 토큰을 헤더에서 제외 요구 반영
-        print(urlRequest)
         var urlRequest = urlRequest
         let urlString = urlRequest.url?.absoluteString
         if let slashIndex = urlString?.lastIndex(of: "/") {
@@ -32,7 +31,6 @@ final class AuthInterceptor: RequestInterceptor {
             if afterSlashString != "reissue" {
                 urlRequest.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
                 urlRequest.setValue("application/json", forHTTPHeaderField: "Content-type")
-                print("new header adopted \(urlRequest.headers)")
             }
         }
         
@@ -40,7 +38,6 @@ final class AuthInterceptor: RequestInterceptor {
     }
     
     func retry(_ request: Request, for session: Session, dueTo error: Error, completion: @escaping (RetryResult) -> Void) {
-        print("retry request")
         guard let response = request.task?.response as? HTTPURLResponse, response.statusCode == 401
         else {
             completion(.doNotRetryWithError(error))
@@ -52,7 +49,6 @@ final class AuthInterceptor: RequestInterceptor {
         var isRefreshTokenAPI = false
         
         guard let accessToken = UserDefaults.standard.string(forKey: "accessToken"), let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") else { return }
-        print(accessToken, refreshToken)
         
         provider.request(.refreshToken(LoginToken(grantType: nil, accessToken: accessToken, refreshToken: refreshToken, accessTokenExpiresIn: nil))) { (result) in
             switch result {
