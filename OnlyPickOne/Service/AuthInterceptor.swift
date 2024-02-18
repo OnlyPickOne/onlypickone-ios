@@ -54,17 +54,7 @@ final class AuthInterceptor: RequestInterceptor {
         guard let accessToken = UserDefaults.standard.string(forKey: "accessToken"), let refreshToken = UserDefaults.standard.string(forKey: "refreshToken") else { return }
         print(accessToken, refreshToken)
         
-        let urlString = request.request?.url?.absoluteString
-        if let slashIndex = urlString?.lastIndex(of: "/") {
-            let afterSlashString = String((urlString?.suffix(from: (urlString?.index(after: slashIndex))!))!)
-            isRefreshTokenAPI = afterSlashString == "reissue"
-        }
-        
-//        if isRefreshTokenAPI {
-//            provider = MoyaProvider<APIService>()
-//        }
-        
-        provider.request(.refreshToken(LoginToken(grantType: nil, accessToken: isRefreshTokenAPI ? nil : accessToken, refreshToken: isRefreshTokenAPI ? nil : refreshToken, accessTokenExpiresIn: nil))) { (result) in
+        provider.request(.refreshToken(LoginToken(grantType: nil, accessToken: accessToken, refreshToken: refreshToken, accessTokenExpiresIn: nil))) { (result) in
             switch result {
             case let .success(response):
                 let result = try? response.map(Response<LoginToken>.self)
