@@ -34,21 +34,20 @@ class GameInfoViewModel: ObservableObject {
             } receiveValue: { [weak self] response in
                 let result = try? response.map(Response<NewGame>.self)
                 if result?.isSuccess == true {
-                    print("sucess")
                     if let game = result?.data {
                         self?.game = game
-                        switch self?.game.itemCount ?? 0 {
-                        case 5...8:
-                            self?.selectionOption = 1
-                        case 9...16:
-                            self?.selectionOption = 2
-                        case 17...32:
-                            self?.selectionOption = 3
-                        case 33...150:
-                            self?.selectionOption = 4
-                        default:
-                            self?.selectionOption = 0
-                        }
+//                        switch self?.game.itemCount ?? 0 {
+//                        case 5...8:
+//                            self?.selectionOption = 0
+//                        case 9...16:
+//                            self?.selectionOption = 1
+//                        case 17...32:
+//                            self?.selectionOption = 2
+//                        case 33...150:
+//                            self?.selectionOption = 3
+//                        default:
+//                            self?.selectionOption = 0
+//                        }
                     }
                 }
             }.store(in: &subscription)
