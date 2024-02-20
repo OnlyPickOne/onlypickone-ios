@@ -92,6 +92,12 @@ struct GameInfoView: View {
                         Text("\(viewModel.game.likeCount ?? 0)")
                             .font(.subheadline)
                     }
+                    .onTapGesture {
+                        if (!(viewModel.game.isCreated ?? false)) {
+                            viewModel.likeGame()
+                            print("like")
+                        }
+                    }
                 }
                 .padding(.horizontal, 30)
                 
@@ -149,6 +155,9 @@ struct GameInfoView: View {
                 }
             }
             .alertButtonTint(color: Color("opoPurple"))
+        }
+        .refreshable {
+            viewModel.fetchGameInfo()
         }
         .onAppear {
             viewModel.fetchGameInfo()
