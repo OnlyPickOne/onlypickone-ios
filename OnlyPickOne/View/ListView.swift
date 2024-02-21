@@ -142,8 +142,9 @@ struct ListView: View {
                     admob()
                 }
             }
+            .searchable(text: $viewModel.searchKeyword, placement: .navigationBarDrawer, prompt: "제목 또는 키워드를 입력해주세요")
         }
-        .searchable(text: $viewModel.searchKeyword, placement: .navigationBarDrawer, prompt: "제목 또는 키워드를 입력해주세요")
+        
         .onSubmit(of: .search) {
             viewModel.refreshData()
             viewModel.fetchData()
