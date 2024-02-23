@@ -32,7 +32,7 @@ enum APIService {
     case signUp(_ account: Account)
     case logIn(_ account: Account)
     case refreshToken(_ token: LoginToken)
-    case notice
+    case notice(noticeId: Int)
     case noticeList(noticeId: Int?, createdAt: String?)
     case test
 }
@@ -75,6 +75,8 @@ extension APIService: TargetType {
             return "/members/\(id)"
         case .noticeList(_, _):
             return "/notices"
+        case .notice(let id):
+            return "/notices/\(id)"
         case .test:
             return "/users/2"
         default:
@@ -162,7 +164,7 @@ extension APIService: TargetType {
     
     var headers: [String : String]? {
         switch self {
-        case .setVersion(_), .create(_, _, _), .gameList, .gameListByPaging(_, _, _, _, _, _, _), .remove(_), .leave(_), .like(_), .deleteLike(_), .report(_), .noticeList(noticeId: _, createdAt: _), .gameInfo(_):
+        case .setVersion(_), .create(_, _, _), .gameList, .gameListByPaging(_, _, _, _, _, _, _), .remove(_), .leave(_), .like(_), .deleteLike(_), .report(_), .noticeList(noticeId: _, createdAt: _), .gameInfo(_), .notice(noticeId: _):
             let accessToken = UserDefaults.standard.string(forKey: "accessToken") ?? ""
             return ["Content-type" : "application/json", "Authorization" : "Bearer \(accessToken)"]
         default:
