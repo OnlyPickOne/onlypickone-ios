@@ -14,12 +14,12 @@ struct NoticeListView: View {
             List {
                 ForEach((0..<(viewModel.noticeList.count)), id: \.self) { index in
                     NavigationLink {
-                        NoticeView()
+                        NoticeView(noticeId: viewModel.noticeList[index].noticeId ?? 0)
                     } label: {
                         VStack(alignment: .leading, spacing: 5) {
                             Text("\(viewModel.noticeList[index].title ?? "")")
                                 .font(.headline)
-                            Text("\(viewModel.noticeList[index].createdAt ?? "")")
+                            Text("\(viewModel.noticeList[index].createdAt?.toLastTimeString() ?? "")")
                                 .font(.subheadline)
                                 .fontWeight(.bold)
                                 .foregroundColor(.gray)
