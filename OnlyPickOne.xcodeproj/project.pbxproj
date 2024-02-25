@@ -67,6 +67,7 @@
 		33A24F7D2B7BD06000165C5F /* Notice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A24F7C2B7BD06000165C5F /* Notice.swift */; };
 		33A24F7F2B7BD38700165C5F /* NoticeList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A24F7E2B7BD38700165C5F /* NoticeList.swift */; };
 		33A24F812B8B65AD00165C5F /* NoticeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A24F802B8B65AD00165C5F /* NoticeViewModel.swift */; };
+		33AB8C142B8E072B002FEC56 /* NoticeSettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AB8C132B8E072B002FEC56 /* NoticeSettingViewModel.swift */; };
 		33C79DBA2ADD195700E311F2 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C79DB92ADD195700E311F2 /* String+.swift */; };
 		33C79DBD2ADD590300E311F2 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 33C79DBC2ADD590300E311F2 /* GoogleMobileAds */; };
 		33C79DBF2ADD59F000E311F2 /* GoogleADBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C79DBE2ADD59F000E311F2 /* GoogleADBanner.swift */; };
@@ -135,6 +136,7 @@
 		33A24F7C2B7BD06000165C5F /* Notice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notice.swift; sourceTree = "<group>"; };
 		33A24F7E2B7BD38700165C5F /* NoticeList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeList.swift; sourceTree = "<group>"; };
 		33A24F802B8B65AD00165C5F /* NoticeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeViewModel.swift; sourceTree = "<group>"; };
+		33AB8C132B8E072B002FEC56 /* NoticeSettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeSettingViewModel.swift; sourceTree = "<group>"; };
 		33C79DB92ADD195700E311F2 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		33C79DBE2ADD59F000E311F2 /* GoogleADBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleADBanner.swift; sourceTree = "<group>"; };
 		33D0C1A82B6A1A0D00542BAB /* NoticeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoticeView.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				33A24F7A2B7BD03800165C5F /* NoticeListViewModel.swift */,
 				33A24F802B8B65AD00165C5F /* NoticeViewModel.swift */,
 				33217A482AC2BFE700F7596E /* VersionSettingViewModel.swift */,
+				33AB8C132B8E072B002FEC56 /* NoticeSettingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				337347362B1A19260026884B /* NSItemProvider+.swift in Sources */,
 				333DC62F2ACE869100B41FFC /* GameInfoView.swift in Sources */,
 				33217A3D2AB968EA00F7596E /* PhotoPicker.swift in Sources */,
+				33AB8C142B8E072B002FEC56 /* NoticeSettingViewModel.swift in Sources */,
 				33217A3F2ABC2B1800F7596E /* VersionSettingView.swift in Sources */,
 				33835F0D2A971D6600C93EB0 /* CardView.swift in Sources */,
 				33217A442AC06E1100F7596E /* Account.swift in Sources */,

@@ -34,6 +34,7 @@ enum APIService {
     case refreshToken(_ token: LoginToken)
     case notice(noticeId: Int)
     case noticeList(noticeId: Int?, createdAt: String?)
+    case submitNotice(_ title: String, _ content: String)
     case test
 }
 
@@ -73,7 +74,7 @@ extension APIService: TargetType {
             return "/games/\(id)/reports"
         case .leave(let id):
             return "/members/\(id)"
-        case .noticeList(_, _):
+        case .noticeList(_, _), .submitNotice(_, _):
             return "/notices"
         case .notice(let id):
             return "/notices/\(id)"
@@ -86,7 +87,7 @@ extension APIService: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .mailAuthReq(_), .mailVerify(_), .signUp(_), .logIn(_), .setVersion(_), .refreshToken(_), .create(_,_,_), .finish(_,_), .like(_), .report(_):
+        case .mailAuthReq(_), .mailVerify(_), .signUp(_), .logIn(_), .setVersion(_), .refreshToken(_), .create(_,_,_), .finish(_,_), .like(_), .report(_), .submitNotice(_, _):
             return .post
         case .remove(_), .leave(_), .deleteLike(_):
             return .delete
@@ -157,6 +158,9 @@ extension APIService: TargetType {
             }
             
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
+        case .submitNotice(let title, let content):
+            let notice = Notice(noticeId: nil, title: title, content: content, viewCount: nil, createdAt: nil)
+            return .requestJSONEncodable(notice)
         default:
             return .requestPlain
         }
@@ -164,7 +168,7 @@ extension APIService: TargetType {
     
     var headers: [String : String]? {
         switch self {
-        case .setVersion(_), .create(_, _, _), .gameList, .gameListByPaging(_, _, _, _, _, _, _), .remove(_), .leave(_), .like(_), .deleteLike(_), .report(_), .noticeList(noticeId: _, createdAt: _), .gameInfo(_), .notice(noticeId: _):
+        case .setVersion(_), .create(_, _, _), .gameList, .gameListByPaging(_, _, _, _, _, _, _), .remove(_), .leave(_), .like(_), .deleteLike(_), .report(_), .noticeList(noticeId: _, createdAt: _), .gameInfo(_), .notice(noticeId: _), .submitNotice(_, _):
             let accessToken = UserDefaults.standard.string(forKey: "accessToken") ?? ""
             return ["Content-type" : "application/json", "Authorization" : "Bearer \(accessToken)"]
         default:
