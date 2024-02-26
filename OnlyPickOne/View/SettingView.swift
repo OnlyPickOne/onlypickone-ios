@@ -14,6 +14,7 @@ struct SettingView: View {
     
     @Binding var isNeedToAuth: Bool
     @State private var isShowingAskView: Bool = false
+    @State private var isShowingSubmitNoticeView: Bool = false
 //    @State private var isAdmin: Bool = true
     
 //    var plistName: String
@@ -131,11 +132,12 @@ struct SettingView: View {
                 
                 if adminDecoder.isAdmin {
                     Section("관리자 메뉴 - 관리자만 보일 예정") {
-                        NavigationLink {
-                            NoticeSettingView(titleInput: "", contentInput: "")
+                        Button {
+                            self.isShowingSubmitNoticeView = true
                         } label: {
                             Text("공지 작성")
                         }
+                        .foregroundColor(Color(uiColor: .label))
                         NavigationLink {
                             UserListView()
                         } label: {
@@ -158,6 +160,9 @@ struct SettingView: View {
             .navigationTitle("설정")
             .navigationBarTitleDisplayMode(.inline)
             .tint(Color("opoPink"))
+            .sheet(isPresented: $isShowingSubmitNoticeView) {
+                NoticeSettingView(isShowingView: $isShowingSubmitNoticeView)
+            }
         }
         .sheet(isPresented: $isShowingAskView) {
             AskView()
