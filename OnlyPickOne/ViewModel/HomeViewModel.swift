@@ -51,7 +51,7 @@ class HomeViewModel: ObservableObject {
         let minimumVersionNumber = minimum.components(separatedBy: ".").map { Int($0) ?? 0 }
         let latestVersionNumber = latest.components(separatedBy: ".").map { Int($0) ?? 0 }
         
-        for i in 0 ..< currentVersionNumber.count {
+        for i in 0 ..< latestVersionNumber.count {
             if currentVersionNumber[i] > latestVersionNumber[i] {
                 return .upToDate
             }
