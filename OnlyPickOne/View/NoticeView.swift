@@ -37,6 +37,12 @@ struct NoticeView: View {
                 } label: {
                     Text("수정")
                 }
+                
+                Button {
+                    print("deleteNotice")
+                } label: {
+                    Text("삭제")
+                }
             }
         }
         .sheet(isPresented: $isShowingSubmitNoticeView) {
