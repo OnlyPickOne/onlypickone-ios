@@ -28,6 +28,22 @@ class NoticeSettingViewModel: ObservableObject {
                 }
             } receiveValue: { response in
                 guard let result = try? response.map(Response<String>.self) else { return }
+                print(result)
+            }.store(in: &subscription)
+    }
+    
+    func modifyNotice(noticeId: Int) {
+        provider.requestPublisher(.modifyNotice(noticeId, titleInput, contentInput))
+            .sink { completion in
+                switch completion {
+                case let .failure(error):
+                    print("error: \(error)")
+                case .finished:
+                    print("request finished")
+                }
+            } receiveValue: { response in
+                guard let result = try? response.map(Response<String>.self) else { return }
+                print(result)
             }.store(in: &subscription)
     }
 }

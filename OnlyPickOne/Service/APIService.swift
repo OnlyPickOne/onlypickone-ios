@@ -35,6 +35,7 @@ enum APIService {
     case notice(noticeId: Int)
     case noticeList(noticeId: Int?, createdAt: String?)
     case submitNotice(_ title: String, _ content: String)
+    case modifyNotice(_ noticeId: Int, _ title: String, _ content: String)
     case test
 }
 
@@ -76,7 +77,7 @@ extension APIService: TargetType {
             return "/members/\(id)"
         case .noticeList(_, _), .submitNotice(_, _):
             return "/notices"
-        case .notice(let id):
+        case .notice(let id), .modifyNotice(let id, _, _):
             return "/notices/\(id)"
         case .test:
             return "/users/2"
@@ -91,6 +92,8 @@ extension APIService: TargetType {
             return .post
         case .remove(_), .leave(_), .deleteLike(_):
             return .delete
+        case .modifyNotice(_, _, _):
+            return .patch
         default:
             return .get
         }
@@ -158,7 +161,7 @@ extension APIService: TargetType {
             }
             
             return .requestParameters(parameters: param, encoding: URLEncoding.queryString)
-        case .submitNotice(let title, let content):
+        case .submitNotice(let title, let content), .modifyNotice(_, let title, let content):
             let notice = Notice(noticeId: nil, title: title, content: content, viewCount: nil, createdAt: nil)
             return .requestJSONEncodable(notice)
         default:
@@ -168,7 +171,7 @@ extension APIService: TargetType {
     
     var headers: [String : String]? {
         switch self {
-        case .setVersion(_), .create(_, _, _), .gameList, .gameListByPaging(_, _, _, _, _, _, _), .remove(_), .leave(_), .like(_), .deleteLike(_), .report(_), .noticeList(noticeId: _, createdAt: _), .gameInfo(_), .notice(noticeId: _), .submitNotice(_, _):
+        case .setVersion(_), .create(_, _, _), .gameList, .gameListByPaging(_, _, _, _, _, _, _), .remove(_), .leave(_), .like(_), .deleteLike(_), .report(_), .noticeList(noticeId: _, createdAt: _), .gameInfo(_), .notice(noticeId: _), .submitNotice(_, _), .modifyNotice(_, _, _):
             let accessToken = UserDefaults.standard.string(forKey: "accessToken") ?? ""
             return ["Content-type" : "application/json", "Authorization" : "Bearer \(accessToken)"]
         default:
