@@ -77,7 +77,7 @@ iOS, Web Client, Server & DB 로 이루어진 3명의 팀 구성원이 진행하
 ### Lee Hoseok
 - Server, Infra, DB Development
 - https://github.com/hoshogi
-- DB 설계 및 Server 구현, 
+- Backend 개발, DB 설계, Infra 구축 및 배포 등
 
 ## 📚 기술 스택
 ### iOS
