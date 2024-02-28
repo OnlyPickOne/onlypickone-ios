@@ -107,3 +107,14 @@ https://water-advantage-4b6.notion.site/8ff7ccd28d05427c85c5aacbc59cfe06?pvs=4
 ### 이용 약관
 https://water-advantage-4b6.notion.site/7e7e7929ce6f4d6a88c6dcdb31e0fa12?pvs=4
 
+## UI/UX 디자인
+### iOS App 디자인 (Figma)
+<div align="center">
+<img width="720" alt="image" src="https://github.com/OnlyPickOne/onlypickone-ios/assets/87888411/ae59b523-d459-44dd-acd4-b9877f98a28e">
+</div>
+
+## TestFlight
+<div align="center">
+<img width="240" alt="image" src="https://github.com/OnlyPickOne/onlypickone-ios/assets/87888411/52aa45b3-4e21-4847-b1bd-b000a734c153">
+<img width="240" alt="image" src="https://github.com/OnlyPickOne/onlypickone-ios/assets/87888411/cb4dce37-f40c-4f10-b374-8a37f5840b23">
+</div>
