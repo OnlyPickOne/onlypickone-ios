@@ -36,6 +36,7 @@ enum APIService {
     case noticeList(noticeId: Int?, createdAt: String?)
     case submitNotice(_ title: String, _ content: String)
     case modifyNotice(_ noticeId: Int, _ title: String, _ content: String)
+    case deleteNotice(_ noticeId: Int)
     case test
 }
 
@@ -77,7 +78,7 @@ extension APIService: TargetType {
             return "/members/\(id)"
         case .noticeList(_, _), .submitNotice(_, _):
             return "/notices"
-        case .notice(let id), .modifyNotice(let id, _, _):
+        case .notice(let id), .modifyNotice(let id, _, _), .deleteNotice(let id):
             return "/notices/\(id)"
         case .test:
             return "/users/2"
@@ -90,7 +91,7 @@ extension APIService: TargetType {
         switch self {
         case .mailAuthReq(_), .mailVerify(_), .signUp(_), .logIn(_), .setVersion(_), .refreshToken(_), .create(_,_,_), .finish(_,_), .like(_), .report(_), .submitNotice(_, _):
             return .post
-        case .remove(_), .leave(_), .deleteLike(_):
+        case .remove(_), .leave(_), .deleteLike(_), .deleteNotice(_):
             return .delete
         case .modifyNotice(_, _, _):
             return .patch
