@@ -21,10 +21,16 @@ class HomeViewModel: ObservableObject {
     @Published var toLeadToUpdate: Bool = false
     
     public func checkToken() -> Bool {
+        if UserDefaults.standard.bool(forKey: "session") == true {
+            self.isNeedToAuth = false
+            return true
+        }
+        
         if UserDefaults.standard.string(forKey: "accessToken") != nil && UserDefaults.standard.string(forKey: "refreshToken") != nil {
             self.isNeedToAuth = false
             return true
         }
+        
         self.isNeedToAuth = true
         return false
     }
@@ -80,6 +86,19 @@ class HomeViewModel: ObservableObject {
             self.isNeedToUpdate = false
             self.toLeadToUpdate = false
         }
+        
+        if let date = UserDefaults.standard.object(forKey: "keepUpdate") as? Date {
+            print("date: \(date), \(Date())")
+            print(Int(Date().timeIntervalSince(date)))
+            let interval = Int(Date().timeIntervalSince(date))
+            if interval < 604800 {
+                self.toLeadToUpdate = false
+            }
+        }
+    }
+    
+    public func keepUpdate() {
+        UserDefaults.standard.setValue(Date(), forKey: "keepUpdate")
     }
     
     init() {
