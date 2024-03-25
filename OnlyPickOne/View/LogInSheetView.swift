@@ -89,6 +89,15 @@ struct LogInSheetView: View {
                     .foregroundColor(.white)
                     .font(.headline)
                     .cornerRadius(10)
+                    
+                    Button {
+                        print("비회원")
+                        isShowingLogInSheet = false
+                        UserDefaults.standard.set(true, forKey: "session")
+                    } label: {
+                        Text("비회원으로 시작하기")
+                            .foregroundColor(.secondary)
+                    }
                 }
                 .padding(48)
             }
