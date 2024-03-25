@@ -11,6 +11,7 @@ struct NoticeView: View {
     @ObservedObject var adminDecoder = JWTDecoder()
     @ObservedObject var viewModel: NoticeViewModel
     
+    @Environment(\.dismiss) private var dismiss
     @State private var isShowingSubmitNoticeView: Bool = false
     
     var noticeId: Int = 1
@@ -40,6 +41,8 @@ struct NoticeView: View {
                 
                 Button {
                     print("deleteNotice")
+                    viewModel.deleteNotice(id: noticeId)
+                    dismiss()
                 } label: {
                     Text("삭제")
                 }
