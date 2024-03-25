@@ -59,8 +59,9 @@ struct HomeView: View {
             }
             Button {
                 print("스킵")
+                viewModel.keepUpdate()
             } label: {
-                Text("다음에 알림")
+                Text("7일 간 알리지 않음")
             }
         })
         .alertButtonTint(color: Color("opoPurple"))
