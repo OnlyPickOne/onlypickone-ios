@@ -15,9 +15,7 @@ struct SettingView: View {
     @Binding var isNeedToAuth: Bool
     @State private var isShowingAskView: Bool = false
     @State private var isShowingSubmitNoticeView: Bool = false
-//    @State private var isAdmin: Bool = true
     
-//    var plistName: String
     var body: some View {
         NavigationView {
             List {
@@ -49,26 +47,33 @@ struct SettingView: View {
                 }
                 
                 Section("개인 설정") {
-//                    NavigationLink {
-//                        MyGameListView()
-//                    } label: {
-//                        Text("내 게임")
-//                    }
-                    Button {
-                        viewModel.logout()
-                        isNeedToAuth = true
-                    } label: {
-                        Text("로그아웃")
-                    }
-                    .foregroundColor(Color(uiColor: .label))
-                    NavigationLink {
-                        LeaveView(viewModel: viewModel) { success in
-                            if success {
-                                isNeedToAuth = true
-                            }
+                    if viewModel.isMember {
+                        Button {
+                            viewModel.logout()
+                            isNeedToAuth = true
+                        } label: {
+                            Text("로그아웃")
                         }
-                    } label: {
-                        Text("회원 탈퇴")
+                        .foregroundColor(Color(uiColor: .label))
+                        
+                        NavigationLink {
+                            LeaveView(viewModel: viewModel) { success in
+                                if success {
+                                    isNeedToAuth = true
+                                }
+                            }
+                        } label: {
+                            Text("회원 탈퇴")
+                        }
+                    }
+                    else {
+                        Button {
+                            viewModel.logout()
+                            isNeedToAuth = true
+                        } label: {
+                            Text("로그인")
+                        }
+                        .foregroundColor(Color(uiColor: .label))
                     }
                 }
                 
@@ -162,6 +167,9 @@ struct SettingView: View {
             .tint(Color("opoPink"))
             .sheet(isPresented: $isShowingSubmitNoticeView) {
                 NoticeSettingView(isShowingView: $isShowingSubmitNoticeView)
+            }
+            .onAppear {
+                viewModel.checkMember()
             }
         }
         .sheet(isPresented: $isShowingAskView) {
