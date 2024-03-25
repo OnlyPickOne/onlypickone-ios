@@ -33,6 +33,20 @@ class NoticeViewModel: ObservableObject {
             }.store(in: &subscription)
     }
     
+    func deleteNotice(id: Int) {
+        provider.requestPublisher(.deleteNotice(id))
+            .sink { completion in
+                switch completion {
+                case let .failure(error):
+                    print("error: \(error)")
+                case .finished:
+                    print("request finished")
+                }
+            } receiveValue: { response in
+                guard let result = try? response.map(Response<String>.self), let data = result.data else { return }
+            }.store(in: &subscription)
+    }
+    
     init(noticeId: Int) {
         self.noticeId = noticeId
         self.fetchNotice(id: noticeId)
