@@ -37,7 +37,9 @@ class LogInViewModel: ObservableObject {
                 if let accessToken = result?.data?.accessToken, let refreshToken = result?.data?.refreshToken {
                     UserDefaults.standard.set(accessToken, forKey: "accessToken")
                     UserDefaults.standard.set(refreshToken, forKey: "refreshToken")
+                    UserDefaults.standard.set(true, forKey: "session")
                 }
+                
                 
                 completion(result?.isSuccess ?? false)
             }.store(in: &subscription)
