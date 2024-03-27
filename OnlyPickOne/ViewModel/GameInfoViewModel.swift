@@ -19,8 +19,15 @@ class GameInfoViewModel: ObservableObject {
     @Published var isShowingReportSucess: Bool = false
     @Published var isShowingReportFail: Bool = false
     @Published var selectionOption = 0
+    @Published var isMember: Bool = false
     
     let gameId: Int
+    
+    public func checkMember() {
+        if UserDefaults.standard.string(forKey: "accessToken") != nil {
+            isMember = true
+        }
+    }
     
     func fetchGameInfo() {
         provider.requestPublisher(.gameInfo(self.gameId))

@@ -158,87 +158,91 @@ struct GameInfoView: View {
         }
         .refreshable {
             viewModel.fetchGameInfo()
+            viewModel.checkMember()
         }
         .onAppear {
             viewModel.fetchGameInfo()
+            viewModel.checkMember()
         }
         .toolbar {
-            Menu {
-                if (viewModel.game.isCreated ?? false) {
-                    Button {
-                        deleteConfirmDialog = true
-                    } label: {
+            if viewModel.isMember {
+                Menu {
+                    if (viewModel.game.isCreated ?? false) {
+                        Button {
+                            deleteConfirmDialog = true
+                        } label: {
                             Text("게임 삭제")
                                 .fontWeight(.black)
                                 .foregroundColor(.white)
                                 .padding(5)
-                    }
-                    .foregroundColor(Color(uiColor: .label))
-                    .alert("삭제하시겠습니까?", isPresented: $deleteConfirmDialog) {
-                        Button("삭제", role: .destructive) {
-                            deleteConfirmDialog = false
-                            viewModel.deleteGame() { success in
-                                if success {
-                                    presentationMode.wrappedValue.dismiss()
-                                    listViewModel.fetchData()
-                                } else {
-                                    deleteFailDialog = true
+                        }
+                        .foregroundColor(Color(uiColor: .label))
+                        .alert("삭제하시겠습니까?", isPresented: $deleteConfirmDialog) {
+                            Button("삭제", role: .destructive) {
+                                deleteConfirmDialog = false
+                                viewModel.deleteGame() { success in
+                                    if success {
+                                        presentationMode.wrappedValue.dismiss()
+                                        listViewModel.fetchData()
+                                    } else {
+                                        deleteFailDialog = true
+                                    }
                                 }
                             }
+                            Button("취소", role: .cancel) {
+                                deleteConfirmDialog = false
+                            }
                         }
-                        Button("취소", role: .cancel) {
-                            deleteConfirmDialog = false
+                        .alert("삭제 요청에 실패하였습니다.", isPresented: $deleteFailDialog) {
+                            Button("확인") {
+                                deleteFailDialog = false
+                            }
                         }
-                    }
-                    .alert("삭제 요청에 실패하였습니다.", isPresented: $deleteFailDialog) {
-                        Button("확인") {
-                            deleteFailDialog = false
-                        }
-                    }
-                    .alertButtonTint(color: Color("opoPurple"))
-                } else if (viewModel.isLiked) {
-                    Button {
-                        viewModel.likeGame()
-                    } label: {
+                        .alertButtonTint(color: Color("opoPurple"))
+                    } else if (viewModel.isLiked) {
+                        Button {
+                            viewModel.likeGame()
+                        } label: {
                             Text("좋아요 취소")
                                 .fontWeight(.black)
                                 .foregroundColor(.white)
                                 .padding(5)
-                    }
-                    .foregroundColor(Color(uiColor: .label))
-                    
-                    Button {
-                        alertToReport.toggle()
-                    } label: {
+                        }
+                        .foregroundColor(Color(uiColor: .label))
+                        
+                        Button {
+                            alertToReport.toggle()
+                        } label: {
                             Text("신고")
                                 .fontWeight(.black)
                                 .foregroundColor(.white)
                                 .padding(5)
-                    }
-                    .foregroundColor(Color(uiColor: .label))
-                } else {
-                    Button {
-                        viewModel.likeGame()
-                    } label: {
+                        }
+                        .foregroundColor(Color(uiColor: .label))
+                    } else {
+                        Button {
+                            viewModel.likeGame()
+                        } label: {
                             Text("좋아요")
                                 .fontWeight(.black)
                                 .foregroundColor(.white)
                                 .padding(5)
-                    }
-                    .foregroundColor(Color(uiColor: .label))
-                    
-                    Button {
-                        alertToReport.toggle()
-                    } label: {
+                        }
+                        .foregroundColor(Color(uiColor: .label))
+                        
+                        Button {
+                            alertToReport.toggle()
+                        } label: {
                             Text("신고")
                                 .fontWeight(.black)
                                 .foregroundColor(.white)
                                 .padding(5)
+                        }
+                        .foregroundColor(Color(uiColor: .label))
                     }
-                    .foregroundColor(Color(uiColor: .label))
+                } label: {
+                    Image(systemName: "ellipsis.circle")
                 }
-            } label: {
-                Image(systemName: "ellipsis.circle")
             }
         }
     }
