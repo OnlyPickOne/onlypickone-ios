@@ -20,6 +20,13 @@ class AddSheetViewModel: ObservableObject {
     @Published var imageList: [UIImage] = [UIImage(named: "picture.add")!]
     @Published var isShowingAddSheet: Bool = false
     @Published var isShowingAlertBlankCaption: Bool = false
+    @Published var isMember: Bool = false
+    
+    public func checkMember() {
+        if UserDefaults.standard.string(forKey: "accessToken") != nil {
+            isMember = true
+        }
+    }
     
     public func addImage(image: UIImage, caption: String) {
         self.imageList.insert(image, at: self.imageList.count - 1)

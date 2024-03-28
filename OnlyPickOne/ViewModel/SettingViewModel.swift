@@ -16,6 +16,13 @@ class SettingViewModel: ObservableObject {
     
     @Published var minimumVersion: String = ""
     @Published var latestVersion: String = ""
+    @Published var isMember: Bool = false
+    
+    public func checkMember() {
+        if UserDefaults.standard.string(forKey: "accessToken") != nil {
+            isMember = true
+        }
+    }
     
     public func info() {
         provider.requestPublisher(.getVersion)
@@ -55,9 +62,8 @@ class SettingViewModel: ObservableObject {
     }
     
     public func logout() {
-        /// 서버 로직은 구현 후 추가할 예정
-        /// 현재는 토큰만 지우는 식으로 임시 구현
         UserDefaults.standard.set(nil, forKey: "accessToken")
         UserDefaults.standard.set(nil, forKey: "refreshToken")
+        UserDefaults.standard.set(false, forKey: "session")
     }
 }

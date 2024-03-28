@@ -55,11 +55,10 @@ struct GameView: View {
                                 if let topItem = game.topItem, let image = topItem.imageUrl, let caption = topItem.caption {
                                     KFAnimatedImage(URL(string: image))
                                         .placeholder { //플레이스 홀더 설정
-                                            Image(systemName: "list.dash")
+                                            Image(systemName: "photo.fill")
                                         }.retry(maxCount: 3, interval: .seconds(5)) //재시도
                                         .startLoadingBeforeViewAppear()
-//                                        .resizable()
-                                        .scaledToFill()
+                                        .scaledToFit()
                                         .clipped()
 //                                        .animation(.easeIn(duration: 0.2), value: image)
                                     Text(caption)
@@ -100,16 +99,12 @@ struct GameView: View {
                                 if let bottomItem = game.bottomItem, let image = bottomItem.imageUrl, let caption = bottomItem.caption {
                                     KFAnimatedImage(URL(string: image))
                                         .placeholder { //플레이스 홀더 설정
-                                            Image(systemName: "list.dash")
+                                            Image(systemName: "photo.fill")
                                         }.retry(maxCount: 3, interval: .seconds(5)) //재시도
                                         .startLoadingBeforeViewAppear()
-//                                        .resizable()
-                                        .scaledToFill()
+                                        .scaledToFit()
                                         .clipped()
 //                                        .animation(.easeIn(duration: 0.2), value: image)
-                                        .onAppear() {
-                                            print("\(image)")
-                                        }
                                     Text(caption)
                                         .fontWeight(.bold)
                                         .font(.title)
@@ -121,7 +116,6 @@ struct GameView: View {
                             .onTapGesture {
                                 game.choose(top: false)
                             }
-                            .scaledToFill()
                             .frame(width: geometry.size.width, height: (geometry.size.height - 50) * 0.45)
                             .clipped()
                             

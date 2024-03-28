@@ -48,10 +48,20 @@ struct AddView: View {
                 }
                 .tint(Color("opoPink"))
                 .padding()
+                .disabled(!viewModel.isMember)
+                
+                if !viewModel.isMember {
+                    Text("게임 생성은 가입된 회원만 가능합니다.")
+                        .font(.caption)
+                        .foregroundColor(Color("opoRed"))
+                }
             }
             .navigationTitle("게임 만들기")
             .navigationBarTitleDisplayMode(.inline)
             .tint(Color("opoPink"))
+            .onAppear {
+                viewModel.checkMember()
+            }
         }
     }
 }
