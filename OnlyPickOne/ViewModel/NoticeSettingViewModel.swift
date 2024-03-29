@@ -46,5 +46,11 @@ class NoticeSettingViewModel: ObservableObject {
                 print(result)
             }.store(in: &subscription)
     }
+    
+    init(subscription: Set<AnyCancellable> = Set<AnyCancellable>(), titleInput: String = "", contentInput: String = "") {
+        self.subscription = subscription
+        self.titleInput = titleInput
+        self.contentInput = contentInput
+    }
 }
 
