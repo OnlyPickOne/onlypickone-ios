@@ -24,9 +24,7 @@ class GameInfoViewModel: ObservableObject {
     let gameId: Int
     
     public func checkMember() {
-        if UserDefaults.standard.string(forKey: "accessToken") != nil {
-            isMember = true
-        }
+        isMember = UserDefaults.standard.string(forKey: "accessToken") != nil
     }
     
     func fetchGameInfo() {
