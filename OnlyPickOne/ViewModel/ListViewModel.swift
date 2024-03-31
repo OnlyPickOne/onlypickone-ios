@@ -34,9 +34,9 @@ class ListViewModel: ObservableObject {
         let debouncedPublisher = searchSubject
             .debounce(for: .seconds(0.3), scheduler: DispatchQueue.main)
         let subscriber = Subscribers.Sink<String, Never>(receiveCompletion: { _ in
-        }, receiveValue: { _ in
+        }, receiveValue: {
             self.refreshData()
-            self.fetchData()
+            self.fetchData($0)
         })
         debouncedPublisher.subscribe(subscriber)
     }
