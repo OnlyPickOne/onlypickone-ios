@@ -49,7 +49,7 @@ struct NoticeView: View {
             }
         }
         .sheet(isPresented: $isShowingSubmitNoticeView) {
-            NoticeSettingView(viewModel: NoticeSettingViewModel(titleInput: viewModel.notice.title ?? "", contentInput: viewModel.notice.content ?? ""), isShowingView: $isShowingSubmitNoticeView)
+            NoticeSettingView(viewModel: NoticeSettingViewModel(titleInput: viewModel.notice.title ?? "", contentInput: viewModel.notice.content ?? ""), isShowingView: $isShowingSubmitNoticeView, noticeId: self.noticeId)
         }
     }
     
