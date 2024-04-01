@@ -10,6 +10,7 @@ import SwiftUI
 struct NoticeSettingView: View {
     @ObservedObject var viewModel = NoticeSettingViewModel()
     @Binding var isShowingView: Bool
+    var noticeId: Int = -1
     
     var body: some View {
         NavigationView {
@@ -34,7 +35,11 @@ struct NoticeSettingView: View {
                 }
                 .padding(5)
                 Button {
-                    viewModel.submitNotice()
+                    if noticeId != -1 {
+                        viewModel.modifyNotice(noticeId: self.noticeId)
+                    } else {
+                        viewModel.submitNotice()
+                    }
                     isShowingView = false
                 } label: {
                     Text("제출")
