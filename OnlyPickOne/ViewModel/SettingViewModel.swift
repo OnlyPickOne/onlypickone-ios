@@ -19,9 +19,7 @@ class SettingViewModel: ObservableObject {
     @Published var isMember: Bool = false
     
     public func checkMember() {
-        if UserDefaults.standard.string(forKey: "accessToken") != nil {
-            isMember = true
-        }
+        isMember = UserDefaults.standard.string(forKey: "accessToken") != nil
     }
     
     public func info() {

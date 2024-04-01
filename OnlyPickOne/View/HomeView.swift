@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeView: View {
     @ObservedObject var viewModel = HomeViewModel()
     @ObservedObject var listViewModel = ListViewModel()
+    @ObservedObject var settingViewModel = SettingViewModel()
 //    @State var refreshTabView: Bool = false
     
     var body: some View {
@@ -22,7 +23,7 @@ struct HomeView: View {
                 .tabItem {
                     Label("게임 만들기", systemImage: "plus.square.fill.on.square.fill")
                 }
-            SettingView(isNeedToAuth: $viewModel.isNeedToAuth)
+            SettingView(viewModel: settingViewModel, isNeedToAuth: $viewModel.isNeedToAuth)
                 .tabItem {
                     Label("설정", systemImage: "gearshape")
                 }
@@ -34,6 +35,7 @@ struct HomeView: View {
                 .onDisappear() {
                     listViewModel.refreshData()
                     listViewModel.fetchData()
+                    settingViewModel.checkMember()
                 }
         }
         .fullScreenCover(isPresented: $viewModel.isNeedToUpdate) {

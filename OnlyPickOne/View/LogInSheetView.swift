@@ -94,6 +94,8 @@ struct LogInSheetView: View {
                         print("비회원")
                         isShowingLogInSheet = false
                         UserDefaults.standard.set(true, forKey: "session")
+                        UserDefaults.standard.set(nil, forKey: "accessToken")
+                        UserDefaults.standard.set(nil, forKey: "refreshToken")
                     } label: {
                         Text("비회원으로 시작하기")
                             .foregroundColor(.secondary)

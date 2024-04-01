@@ -128,7 +128,7 @@ struct SettingView: View {
                     }
                     NavigationLink {
                         AcknowListViewControllerViewWrapper()
-                                    .navigationBarTitle("Acknowledgements")
+                                    .navigationBarTitle("오픈소스 라이브러리")
                                     .edgesIgnoringSafeArea(.all)
                     } label: {
                         Text("오픈소스 라이브러리")
@@ -136,7 +136,7 @@ struct SettingView: View {
                 }
                 
                 if adminDecoder.isAdmin {
-                    Section("관리자 메뉴 - 관리자만 보일 예정") {
+                    Section("관리자 메뉴") {
                         Button {
                             self.isShowingSubmitNoticeView = true
                         } label: {
